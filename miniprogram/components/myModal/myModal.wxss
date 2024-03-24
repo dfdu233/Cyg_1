@@ -1,0 +1,39 @@
+
+.modal {
+  background-color: #fff;
+  box-shadow: 0 0 5rpx 5rpx #d1d1d1; /*阴影*/
+  position: absolute;
+  z-index: 9999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  min-height: 400rpx;
+  width: 500rpx;
+  padding: 20rpx 30rpx 30rpx;
+}
+
+/*右上角的X*/
+.modal .top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal .content {
+  margin: 40rpx 30rpx 100rpx 30rpx;
+  overflow: hidden;
+  word-wrap: break-word; /*换行*/
+}
+
+.modal .btn {
+  display: flex;
+  width: 90%;
+  position: absolute; /*脱离文档流*/
+  bottom: 40rpx;
+}
+
+.modal .btn button {
+  width: 40%;
+  font-weight: 400;
+}

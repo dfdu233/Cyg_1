@@ -1,0 +1,111 @@
+/*校区选择*/
+.body {
+  width: 85%;
+  margin: 20rpx auto;
+  box-shadow: 0 0 20rpx #a1a1a1;
+  border-radius: 25rpx;
+  padding: 25rpx;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+
+
+/*大容器样式*/
+.container {
+  margin: 40rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.page {
+  position: relative;
+}
+
+/*大容器内九个小方块样式*/
+.container .body {
+  width: 180rpx;
+  height: 160rpx;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 20rpx;
+  border-radius: 20rpx;
+}
+
+/*图片外圈圆环*/
+.container .body .circleBorder {
+  width: 120rpx;
+  height: 120rpx;
+  position: absolute;
+  top: -30rpx;
+  border-radius: 50%;
+  background-color: #e7b18c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*阴影圆环*/
+  box-shadow: 0 0 10rpx 10rpx #FBE5D6; 
+}
+
+/*九个小方块的子元素（九张图片）样式、位置*/
+.container .body .circleBorder .icon {
+  width: 100rpx;
+  height: 100rpx;
+  background-color: #FBE5D6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+/*九张图片的尺寸大小*/
+.container .body .circleBorder .icon image {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+
+/*图片下方的文字*/
+.container .body .text {
+  margin-top: 80rpx;
+  color: #000000;
+}
+
+/*公告*/
+.notice{
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 5rpx 15rpx;
+  margin-bottom: 100rpx;
+}
+
+.notice  image {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.notice  text {
+  font-size: 28rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: 30rpx;
+}

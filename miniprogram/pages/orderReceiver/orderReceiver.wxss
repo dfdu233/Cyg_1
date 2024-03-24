@@ -1,0 +1,64 @@
+.wholebody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /*水平居中*/
+  align-items: center; /*垂直居中*/
+}
+
+.wholebody .noneImg {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+/*.wholebody 下面.noneData和.showAll两者的样式*/
+.wholebody .noneData, .showAll {
+  color: #717171;
+  margin-top: 20rpx;
+  font-size: 30rpx;
+}
+
+.wholebody .showAll text {
+  margin: 0 20rpx;
+}
+
+.wholebody .body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  margin: 0 auto;
+  margin-top: 50rpx;
+  width: 90%;
+  border-radius: 40rpx;
+  padding: 25rpx 30rpx;
+  box-sizing: border-box;
+}
+
+.wholebody .body .top {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.wholebody .body .top .name, .userID {
+  max-width: 50%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.wholebody .body image {
+  width: 85%;
+  height: 300rpx;
+  margin-top: 50rpx;
+}
+
+.wholebody .body .btn {
+  margin-left: auto;
+  margin-top: 50rpx;
+}
+
+.wholebody .body .btn button:last-child {
+  margin-left: 30rpx;
+}

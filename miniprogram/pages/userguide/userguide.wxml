@@ -1,0 +1,147 @@
+<!--用户指南-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="backText">返回</view>
+</cu-custom>
+
+<!--可滚动视图-->
+<scroll-view scroll-x class="scroll_view">
+  <!--scroll-x横向滚动-->
+  <view class="tab">
+    <view class="tab_item {{ tabNow === index ? 'select' : '' }}" wx:for="{{ tabList }}" data-index="{{ index }}" wx:key="index" bindtap="selectTab">
+      {{ item }}
+    </view>
+  </view>
+</scroll-view>
+
+<view class="paragraph" wx:if="{{tabNow===0}}">
+  <view class="bold">1、快递代取&快递代寄</view>
+  <view class="line">快递代取定价由校区快递站距离和快递大小及重量决定。</view>
+  <view class="bold">2、打印服务</view>
+  <view class="line">由打印内容多少和距离以及需求时间决定</view>
+  <view class="bold">3、跑腿服务（帮我送&帮我拿&帮我买）</view>
+  <view class="line">跑腿服务定价由订单实际劳动量决定，用户可根据订单实际情况调整定价。</view>
+  <view class="bold">4、闲置买卖</view>
+  <view class="line">卖家送：服务费 =商品售价×5%
+；服务费最低为0.5元，最高为5元</view>
+  <view class="line">买家取：服务费 =商品售价×7%
+；服务费最低为0.7元，最高为7元</view>
+  <view class="line">接单员取送：服务费 =商品售价×5%
+；服务费最低为0.5元，最高为5元</view>
+  <view class="line">服务费将在商品交易成功后，从卖家的账户中自动扣除</view>
+  <view class="bold">5、挂房租房</view>
+  <view class="line">校园畅逸服务平台为房东、中介、租客提供免费信息服务。</view>
+  <view class="bold">6、电费代充</view>
+  <view class="line">达到王者段位后可以享受免费电费代充服务</view>
+</view>
+
+<view class="paragraph" wx:if="{{tabNow===1}}">
+  <view class="bold">1、快递代取&快递代寄</view>
+  <view class="line">用户下单1次获得1积分；接单员接单一次获得1积分。</view>
+  <view class="bold">2、打印服务</view>
+  <view class="line">用户下单1次获得1积分；接单员接单一次获得1积分。</view>
+  <view class="bold">3、跑腿服务（帮我送&帮我拿&帮我买）</view>
+  <view class="line">用户下单1次获得1积分；接单员接单一次获得1积分。</view>
+  <view class="bold">4、闲置买卖</view>
+  <view class="line">卖主上传一个商品获得1积分；
+    用户下单成功一个商品获得1积分。若中途由第三方送货则接单员接单一次获得1积分</view>
+  <view class="bold">5、挂房租房</view>
+  <view class="line">房东上传1套房源信息，获得1积分；
+    租客下单获取1套房源信息获得1积分。</view>
+  <view class="bold">6、电费代充</view>
+  <view class="line">用户下单代充电费金额{{'<'}}50无法获取积分；50元{{'>='}}用户下单代充电费金额{{'<'}}100元获得1积分；用户下单代充电费金额{{'>='}}100元，获得2积分。</view>
+  <view class="body">
+    <view class="table-container">
+      <view class="row">
+        <view class="column">
+          <image src="../../images/one.png" mode="aspectFit" style="width:50rpx; height: 50rpx" />
+        </view>
+        <view class="column">青铜</view>
+        <view class="column">积分 {{'≤'}}5</view>
+        <view class="column">原价</view>
+      </view>
+      <view class="row">
+        <view class="column">
+          <image src="../../images/two.png" mode="aspectFit" style="width:50rpx; height: 50rpx" />
+        </view>
+        <view class="column">白银 </view>
+        <view class="column">5{{'<'}} 积分 {{'≤'}} 10</view>
+        <view class="column">享受9.9折权益</view>
+      </view>
+      <view class="row">
+        <view class="column">
+          <image src="../../images/three.png" mode="aspectFit" style="width:50rpx; height: 50rpx" />
+        </view>
+        <view class="column">黄金</view>
+        <view class="column">10{{'<'}} 积分 {{'≤'}} 20</view>
+        <view class="column">享受9.8折权益</view>
+      </view>
+      <view class="row">
+        <view class="column">
+          <image src="../../images/four.png" mode="aspectFit" style="width:50rpx; height: 50rpx" />
+        </view>
+        <view class="column">铂金</view>
+        <view class="column">20{{'<'}} 积分 {{'≤'}} 30</view>
+        <view class="column">享受9.7折权益</view>
+      </view>
+      <view class="row">
+        <view class="column">
+          <image src="../../images/five.png" mode="aspectFit" style="width:50rpx; height: 50rpx" />
+        </view>
+        <view class="column">钻石</view>
+        <view class="column">30{{'<'}} 积分 {{'≤'}} 40</view>
+        <view class="column">享受9.6折权益</view>
+      </view>
+      <view class="row">
+        <view class="column">
+          <image src="../../images/six.png" mode="aspectFit" style="width:50rpx; height: 50rpx" />
+        </view>
+        <view class="column">星耀</view>
+        <view class="column">40{{'<'}} 积分 {{'≤'}} 50</view>
+        <view class="column">享受9.5折权益</view>
+      </view>
+      <view class="row">
+        <view class="column">
+          <image src="../../images/seven.png" mode="aspectFit" style="width:50rpx; height: 50rpx" />
+        </view>
+        <view class="column">王者</view>
+        <view class="column">50{{'<'}} 积分 {{'≤'}} 60</view>
+        <view class="column">享受9折权益</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="paragraph" wx:if="{{tabNow===2}}">
+  <view class="body">
+    
+  </view>
+  <view class="tips">以下为{{locationRange[0][locationValue]}}各服务的手续费用，为保证平台平稳可持续发展，
+征收手续费用用于平台的日常维护。</view>
+  <view class="body">
+    <view class="table-container">
+      <view class="row">
+        <view class="column"class="bold"> 服务项</view>
+        <view class="column"class="bold">手续费</view>
+        <view class="column"class="bold">接单佣金</view>
+      </view>
+      <view class="row">
+        <view class="column">快递代取</view>
+        <view class="column">15%</view>
+        <view class="column">85%</view>
+      </view>
+      <view class="row">
+        <view class="column">跑腿服务</view>
+        <view class="column">15%</view>
+        <view class="column">85%</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+    
+    
+    
+    
+    
+    

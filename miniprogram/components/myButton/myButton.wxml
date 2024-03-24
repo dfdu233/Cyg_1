@@ -1,0 +1,5 @@
+<!--
+  我的-申请接单-这是“提交申请”的封装组件
+  component的父组件：pages/applyOrder/applyOrder.json
+-->
+<button class="submitBtn">{{ text }}</button>

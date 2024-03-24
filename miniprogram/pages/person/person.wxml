@@ -1,0 +1,105 @@
+<!--我的-->
+<cu-custom bgColor="bg-white" >
+  <view slot="content"> 校园畅逸服务 </view>
+</cu-custom>
+<!--修改个人信息-->
+<view class="info" bindtap="updateInfo">
+  <image class="avatar" src="{{ hasUserInfo ? userInfo.avatarUrl : '../../images/touxiang.png' }}"></image>
+  <block wx:if="{{ !hasUserInfo }}">
+    <!-- 
+      <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" wx:if="{{ canIUseGetUserProfile }}" bindtap="getUserProfile">点我授权</button> 
+      -->
+    <button wx:if="{{ canIUseGetUserProfile }}" bindtap="getUserProfile">点我授权</button>
+    <button wx:else open-type="getUserInfo" bindgetuserinfo="getUserInfo">点我授权</button>
+  </block>
+
+  <view class="name" wx:if="{{ hasUserInfo }}">
+    <text>{{ userInfo.nickName }}</text>
+    <text>{{ userInfo.gender === 0 ? '男' : '女' }}</text>
+  </view>
+
+  <image wx:if="{{ hasUserInfo }}" class="into" src="../../images/dayu.png"></image>
+</view>
+
+<!--小公告-->
+<view class="notice mt" bindtap="handleClickNotice" >
+  <image src="../../images/notice.png"></image>
+  <text>欢迎使用！有问题请添加客服的微信：zxy1475857674</text>
+</view>
+
+<button class="cell mt" bindtap="applyOrder">
+  <view class="cellLeft">
+    <image src="../../images/apply.png"></image>
+    <text>申请接单</text>
+  </view>
+  <!--尖角符-->
+  <text class="cellRight">></text>
+</button>
+
+<button class="cell" bindtap="orderReceiver" wx:if="{{ admin }}">
+  <!--只有当前用户是管理员时，才会显示这个按钮-->
+  <view class="cellLeft">
+    <image src="../../images/check.png"></image>
+    <text>审核接单申请</text>
+  </view>
+  <text class="cellRight">></text>
+</button>
+
+<button class="cell" bindtap="jiedanyuan_zhongxin" wx:if="{{ orderReceive }}">
+  <!--只有当前用户是接单员时，才会显示这个按钮-->
+  <view class="cellLeft">
+    <image src="../../images/jiedanyuanzhongxin.png"></image>
+    <text>接单员中心</text>
+  </view>
+  <text class="cellRight">></text>
+</button>
+
+<view class="customerService mt">
+  <button class="cell" bind:tap="toaddAddress">
+    <view class="cellLeft">
+      <image src="../../images/wx.png"></image>
+      <text>我的地址</text>
+    </view>
+    <!--尖角符-->
+    <text class="cellRight">></text>
+  </button>
+
+  <button class="cell" bind:tap="topoints">
+    <!--contact打开客服会话-->
+    <view class="cellLeft">
+      <image src="../../images/customService.png"></image>
+      <text>我的积分</text>
+    </view>
+    <text class="cellRight">></text>
+  </button>
+</view>
+
+<view class="ohter mt">
+  <button class="cell" bindtap="toAbout">
+    <view class="cellLeft">
+      <image src="../../images/about.png"></image>
+      <text>关于我们</text>
+    </view>
+    <text class="cellRight">></text>
+  </button>
+
+  <button class="cell" bind:tap="touserguide">
+    <!--跳转到用户指南-->
+    <view class="cellLeft">
+      <image src="../../images/advice.png"></image>
+      <text>用户指南</text>
+    </view>
+    <text class="cellRight">></text>
+  </button>
+</view>
+
+<button class="cell mt" bindtap="out">
+  <view class="cellLeft">
+    <image src="../../images/out.png"></image>
+    <text>退出登录</text>
+  </view>
+  <!--尖角符-->
+  <text class="cellRight">></text>
+</button>
+
+<view class="version mt">当前版本: 1.0.0</view>
