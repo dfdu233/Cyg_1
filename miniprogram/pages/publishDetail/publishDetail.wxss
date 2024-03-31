@@ -1,0 +1,16 @@
+/* miniprogram/pages/publishDetail/publishDetail.wxss */
+
+/* other */
+
+.right__footer_start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.right__footer_between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+

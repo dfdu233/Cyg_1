@@ -174,7 +174,16 @@ Page({
 				url: '../points/points',
 		})
 },		
-
+  toorder(){
+    wx.navigateTo({
+      url: '../secorder/secorder',
+  })
+  },
+  tousercenter(){
+    wx.navigateTo({
+      url:  `./../usercenter/usercenter?userId=${wx.getStorageSync('openid')}`,
+  })
+  },
     //关于我们
     toAbout() {
         wx.navigateTo({

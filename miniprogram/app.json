@@ -23,22 +23,29 @@
     "components/myButton/myButton",
     "components/myModal/myModal",
     "pages/receiveLoading/receiveLoading",
-		"pages/orderReceiver/orderReceiver",
-		"pages/points/points",
-		"pages/detail/detail",
-		"pages/userguide/userguide",
-		"pages/jiedanyuan_zhongxin/jiedanyuan_zhongxin"
+    "pages/orderReceiver/orderReceiver",
+    "pages/points/points",
+    "pages/detail/detail",
+    "pages/userguide/userguide",
+    "pages/jiedanyuan_zhongxin/jiedanyuan_zhongxin",
+    "pages/category/category",
+    "pages/publish/publish",
+    "pages/buy/buy",
+    "pages/sell/sell",
+    "pages/secorder",
+    "pages/secorder/secorder",
+    "pages/usercenter/usercenter"
   ],
   "window": {
-		"navigationStyle": "custom",
+    "navigationStyle": "custom",
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTextStyle": "black"
-	},
-	"usingComponents": {
-		"cu-custom":"/style/colorui/components/cu-custom"
-	},
+  },
+  "usingComponents": {
+    "cu-custom": "/style/colorui/components/cu-custom"
+  },
   "tabBar": {
     "list": [
       {

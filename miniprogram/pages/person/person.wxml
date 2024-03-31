@@ -72,6 +72,23 @@
     </view>
     <text class="cellRight">></text>
   </button>
+  <button class="cell" bind:tap="toorder">
+    <!--contact打开客服会话-->
+    <view class="cellLeft">
+      <image src="../../images/customService.png"></image>
+      <text>闲置买卖</text>
+    </view>
+    <text class="cellRight">></text>
+  </button>
+  <button class="cell" bind:tap="tousercenter">
+    <!--contact打开客服会话-->
+    <view class="cellLeft">
+      <image src="../../images/customService.png"></image>
+      <text>我的主页</text>
+    </view>
+    <text class="cellRight">></text>
+  </button>
+
 </view>
 
 <view class="ohter mt">
@@ -91,6 +108,7 @@
     </view>
     <text class="cellRight">></text>
   </button>
+  
 </view>
 
 <button class="cell mt" bindtap="out">

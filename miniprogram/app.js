@@ -61,5 +61,57 @@ App({
 				this.globalData.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
 			}
 		})
+  },
+  async getUserInfoData() {
+    wx.showLoading({
+      title: '加载中',
+    })
+    console.log("0 after output")
+    const res = await new Promise((resolve, reject) => {
+      wx.getSetting({
+        success(res) {
+          resolve(res)
+        },
+        fail(err) {
+          reject(err)
+          wx.showToast({
+            title: '获取用户setting异常',
+          })
+        }
+      })
+    })
+    if (res.authSetting['scope.userInfo']) {
+      const userInfoRes = await new Promise((resolve, reject) => {
+        wx.getUserInfo({
+          success(res) {
+            console.log("3 after output")
+            resolve(res)
+          }
+        })
+      })
+      if (userInfoRes.userInfo) {
+        console.log(this.globalData)
+        this.globalData = {
+          ...this.globalData,
+          ...userInfoRes
+        }
+        const cloudRes = await new Promise((resolve, reject) => {
+          wx.cloud.callFunction({
+            name: 'login',
+            data: {},
+            success: res => {
+              resolve(res)
+            },
+            fail: err => {
+              reject(err)
+            }
+          })
+        })
+        console.log(cloudRes)
+        this.globalData.openid = cloudRes.result.openid
+      }
+    }
+    wx.hideLoading()
+    return this.globalData
   }
 });

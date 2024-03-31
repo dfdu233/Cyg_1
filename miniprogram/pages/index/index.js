@@ -40,7 +40,7 @@ Page({
       {
         icon: '../../images/trade.png',
         text: '闲置买卖',
-        url: '../sellandbuy/sellandbuy',  
+        url: '../sell/sell',  
       },
       {
         icon: '../../images/rent.png',
