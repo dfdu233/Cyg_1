@@ -1,0 +1,145 @@
+/* pages/jiedanyuan_zhongxin/jiedanyuan_zhongxin.wxss */
+page {
+  background-color: #fff;
+}
+.body {
+  width: 85%;
+  margin: 20rpx auto;
+  box-shadow: 0 0 20rpx #a1a1a1;
+  border-radius: 25rpx;
+  padding: 25rpx;
+  justify-content: center;
+  align-items: center;
+}
+.container {  
+  display: flex;  
+  justify-content: space-between;  
+  align-items: center;  
+}  
+.changan_1 {
+font-size: 35rpx;
+color: green;
+margin-left: 10rpx;
+margin-top: 50rpx;
+}
+.changan_2 {
+  font-size: 40rpx;
+  color: rgb(11, 170, 11);
+  }
+/* detail详情介绍开始 */  
+.container3 {
+  display: flex;
+  justify-content:space-between;
+  margin-top: 20rpx;
+  background-color: rgb(12, 194, 12);
+  border: 2rpx solid gray; /* 灰色边框 */  
+  padding: 10rpx; /* 内边距 */  
+  margin-top: 30rpx; /* 离顶部的距离 */  
+  border-radius: 20rpx 20rpx 20rpx 20rpx; /* 圆角效果，四个方向的半径分别为左上、右上、右下、左下 */ 
+}
+
+.box {
+  flex-grow: 1;
+  padding: 15px;
+}
+
+.text {
+  margin-bottom: 5px;
+text-align: center;  
+}
+/* detail详情介绍结束 */  
+
+/* 第一个图框开始 */ 
+.container4 {  
+	height: 300rpx;
+  display: flex;  
+  flex-direction: column;
+  justify-content: left;   
+  border: 2rpx solid gray; /* 灰色边框 */  
+  padding: 20rpx; /* 内边距 */  
+  margin-top: 50rpx; /* 离顶部的距离 */  
+  border-radius: 20rpx 20rpx 20rpx 20rpx; /* 圆角效果，四个方向的半径分别为左上、右上、右下、左下 */  
+}
+.container5 {  
+  display: flex;  
+  flex-direction: row;   
+  padding: 10rpx; /* 内边距 */  
+  margin-top: 2rpx; /* 离顶部的距离 */  
+  width: 550rpx;
+  height: 90rpx;
+  border-bottom: 1px solid gray;
+}  
+.arrow-container {   
+  display: flex;  
+  align-items:flex-end; /* 垂直居中箭头符号 */  
+  justify-content:right; /* 水平居中箭头符号 */  
+  width: 50rpx; /* 设置箭头容器的宽度 */  
+  height: 50rpx; /* 设置箭头容器的高度 */  
+  font-size: 40rpx; /* 设置箭头符号的字体大小 */  
+  color: #000; /* 设置箭头符号的颜色 */  
+}  
+/* 第一个图框结束 */ 
+/* 第二个图框开始 */ 
+.container6 {  
+	height: 200rpx;
+  display: flex;  
+  flex-direction: column;
+  justify-content: left;   
+  border: 2rpx solid gray; /* 灰色边框 */  
+  padding: 20rpx; /* 内边距 */  
+  margin-top: 50rpx; /* 离顶部的距离 */  
+  border-radius: 20rpx 20rpx 20rpx 20rpx; /* 圆角效果，四个方向的半径分别为左上、右上、右下、左下 */  
+}
+.container7 {   /* 接单员状指南下面有下划线 */  
+  display: flex;  
+  flex-direction: row;   
+  padding: 10rpx; /* 内边距 */  
+  margin-top: 2rpx; /* 离顶部的距离 */  
+  width: 550rpx;
+  height: 90rpx;
+  border-bottom: 1px solid gray;
+}  
+.container7_1 {  /* 接单员状态下面无下划线 */  
+  display: flex;  
+  flex-direction: row;   
+  padding: 10rpx; /* 内边距 */  
+  margin-top: 2rpx; /* 离顶部的距离 */  
+  width: 550rpx;
+  height: 90rpx;
+}  
+.arrow-container {   
+  display: flex;  
+  align-items:flex-end; /* 垂直居中箭头符号 */  
+  justify-content:right; /* 水平居中箭头符号 */  
+  width: 50rpx; /* 设置箭头容器的宽度 */  
+  height: 50rpx; /* 设置箭头容器的高度 */  
+  font-size: 40rpx; /* 设置箭头符号的字体大小 */  
+  color: #000; /* 设置箭头符号的颜色 */  
+}  
+/* 第二个图框结束 */ 
+/* 第三个图框开始 */ 
+.container8 {  
+	height: 120rpx;
+  display: flex;  
+  flex-direction: column;
+  justify-content: left;   
+  border: 2rpx solid gray; /* 灰色边框 */  
+  padding: 20rpx; /* 内边距 */  
+  margin-top: 50rpx; /* 离顶部的距离 */  
+  border-radius: 20rpx 20rpx 20rpx 20rpx; /* 圆角效果，四个方向的半径分别为左上、右上、右下、左下 */  
+}
+.container9 {   /* 接单员状指南下面有下划线 */  
+  display: flex;  
+  flex-direction: row;   
+  padding: 10rpx; /* 内边距 */  
+  margin-top: 2rpx; /* 离顶部的距离 */  
+  width: 800rpx;
+  height: 90rpx;
+}    
+/* 第三个图框结束 */ 
+.text-container {  
+  flex: 1; /* 让文字容器占据剩余空间 */  
+  margin-right: 10rpx; /* 文字容器右侧间距 */  
+  margin-left: 2rpx;
+  margin-top: 5rpx;
+}  

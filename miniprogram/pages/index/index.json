@@ -1,0 +1,4 @@
+{
+"usingComponents": { 
+    "my_select": "/components/select/select"}
+}

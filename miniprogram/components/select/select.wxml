@@ -1,0 +1,26 @@
+<!--pages/components/my_select/my_select.wxml-->
+<view class="select_all_view">
+ <!-- 内容说明，可以没有 -->
+ <view class="select_title" wx:if="{{title}}">{{title}}</view>
+ <view class="select_view">
+  <!-- 搜索输入框 -->
+  <input class="search_input" placeholder="输入关键词进行搜索" bindinput="searchOptions" />
+  <!-- 输入框 -->
+  <view class="inputPlaceholder" bindtap="startChange">
+   <text wx:if='{{select}}'>{{select}}</text>
+   <text wx:else="{{select}}">{{placeholder}}</text>
+   <view class="jiantou1" wx:if='{{changable}}'>
+    <l-icon name="down" size="30" />
+   </view>
+   <view class="jiantou1" wx:else='{{changable}}'>
+    <l-icon name="left" size="30" />
+   </view>
+  </view>
+  <!-- 下拉展开后的可选择内容 -->
+  <view class="content" wx:if='{{changable}}'>
+   <view class="{{item.id==selectId ? 'active':''}}" wx:for="{{selectcontent}}" wx:key="idnex" bindtap="changecontent" data-datavalue="{{item}}">
+    {{item.name}}
+   </view>
+  </view>
+ </view>
+</view>

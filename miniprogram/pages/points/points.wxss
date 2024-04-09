@@ -1,0 +1,100 @@
+/* pages/points/points.wxss */
+pages {
+  background-color: #fff;
+}
+
+.body {
+  width: 85%;
+  margin: 20rpx auto;
+  box-shadow: 0 0 20rpx #a1a1a1;
+  border-radius: 25rpx;
+  padding: 25rpx;
+  justify-content: center;
+  align-items: center;
+}
+/* 图标及文字 */  
+.container1 {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center; 
+  margin-top: 100rpx; 
+}  
+.text-container {  
+  display: flex;  
+  justify-content: space-between;  
+}  
+.text-container1 {  
+  display: flex;  
+  justify-content: space-between;  
+}  
+.text-container2 {  
+  display: flex;  
+  justify-content: space-between;  
+}  
+.text-line {  
+  margin-bottom: 20rpx; 
+  margin-top: 20rpx; 
+}
+/* 中间图框 */ 
+.container2 {  
+  display: flex;  
+  flex-direction: row;  
+  border: 2rpx solid gray; /* 灰色边框 */  
+  padding: 20rpx; /* 内边距 */  
+  margin-top: 150rpx; /* 离顶部的距离 */  
+  border-radius: 20rpx 20rpx 20rpx 20rpx; /* 圆角效果，四个方向的半径分别为左上、右上、右下、左下 */ 
+}  
+
+.image-container {  
+  width: 50rpx; /* 图片容器宽度 */  
+  height: 50rpx; /* 图片容器高度 */  
+  margin-right: 10rpx; /* 图片容器右侧间距 */ 
+}  
+
+.text-container3 {  
+  flex: 1; /* 让文字容器占据剩余空间 */  
+  margin-right: 10rpx; /* 文字容器右侧间距 */  
+  margin-left: 2rpx;
+  margin-top: 5rpx;
+}  
+
+.text-container4 {  
+  flex: 1; /* 让文字容器占据剩余空间 */  
+  margin-right: 10rpx; /* 文字容器右侧间距 */  
+  margin-left: 2rpx;
+  margin-top: 5rpx;
+}  
+
+/* 底部图框内容 */ 
+.container3 {  
+  display: flex;  
+  flex-direction: row;  
+  border: 2rpx solid gray; /* 灰色边框 */  
+  padding: 10rpx; /* 内边距 */  
+  margin-top: 450rpx; /* 离顶部的距离 */  
+  border-radius: 20rpx 20rpx 20rpx 20rpx; /* 圆角效果，四个方向的半径分别为左上、右上、右下、左下 */ 
+}  
+
+.image-container {  
+  width: 50rpx; /* 图片容器宽度 */  
+  height: 50rpx; /* 图片容器高度 */  
+  margin-right: 10rpx; /* 图片容器右侧间距 */ 
+}  
+
+.text-container3 {  
+  flex: 1; /* 让文字容器占据剩余空间 */  
+  margin-right: 10rpx; /* 文字容器右侧间距 */  
+  margin-left: 2rpx;
+  margin-top: 5rpx;
+}  
+
+.arrow-container {   
+  display: flex;  
+  align-items: center; /* 垂直居中箭头符号 */  
+  justify-content: center; /* 水平居中箭头符号 */  
+  width: 50rpx; /* 设置箭头容器的宽度 */  
+  height: 50rpx; /* 设置箭头容器的高度 */  
+  font-size: 40rpx; /* 设置箭头符号的字体大小 */  
+  color: #000; /* 设置箭头符号的颜色 */  
+}  

@@ -1,0 +1,71 @@
+<!--首页-打印服务-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="backText"> 打印服务 </view>
+</cu-custom>
+
+<view class="body">
+  <view class="item">
+    <text>收件地址</text>
+    <text bindtap="selectAddress">{{ address ? address : '请选择地址 >' }}</text>
+  </view>
+
+  <view class="item">
+    <text>打印文件</text>
+
+    <view class="addImage" bindtap="getImg" wx:if="{{ !printImg }}">
+      <text>+</text>
+    </view>
+
+    <view class="uploadFile" wx:else>
+      <text>上传成功!</text>
+      <button size="mini" type="primary" bindtap="preview">预览</button>
+      <button size="mini" type="warn" bindtap="getImg">重新上传</button>
+    </view>
+  </view>
+
+	<view class="shijianyaoqiu">时间要求：</view>
+  <view class="time">
+    <!--selectType选择时间缓急，并给出提示-->
+    <view class="{{ timeNow === index ? 'selectType' : ''}}" wx:for="{{ timeList }}" wx:key="index" data-id="{{ index }}" data-tip="{{ item.tips }}" bindtap="selectTime">{{ item.name }}</view>
+  </view>
+
+  <view class="item">
+    <text>页数</text>
+    <input type="text" value="{{ pageNum }}" placeholder="输入页数" bindinput="getPageNumber" />
+  </view>
+
+  <view class="item">
+    <text>份数</text>
+    <input type="text" value="{{ copieNum }}" placeholder="打印份数" bindinput="getcopieNumber" />
+  </view>
+
+  <view class="item">
+    <text>备注</text>
+    <input type="text" value="{{ remark }}" placeholder="备注信息，若没有可填无" bindinput="getRemark" />
+  </view>
+
+  <view class="item">
+    <text>是否彩印</text>
+    <switch checked="{{ colorPrint }}" bindchange="getColorPrint"></switch>
+  </view>
+
+  <view class="item">
+    <text>是否双面</text>
+    <switch checked="{{ twoSided }}" bindchange="getTwoSided"></switch>
+  </view>
+
+  <view class="tips">
+    <view class="tips_money">
+      <text>黑白 <text class="color_red">0.5元/页</text> </text>
+      <text>彩印 <text class="color_red">1元/页</text> </text>
+      <text>跑腿费 <text class="color_red">3元</text> </text>
+    </view>
+
+    <text>需支付 :</text>
+    <text class="color_red money">{{ finalMoney }} 元</text>
+
+  </view>
+  <button class="submitBtn" bindtap="submit">立即发布</button>
+
+  <view class="notice" bindtap="toAgreement">用户条款&隐私策略</view>
+</view>

@@ -1,0 +1,200 @@
+<!--订单页-->
+<cu-custom bgColor="bg-white" >
+  <view slot="content"> 校园畅逸服务 </view>
+</cu-custom>
+<!--可滚动视图-->
+<scroll-view scroll-x class="scroll_view">
+  <!--scroll-x横向滚动-->
+  <view class="tab">
+    <view class="tab_item {{ tabNow === index ? 'select' : '' }}" wx:for="{{ tabList }}" data-index="{{ index }}" wx:key="index" bindtap="selectTab"data-type="tab">
+      {{ item }}
+    </view>
+  </view>
+</scroll-view>
+<view class="tab_next">
+  <view class="tab_next_item {{tab_nextNow === index ? 'selected' : '' }}" wx:for="{{tab_nextList}}" wx:key="index" bindtap="selectTab" data-index="{{index}}" data-type="tab_next">
+    {{ tabNow === 0 && index === 0 ? '待接单' : tabNow === 1 && index === 0 ? '待卖出' : item }}
+  </view>
+</view>
+
+<!--我下单的待接单部分-->
+<view wx:if="{{ tabNow === 0&&tab_nextNow === 0}}" class="body">
+  <view class="order" wx:for="{{myOrderNotGet}}" wx:key="index">
+    <view class="order_top">
+      <view class="top_left">
+        <image src="{{ item.userInfo.avatarUrl }}"></image>
+        <view class="name">
+          <text>{{ item.name }}</text>
+          <text>{{ item.time }}</text>
+        </view>
+      </view>
+      <view class="{{ item.stateColor }}">
+        {{ item.state }}
+      </view>
+    </view>
+
+    <view class="order_content">
+      <view class="content">
+        {{ item.info }}
+      </view>
+      <view class="address" >
+        <block wx:if="{{ item.name !== '闲置买卖' }}">
+          目的地：{{item.address}}
+        </block>
+      </view>
+      <view class="address">
+        <block>
+          取件码：{{item.expressCode}}
+        </block>
+      </view>
+    </view>
+
+    <view class="order_bottom">
+      <button type="warn" size="mini" style="margin-right: 10rpx;" bindtap="deleteOrder" data-id="{{ item._id }}" wx:if="{{ item.state === '待接单' }}">取消订单</button>
+
+      <!--在“待接单”页，仅显示“取消订单”“金额”“订单状态”三个信息-->
+      <!-- 
+      <button wx:if="{{ item.name === '打印服务' && openid === item.receivePerson }}" size="mini" type="primary" bindtap="downloadFile" data-item="{{ item }}">下载文件</button>
+      <button wx:if="{{ item.codeImg }}" size="mini" type="primary" bindtap="showCodeImg" data-item="{{ item }}">取件码</button>
+      <button wx:if="{{ item.imgUrl }}" size="mini" type="primary" bindtap="showimgUrl" data-item="{{ item }}">快递代寄</button> 
+      -->
+      <view class="money">
+        金额 ￥{{ item.money }}
+      </view>
+    </view>
+  </view>
+  <view class="showAll">
+    ------- <text>已显示全部</text> -------
+  </view>
+</view>
+
+<!--我下单的待完成部分-->
+<view wx:if="{{ tabNow === 0&&tab_nextNow === 1}}" class="body">
+  <view class="order" wx:for="{{ ordering }}" wx:key="index">
+    <view class="order_top">
+      <view class="top_left">
+        <image src="{{ item.userInfo.avatarUrl }}"></image>
+        <view class="name">
+          <text>{{ item.name }}</text>
+          <text>{{ item.time }}</text>
+        </view>
+      </view>
+      <!--订单状态以及状态的颜色-->
+      <view class="{{ item.stateColor }}">
+        {{ item.state }}
+      </view>
+    </view>
+
+    <view class="order_content">
+      <view class="content">
+        {{ item.info }}
+      </view>
+      <view class="address">
+        <block  wx:if="{{ item.name !== '闲置买卖'}}">
+          目的地：{{item.address}}
+        </block>
+      </view>
+      <view class="address">
+        <block  wx:if="{{ openid === item.receivePerson }}&&{{item.name=== '快递代取'}}">
+          取件码：{{item.expressCode}}
+        </block>
+      </view>
+      <!--callPhone拨打电话-->
+      <view class="address" bindtap="callPhone" data-phone="{{ item.phone }}">
+        <block>
+          联系电话：{{item.phone}} 
+        </block>
+      </view>
+      <view class="address" bindtap="callPhone" data-phone="{{ phoneNow }}">
+        <block>
+          接单员电话：{{phoneNow}}
+        </block>
+      </view>
+    </view>
+
+    <view class="order_bottom">
+      <view class="money">
+        金额 ￥{{ item.money }}
+      </view>
+      <view class="accept" wx:if="{{ item.state === '待完成' }}" bindtap="toFinish" data-item="{{ item }}">
+        已完成
+      </view>
+    </view>
+  </view>
+  <view class="showAll">
+    ------- <text>已显示全部</text> -------
+  </view>
+</view>
+
+<!--我下单的已完成部分-->
+<view wx:if="{{ tabNow === 0&&tab_nextNow === 2}}" class="body">
+  <view class="order" wx:for="{{ ordered }}" wx:key="index">
+    <view class="order_top">
+      <view class="top_left">
+        <image src="{{ item.userInfo.avatarUrl }}"></image>
+        <view class="name">
+          <text>{{ item.name }}</text>
+          <text>{{ item.time }}</text>
+        </view>
+      </view>
+      <!--订单状态以及状态的颜色-->
+      <view class="{{ item.stateColor }}">
+        {{ item.state }}
+      </view>
+    </view>
+
+    <view class="order_content">
+      <view class="content">
+        {{ item.info }}
+      </view>
+      <view class="address" >
+        <block wx:if="{{ item.name !== '闲置买卖' }}">
+          目的地：{{item.address}}
+        </block>
+      </view>
+      <view class="address" wx:if="{{ openid === item.receivePerson }}">
+        <block>
+          取件码：{{item.expressCode}}
+        </block>
+      </view>
+      <!--callPhone拨打电话-->
+      <view class="address" bindtap="callPhone" data-phone="{{ item.phone }}">
+        订单已完成，相关信息已隐藏
+      </view>
+    </view>
+
+    <view class="order_bottom">
+      <button type="warn" size="mini" style="margin-right: 10rpx;" bindtap="zhijiedeleteOrder" data-id="{{ item._id }}" wx:if="{{ item.state !== '已帮助' }}">删除</button>
+      <view class="money">
+        金额 ￥{{ item.money }}
+      </view>
+    </view>
+  </view>
+  <view class="showAll">
+  ------- <text>已显示全部</text> -------
+  </view>
+</view>
+
+<!--二手交易待完成部分-->
+<view wx:if="{{ tabNow === 1&&tab_nextNow===0 }}" class="body">
+
+  <view class="showAll">
+    ------- <text>已显示全部</text> -------
+  </view>
+</view>
+
+<view wx:if="{{ tabNow === 1&&tab_nextNow===1 }}" class="body">
+
+  <view class="showAll">
+    ------- <text>已显示全部</text> -------
+  </view>
+</view>
+
+<!--二手交易已完成部分-->
+<view wx:if="{{ tabNow === 1&&tab_nextNow===2}}" class="body">
+
+
+  <view class="showAll">
+    ------- <text>已显示全部</text> -------
+  </view>
+</view>

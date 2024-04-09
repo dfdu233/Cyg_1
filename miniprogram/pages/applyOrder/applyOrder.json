@@ -1,0 +1,8 @@
+
+{
+  "usingComponents": {
+    "my-button": "../../components/myButton/myButton",
+    "my-modal": "../../components/myModal/myModal"
+  },
+  "navigationBarTitleText": "申请接单"
+}

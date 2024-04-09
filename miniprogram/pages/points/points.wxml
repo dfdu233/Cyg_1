@@ -1,0 +1,44 @@
+<!--我的-我的积分-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="backText">返回</view>
+</cu-custom>
+
+<view class="body">
+  <!-- 图标及文字 -->  
+<view class="container1">  
+  <image src="{{imageSrc}}" style="width: 80rpx; height: 80rpx; top: 2rpx; left: 1rpx;"></image>  
+  <view class="text-container"> 
+    <view class="text-container1"> 
+      <text class="text-line">{{rank}}</text> 
+    </view> 
+    <view class="text-container2" style="margin-left: 20rpx;">
+     <text class="text-line">{{Jifen}}</text>
+    </view>  
+  </view>  
+</view>
+<!-- 中间的图框和文字 -->  
+<view class="container2">  
+  <view class="image-container">  
+    <image src="/images/rights.png" style="width: 50rpx; height: 50rpx; top: 2rpx; left: 1rpx;"></image>   
+  </view>  
+  <view class="text-container3">  
+    <text class="text-line">享受权益</text>  
+  </view>  
+  <view class="text-container4">  
+    <text class="text-line">所有服务{{discount}}折</text>  
+  </view>  
+</view>
+<!-- 底部的图框和跳转 -->  
+<view class="container3">  
+  <view class="image-container">  
+    <image src="../../images/ball.png" style="width: 50rpx; height: 50rpx; top: 2rpx; left: 1rpx;"></image>   
+  </view>  
+  <view class="text-container3">  
+    <text class="text-line">积分规则</text>  
+  </view>  
+  <view class="arrow-container" bindtap="goToRent">  
+    <text class="arrow">></text>    
+  </view>  
+</view>
+</view>
+
