@@ -6,6 +6,7 @@ const { $Message } = require('../../iview/dist/base/index');
 const app = getApp()
 
 Page({
+
   /**
    * 页面的初始数据
    */
@@ -31,14 +32,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: async function(options) {
-    console.log('我初始化了')
     await this.setData({
       id: options.id
     })
-    console.log(2)
+  
     let res = await app.getUserInfoData()
-    console.log(3)
-    await this.fetchUserData(res)
+    await this.fetchUserData(res.openid)
     await this.fetchData()
     this.setData({
       showSkeleton: false
@@ -130,7 +129,34 @@ Page({
       timeStamp:new Date().getTime(),
       commentValue:this.data.commentValue
     }
-    
+    console.log(1)
+    wx.cloud.callFunction({
+      name: 'commentOrReply',
+      data: {
+        commentData,
+        id: this.data.id,
+        replyId:this.data.replyId
+      },
+      success: res => {
+        this.setData({
+          pageData:res.result.data,
+          commentValue:""
+        })
+      },
+      fail:e=>{
+        console.log(e)
+        wx.showToast({
+          title: e,
+        })
+      },
+      complete:()=>{
+        this.setData({
+          commentType: "comment",
+          commentFocus: false
+        })
+        wx.hideLoading()
+      }
+    })
   },
   async handleObtainedOrRepublish(id, type) {
     try {
@@ -170,7 +196,7 @@ Page({
         image:this.data.pageData.images[0],
         methods: this.data.pageData.shippingMethods
       },
-      addressInfo:this.data.userData.address[0],
+      addressInfo:'101',
       create_time:new Date().getTime(),
       status:"unreceipt",
       rate:0
@@ -184,7 +210,7 @@ Page({
         await this.handleObtainedOrRepublish(this.data.id,"sold")
         console.log(res)
         wx.navigateTo({
-          url: './../order/order',
+          url: './../secorder/secorder',
         })
       },
       fail:(e)=>{

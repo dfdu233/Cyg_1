@@ -30,11 +30,14 @@
     "pages/jiedanyuan_zhongxin/jiedanyuan_zhongxin",
     "pages/category/category",
     "pages/publish/publish",
+    "pages/publishDetail/publishDetail",
+    "pages/goodsDetail/goodsDetail",
     "pages/buy/buy",
     "pages/sell/sell",
     "pages/secorder",
     "pages/secorder/secorder",
-    "pages/usercenter/usercenter"
+    "pages/usercenter/usercenter",
+    "pages/goodsList/goodsList"
   ],
   "window": {
     "navigationStyle": "custom",

@@ -45,6 +45,11 @@ Page({
         },
         {
           url: "./../login/login",
+          icon: "./../../images/sport.png",
+          label: "书籍",
+        },
+        {
+          url: "./../login/login",
           icon: "./../../images/all.png",
           label: "全部",
         },
