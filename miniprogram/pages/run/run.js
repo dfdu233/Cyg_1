@@ -60,7 +60,8 @@ Page({
     addMoney: null,
     moneya:3.3,
     moneyb:0.9,
-    finalMoney:''
+    finalMoney:'',
+    outTradeNo:"2608230605"+Date.parse(new Date())
   },
   /*选择小中大件时的tip*/
   selectType(e) {
@@ -107,93 +108,120 @@ Page({
         finalMoney: finalMoney,
     });
 },
+submit() {
+  const that = this.data;
+  const {
+    helpContent,
+    pickUpAddress,
+    address,
+    addMoney,
+    userInfo,
+    phone,
+    moneya,
+    moneyb,
+    finalMoney,
+    outTradeNo,
+  } = this.data;
+  if (!helpContent || !pickUpAddress || !address) {
+    wx.showToast({
+      icon: 'none',
+      title: '您填写的信息不全',
+    })
+    return;
+  }
 
-  submit() {
-    const that = this.data;
-    const {
-      helpContent,
-      pickUpAddress,
+  wx.cloud.callFunction({
+    name:"pay",
+    data:{
+      price:finalMoney,
+      outTradeNo
+    },
+    success:res =>{
+      console.log("获取支付参数成功",res)
+      console.log(res)
+      const payment=res.result.payment
+      console.log("payment",payment)
+      wx.requestPayment({
+        ...payment,
+        success(res){
+  db.collection('order').add({ //在云数据库中新增记录
+    data: {
+      // 模块的名字
+      name: '帮我拿',
+      // 当前时间
+      time: getTimeNow(),
+      // 订单金额
+      money:Number(moneya*moneyb+addMoney),
+      // 订单状态
+      state: '待帮助',
+      // 收件地址
       address,
-      addMoney,
-      userInfo,
-      phone,
-      moneya,
-      moneyb,
-    } = this.data;
-    if (!helpContent || !pickUpAddress || !address) {
-      wx.showToast({
-        icon: 'none',
-        title: '您填写的信息不全',
-      })
-      return;
-    }
-    db.collection('order').add({ //在云数据库中新增记录
-      data: {
-        // 模块的名字
-        name: '帮我拿',
-        // 当前时间
-        time: getTimeNow(),
-        // 订单金额
-        money:Number(moneya*moneyb+addMoney),
-        // 订单状态
-        state: '待接单',
-        // 收件地址
-        address,
-        // 订单信息
-        info: {
-          // 帮助内容
-          helpContent,
-          // 取货地点
-          pickUpAddress,
-        },
-        // 用户信息
-        userInfo,
-        // 手机号
-        phone,
-        createTime: db.serverDate()
+      // 订单信息
+      info: {
+        // 帮助内容
+        helpContent,
+        // 取货地点
+        pickUpAddress,
       },
-      success: (res) => {
-        wx.cloud.callFunction({  
-          name: 'addPoint',  
-          // 传给云函数的参数  
-          data: { 
-            num:1
-          },  
-          // 成功回调  
-          success: function(res) {  
-            console.log(res.result); 
-            if (res.result.code === 0) {  
-              wx.showToast({  
-                title: '积分更新成功',
-                icon: 'success'  
-              });  
-            } else {  
-              wx.showModal({
-                title: '错误',  
-                content: res.result.message,
-                showCancel: false  
-              });  
-            }  
-          },  
-          fail: function(err) {  
-            console.error(err); // 打印调用失败的信息  
-            wx.showModal({  
-              title: '调用失败',  
-              content: '请稍后再试',  
+      // 用户信息
+      userInfo,
+      // 手机号
+      phone,
+      createTime: db.serverDate()
+    },
+    success: (res) => {
+      wx.cloud.callFunction({  
+        name: 'addPoint',  
+        // 传给云函数的参数  
+        data: { 
+          num:1
+        },  
+        // 成功回调  
+        success: function(res) {  
+          console.log(res.result); 
+          if (res.result.code === 0) {  
+            wx.showToast({  
+              title: '积分更新成功',
+              icon: 'success'  
+            });  
+          } else {  
+            wx.showModal({
+              title: '错误',  
+              content: res.result.message,
               showCancel: false  
             });  
           }  
-        })        
-        wx.switchTab({
-          url: '../index/index',
-        })
-        wx.showToast({
-          title: '发布成功',
-        })
-        wx.removeStorageSync('helpContentNow');
-      }
-    })
-  },
+        },  
+        fail: function(err) {  
+          console.error(err); // 打印调用失败的信息  
+          wx.showModal({  
+            title: '调用失败',  
+            content: '请稍后再试',  
+            showCancel: false  
+          });  
+        }  
+      })        
+      wx.switchTab({
+        url: '../index/index',
+      })
+      wx.showToast({
+        title: '发布成功',
+      })
+      wx.removeStorageSync('helpContentNow');
+    }
+  })
+},
+fail(err){
+  console.log("支付失败",err)
+}
+})
+},
+fail:res =>{
+console.log("获取支付参数失败",res)
+},
+})
+
+},
   // 增加金额
   getMoney(e) {
     this.setData({

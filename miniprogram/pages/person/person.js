@@ -1,6 +1,7 @@
 // 我的
 
 const db = wx.cloud.database();
+const CloudFunc = require("./../../cloudDatabase/operateDatas.js")
 Page({
     /**
      * 页面的初始数据
@@ -252,7 +253,7 @@ touserguide() {
                 })
 
                 wx.setStorageSync('userInfo', this.data.userInfo); //登录后，更换小程序的默认头像和昵称
-
+                CloudFunc.addUsers(this.data.userInfo);
   
        
             }

@@ -26,7 +26,11 @@ Page({
           icon: "./../../images/makeups.png",
           label: "穿衣美妆",
         },
-
+        {
+          url: "./../login/login",
+          icon: "./../../images/book.png",
+          label: "书籍",
+        },
       ],
       [{
           url: "./../login/login",
@@ -43,11 +47,7 @@ Page({
           icon: "./../../images/sport.png",
           label: "运动户外",
         },
-        {
-          url: "./../login/login",
-          icon: "./../../images/sport.png",
-          label: "书籍",
-        },
+        
         {
           url: "./../login/login",
           icon: "./../../images/all.png",

@@ -123,8 +123,8 @@ Page({
     const value=event.currentTarget.dataset.value
     app.globalData.categorySelectedValue = value
     app.globalData.categorySelectedType=this.data.menu[this.data.seletedIndex].mainTitle
-    wx.redirectTo({
-      url: '/pages/publish/publish',
+    wx.navigateBack()({
+      
     })
   }
 })
