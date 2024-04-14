@@ -42,24 +42,12 @@
   },
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
   "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
-      "list": []
-    },
-    "plugin": {
-      "list": []
-    },
-    "game": {
-      "list": []
-    },
     "miniprogram": {
       "list": [
         {
-          "id": -1,
           "name": "db guide",
-          "pathName": "pages/databaseGuide/databaseGuide"
+          "pathName": "pages/databaseGuide/databaseGuide",
+          "query": ""
         }
       ]
     }
@@ -76,5 +64,7 @@
     "ignore": [],
     "include": []
   },
-  "appid": "wxa2ee26d25e731703"
+  "appid": "wxa2ee26d25e731703",
+  "projectname": "20240302",
+  "libVersion": "2.30.2"
 }

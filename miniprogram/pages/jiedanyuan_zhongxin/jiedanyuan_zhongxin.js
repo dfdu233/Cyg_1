@@ -219,7 +219,6 @@ Page({
       }
     })
   },
-
   // 获取正在悬赏的订单信息
   getRewardOrder() {
     wx.showLoading({

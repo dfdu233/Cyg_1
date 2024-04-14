@@ -116,7 +116,7 @@ Page({
         // 订单金额
         money: colorPrint ? ( copieNum * 1 * pageNum + 3 ) : ( copieNum * 0.5 * pageNum + 3 ),
         // 订单状态
-        state: '待帮助',
+        state: '待接单',
         // 收件地址
         address,
         // 订单信息

@@ -9,14 +9,18 @@ const db = cloud.database();
 
 // 云函数入口函数
 exports.main = async (event, context) => {
+
   const { _id, allMoney, allCount, allOrder ,dayCount} = event;
+
   try {
     return await db.collection('orderReceive').doc(_id).update({
       data: {
         allMoney,
         allCount,
+
         allOrder,
         dayCount,
+
       }
     }) 
   } catch (error) {

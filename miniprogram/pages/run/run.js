@@ -60,8 +60,7 @@ Page({
     addMoney: null,
     moneya:3.3,
     moneyb:0.9,
-    finalMoney:'',
-    outTradeNo:"2608230605"+Date.parse(new Date())
+    finalMoney:''
   },
   /*选择小中大件时的tip*/
   selectType(e) {
@@ -120,8 +119,6 @@ Page({
       phone,
       moneya,
       moneyb,
-      finalMoney,
-      outTradeNo,
     } = this.data;
     if (!helpContent || !pickUpAddress || !address) {
       wx.showToast({
@@ -130,21 +127,6 @@ Page({
       })
       return;
     }
-
-    wx.cloud.callFunction({
-      name:"pay",
-      data:{
-        price:finalMoney,
-        outTradeNo
-      },
-      success:res =>{
-        console.log("获取支付参数成功",res)
-        console.log(res)
-        const payment=res.result.payment
-        console.log("payment",payment)
-        wx.requestPayment({
-          ...payment,
-          success(res){
     db.collection('order').add({ //在云数据库中新增记录
       data: {
         // 模块的名字
@@ -154,7 +136,7 @@ Page({
         // 订单金额
         money:Number(moneya*moneyb+addMoney),
         // 订单状态
-        state: '待帮助',
+        state: '待接单',
         // 收件地址
         address,
         // 订单信息
@@ -212,17 +194,6 @@ Page({
       }
     })
   },
-  fail(err){
-    console.log("支付失败",err)
-  }
-})
-},
-fail:res =>{
-console.log("获取支付参数失败",res)
-},
-})
-
-},
   // 增加金额
   getMoney(e) {
     this.setData({

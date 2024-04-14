@@ -119,6 +119,7 @@ Page({
       phone,
       moneya,
       moneyb,
+      finalMoney
     } = this.data;
     if (!helpContent || !pickUpAddress || !address) {
       wx.showToast({
@@ -130,13 +131,13 @@ Page({
     db.collection('order').add({ //在云数据库中新增记录
       data: {
         // 模块的名字
-        name: '帮我拿',
+        name: '帮我送',
         // 当前时间
         time: getTimeNow(),
         // 订单金额
         money:Number(moneya*moneyb+addMoney),
         // 订单状态
-        state: '待帮助',
+        state: '待接单',
         // 收件地址
         address,
         // 订单信息

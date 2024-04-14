@@ -72,7 +72,7 @@ Page({
 
   submit() {
     const that = this.data;
-    const { helpContent, imgUrl, address, userInfo, business, remark, addMoney, phone } = this.data;
+    const { helpContent, imgUrl, address, userInfo, business, remark, addMoney, phone,money } = this.data;
     if (!(helpContent || imgUrl) || !address || !business) {
       wx.showToast({
         icon: 'none',
@@ -89,7 +89,7 @@ Page({
         // 订单金额
 				money: Number(that.money + that.addMoney),
         // 订单状态
-        state: '待帮助',
+        state: '待接单',
         // 收件地址
         address:that.address,
         // 订单信息
