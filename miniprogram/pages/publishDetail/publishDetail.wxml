@@ -1,4 +1,7 @@
 <!--miniprogram/pages/publishDetail/publishDetail.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="backText"> 交易详情 </view>
+</cu-custom>
 <i-cell-group>
   <i-cell title="交易类型">
     <view class='right__footer_between' slot="footer">

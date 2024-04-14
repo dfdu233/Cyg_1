@@ -34,6 +34,7 @@ Page({
       goodsData: [],
       page:1
     },
+
     pageSize:10,
     showLoadMore:false,
     rateValue:0,
@@ -102,6 +103,7 @@ Page({
       wx.showLoading({
         title: '',
       })
+    
       wx.cloud.callFunction({
         name: 'getUserGoodsData',
         data: {

@@ -26,6 +26,7 @@ Page({
     commentFocus:false,
     password:[],
     isPayPanelShow:false,
+    create_time:"260909090"+Date.parse(new Date())
   },
 
   /**
@@ -197,7 +198,7 @@ Page({
         methods: this.data.pageData.shippingMethods
       },
       addressInfo:'101',
-      create_time:new Date().getTime(),
+      create_time:this.data.create_time,
       status:"unreceipt",
       rate:0
     }
@@ -226,8 +227,32 @@ Page({
   },
   handleWechatPay(){
     console.log("pay")
-    this.setData({
-      isPayPanelShow:true
+    const _=this
+    wx.cloud.callFunction({
+      name:"pay",
+      data:{
+        price:_.data.pageData.money,
+        outTradeNo:_.data.create_time
+      },
+
+      success:res =>{
+        console.log("获取支付参数成功",res)
+        console.log(res)
+        const payment=res.result.payment
+        console.log("payment",payment)
+        wx.requestPayment({
+          ...payment,
+          success(res){
+            this.createOrder()
+          },
+          fail(err){
+            console.log("支付失败",err);
+          }
+        })
+      },
+      fail(err){
+        console.log("支付失败",err)
+      }
     })
   },
   handlePayPanelHide(event){

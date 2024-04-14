@@ -39,7 +39,7 @@ Page({
         color: 'theme'
       },
       {
-        name: '同城自取',
+        name: '跑腿',
         checked: false,
         color: 'theme'
       }
