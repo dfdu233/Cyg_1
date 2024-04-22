@@ -34,7 +34,7 @@ Page({
       }
     ],
     shippingMethodsTags: [{
-        name: '快递',
+        name: '自提',
         checked: true,
         color: 'theme'
       },
@@ -42,7 +42,13 @@ Page({
         name: '跑腿',
         checked: false,
         color: 'theme'
-      }
+      },
+      {
+        name: '买主',
+        checked: false,
+        color: 'theme'
+      },
+
     ],
     address: {}
   },

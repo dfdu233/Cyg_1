@@ -225,7 +225,7 @@ Page({
       title: '加载中',
     })
     db.collection('order').orderBy('createTime', 'desc').where({
-      state: '待接单'
+      state: '待帮助'
     }).get({
       success: (res) => {
         const {
@@ -816,7 +816,7 @@ Page({
       })
     } else if (tabNow === 3) {
       db.collection('order').orderBy('createTime', 'desc').skip(rewardOrder.length).where({
-        state: '待接单'
+        state: '待帮助'
       }).get({
         success: (res) => {
           if (res.data.length) {
