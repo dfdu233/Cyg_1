@@ -11,14 +11,9 @@
     </view>
   </view>
 </scroll-view>
-<view class="tab_next">
-  <view class="tab_next_item {{tab_nextNow === index ? 'selected' : '' }}" wx:for="{{tab_nextList}}" wx:key="index" bindtap="selectTab" data-index="{{index}}" data-type="tab_next">
-    {{ tabNow === 0 && index === 0 ? '待接单' : tabNow === 1 && index === 0 ? '待卖出' : item }}
-  </view>
-</view>
 
 <!--我下单的待接单部分-->
-<view wx:if="{{ tabNow === 0&&tab_nextNow === 0}}" class="body">
+<view wx:if="{{ tabNow === 0}}" class="body">
   <view class="order" wx:for="{{myOrderNotGet}}" wx:key="index">
     <view class="order_top">
       <view class="top_left">
@@ -69,7 +64,7 @@
 </view>
 
 <!--我下单的待完成部分-->
-<view wx:if="{{ tabNow === 0&&tab_nextNow === 1}}" class="body">
+<view wx:if="{{ tabNow === 1}}" class="body">
   <view class="order" wx:for="{{ ordering }}" wx:key="index">
     <view class="order_top">
       <view class="top_left">
@@ -127,7 +122,7 @@
 </view>
 
 <!--我下单的已完成部分-->
-<view wx:if="{{ tabNow === 0&&tab_nextNow === 2}}" class="body">
+<view wx:if="{{ tabNow ===2}}" class="body">
   <view class="order" wx:for="{{ ordered }}" wx:key="index">
     <view class="order_top">
       <view class="top_left">
@@ -172,29 +167,5 @@
   </view>
   <view class="showAll">
   ------- <text>已显示全部</text> -------
-  </view>
-</view>
-
-<!--二手交易待完成部分-->
-<view wx:if="{{ tabNow === 1&&tab_nextNow===0 }}" class="body">
-
-  <view class="showAll">
-    ------- <text>已显示全部</text> -------
-  </view>
-</view>
-
-<view wx:if="{{ tabNow === 1&&tab_nextNow===1 }}" class="body">
-
-  <view class="showAll">
-    ------- <text>已显示全部</text> -------
-  </view>
-</view>
-
-<!--二手交易已完成部分-->
-<view wx:if="{{ tabNow === 1&&tab_nextNow===2}}" class="body">
-
-
-  <view class="showAll">
-    ------- <text>已显示全部</text> -------
   </view>
 </view>

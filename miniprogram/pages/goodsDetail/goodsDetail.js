@@ -167,7 +167,8 @@ Page({
         name: 'shelfOrObtainedGood',
         data: {
           id,
-          type
+          type,
+          buyeraddress:wx.getStorageSync('address')[0],
         }
       })
       console.log(res)

@@ -1,5 +1,23 @@
 // app.js
 App({
+  globalData:{
+    orderStatus:"待完成"
+  },
+  watch: function (method) {
+    var obj = this.globalData;
+    Object.defineProperty(obj, "orderStatus", {
+      configurable: true,
+      enumerable: true,
+      set: function (value) {
+        console.log("订单状态变化为：" + value);
+        this._orderStatus = value;
+        method(value);
+      },
+      get: function () {
+        return this._orderStatus;
+      }
+    })
+  },
   onLaunch: function () {
     console.log(new Date().getDate())
     console.log(new Date().getMonth()+1)
@@ -36,7 +54,7 @@ App({
     // 在页面的js文件中调用云函数
 		this.globalData = {
       Jifen:[],
-      discount:10
+      discount:10,
     };
     wx.cloud.callFunction({
       name: 'getJifen', // 云函数的名称
