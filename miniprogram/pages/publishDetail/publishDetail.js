@@ -164,7 +164,8 @@ Page({
       address: this.data.address,
       money: this.data.money,
       transactionType: this.data.transactionTypeTags[this.data.transactionTypeTagsIndex].name,
-      shippingMethods: this.data.shippingMethodsTags.filter(item => item.checked)
+      shippingMethods: this.data.shippingMethodsTags.filter(item => item.checked),
+      buyeraddress:'',
     }
     await CloudFunc.updateGoods(where, data).then((res)=>{
       console.log(res)

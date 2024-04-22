@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabList: ['我下单的', '二手交易'],
+    tabList: ['待接单','待完成','已完成'],
     tabNow: 0,
     orderList: [],
     myOrderNotGet: [],
@@ -14,12 +14,7 @@ Page({
     myOrdered:[],
     helpOrder: [],
     openid: '',
-    phoneNow: '',
-    canReceive: false,
-    helpTotalNum: 0,
-    helpTotalMoeny: 0,
-    tab_nextList:['待接单','待完成','已完成'],
-    tab_nextNow:0
+    phoneNow: ''
   },
 
   selectTab(e) {
@@ -38,35 +33,20 @@ Page({
       this.setData({ tabNow: index }, () => {
         this.loadDataBasedOnTabs();
       });
-    } else if (type === 'tab_next') {
-      this.setData({ tab_nextNow: index }, () => {
-        this.loadDataBasedOnTabs();
-      });
-    }
+    } 
   },
 
-  // 根据当前的tab和tab_next状态加载数据
+  // 根据当前的tab状态加载数据
   loadDataBasedOnTabs: function() {
     let { tabNow, tab_nextNow } = this.data;
     // 示例: 根据tabNow和tab_nextNow的值调用不同的函数
     if (tabNow === 0) {
-      if (tab_nextNow === 0) {
-        this.onLoad();
-      } else if (tab_nextNow === 1) {
-        this.fetchDataForTab0Next1();
-      } else if (tab_nextNow === 2) {
-        this.fetchDataForTab0Next2();
-      }
+      this.onLoad();
     } else if (tabNow === 1) {
-      if (tab_nextNow === 0) {
-        this.fetchDataForTab1Next0();
-      } else if (tab_nextNow === 1) {
-        this.fetchDataForTab1Next1();
-      } else if (tab_nextNow === 2) {
-        this.fetchDataForTab1Next2();
-      }
+      this.fetchDataForTab0Next1();
+    } else if (tabNow === 2) {
+      this.fetchDataForTab0Next2();
     }
-    // 其他组合根据需要添加
   },
 
   // 获取待完成数据
@@ -75,6 +55,7 @@ Page({
       title: '加载中',
     })
     db.collection('order').orderBy('createTime', 'desc').where({
+      _openid:this.data.openid,
       state: "待完成"
     }).get({
       success: (res) => {
@@ -91,10 +72,6 @@ Page({
           }
           if (item.name === "快递代寄" && item.info.imgUrl) {
             item.imgUrl = item.info.imgUrl;
-          }
-          //接单员接单后，需要下载需要打印的文件
-          if (item.name === '打印服务') {
-            item.printImg = item.info.printImg;
           }
           item.info = this.formatInfo(item);
           item.stateColor = this.formatState(item.state);
@@ -120,6 +97,7 @@ Page({
       title: '加载中',
     })
     db.collection('order').orderBy('createTime', 'desc').where({
+      _openid: this.data.openid,
       state: "已完成"
     }).get({
       success: (res) => {
@@ -136,10 +114,6 @@ Page({
           }
           if (item.name === "快递代寄" && item.info.imgUrl) {
             item.imgUrl = item.info.imgUrl;
-          }
-          //接单员接单后，需要下载需要打印的文件
-          if (item.name === '打印服务') {
-            item.printImg = item.info.printImg;
           }
           item.info = this.formatInfo(item);
           item.stateColor = this.formatState(item.state);
@@ -158,17 +132,6 @@ Page({
         wx.hideLoading();
       }
     })
-  },
-  //获取二手交易待接单
-  fetchDataForTab1Next0:function(){
-
-  },
-  //二手交易待完成
-  fetchDataForTab1Next1:function(){
-
-  },
-  fetchDataForTab1Next2:function(){
-
   },
 
    // 取消待接单的订单
@@ -200,7 +163,7 @@ Page({
             fail: () => {
               wx.showToast({
                 icon: 'none',
-                title: '删除失败',
+                title: '取消失败',
               })
               wx.hideLoading();
             }
@@ -227,7 +190,7 @@ Page({
         wx.showToast({
           title: '删除成功',
         })
-        this.getMyOrder();
+        this.myOrdered();
         wx.hideLoading();
       },
       fail: () => {
@@ -259,7 +222,7 @@ Page({
   },
 
 
-  //在“我的订单待完成”里确定“已完成”
+  //在“待完成”里确定“已完成”
   async toFinish(e) {
     wx.showLoading({
       title: '加载中',
@@ -286,9 +249,6 @@ Page({
       name: 'updateReceiver',
       data: {
         _id,
-        allMoney, //总收益
-        allCount, //总单数
-        allOrder //所有我帮助的订单
       },
     });
     await db.collection('order').doc(orderID).update({
@@ -296,7 +256,7 @@ Page({
         state: '已完成'
       }
     });
-    this.getMyOrder();
+    this.myOrdered();
     wx.hideLoading();
   },
 
@@ -369,10 +329,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showLoading({
-      title: '加载中',
-    })
+    this.fetchDataForTab0Next1()
     db.collection('order').orderBy('createTime', 'desc').where({
+      _openid: this.data.openid,
       state: "待接单"
     }).get({
       success: (res) => {
@@ -389,10 +348,6 @@ Page({
           }
           if (item.name === "快递代寄" && item.info.imgUrl) {
             item.imgUrl = item.info.imgUrl;
-          }
-          //接单员接单后，需要下载需要打印的文件
-          if (item.name === '打印服务') {
-            item.printImg = item.info.printImg;
           }
           item.info = this.formatInfo(item);
           item.stateColor = this.formatState(item.state);
@@ -411,8 +366,17 @@ Page({
         wx.hideLoading();
       }
     })
+    getApp().watch((value)=>{
+      if(value === "待完成"){
+        this.fetchDataForTab0Next1();
+      }
+    })
+    this.fetchDataForTab0Next1();
+    wx.showLoading({
+      title: '加载中',
+    })
   },
-
+  
   //取件码截图
   showCodeImg(e) {
     const {
@@ -454,7 +418,7 @@ Page({
       }
     } = e.currentTarget.dataset;
     console.log(imgUrl, state, receivePerson);
-    if (state !== '已帮助' || receivePerson !== this.data.openid) {
+    if (state !== '已完成' || receivePerson !== this.data.openid) {
       wx.showToast({ //设置查看权限
         icon: 'none',
         title: '无权查看 !',

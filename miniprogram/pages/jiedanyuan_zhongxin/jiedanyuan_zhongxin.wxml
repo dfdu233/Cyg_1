@@ -71,7 +71,7 @@
         {{ item.state !== '已完成' ? '联系电话：' + item.phone : '订单已完成，相关信息已隐藏' }}
       </view>
       <view class="address" bindtap="callPhone" data-phone="{{ phoneNow }}" wx:if="{{ item.state !== '已完成' }}">
-        {{ item.state === '待帮助' ? '接单员电话：（目前无人接单）' : '接单员电话：' + phoneNow }}
+        {{ item.state === '待接单' ? '接单员电话：（目前无人接单）' : '接单员电话：' + phoneNow }}
       </view>
     </view>
 
@@ -82,7 +82,7 @@
       <view class="money">
         金额 ￥{{ item.money }}
       </view>
-      <view class="accept" wx:if="{{ item.state === '待帮助' }}" bindtap="orderReceive" data-item="{{ item }}">
+      <view class="accept" wx:if="{{ item.state === '待接单' }}" bindtap="orderReceive" data-item="{{ item }}">
         接单
       </view>
     </view>
@@ -126,7 +126,7 @@
         {{ item.state !== '已完成' ? '联系电话：' + item.phone : '订单已完成，相关信息已隐藏' }}
       </view>
       <view class="address" bindtap="callPhone" data-phone="{{ phoneNow }}" wx:if="{{ item.state !== '已完成' }}">
-        {{ item.state === '待帮助' ? '接单员电话：（目前无人接单）' : '接单员电话：' + phoneNow }}
+        {{ item.state === '待接单' ? '接单员电话：（目前无人接单）' : '接单员电话：' + phoneNow }}
       </view>
     </view>
 
@@ -200,7 +200,7 @@
         {{ item.state !== '已完成' ? '联系电话：' + item.phone : '订单已完成，相关信息已隐藏' }}
       </view>
       <view class="address" bindtap="callPhone" data-phone="{{ phoneNow }}" wx:if="{{ item.state !== '已完成' }}">
-        {{ item.state === '待帮助' ? '接单员电话：（目前无人接单）' : '接单员电话：' + phoneNow }}
+        {{ item.state === '待接单' ? '接单员电话：（目前无人接单）' : '接单员电话：' + phoneNow }}
       </view>
     </view>
 
@@ -248,7 +248,7 @@
         {{ item.state !== '已完成' ? '联系电话：' + item.phone : '订单已完成，相关信息已隐藏' }}
       </view>
       <view class="address" bindtap="callPhone" data-phone="{{ phoneNow }}" wx:if="{{ item.state !== '已完成' }}">
-        {{ item.state === '待帮助' ? '接单员电话：（目前无人接单）' : '接单员电话：' + phoneNow }}
+        {{ item.state === '待接单' ? '接单员电话：（目前无人接单）' : '接单员电话：' + phoneNow }}
       </view>
     </view>
 

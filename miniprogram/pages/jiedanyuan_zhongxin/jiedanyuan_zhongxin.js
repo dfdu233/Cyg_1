@@ -9,7 +9,7 @@ Page({
    */
 
   data: {
-    tabList: ['全部', '我的订单', '我帮助的', '正在悬赏'],
+    tabList: ['待接单', '待完成', '已完成', '正在悬赏'],
     tabNow: 0,
     orderList: [],
     myOrder: [],
@@ -74,44 +74,6 @@ Page({
     }
   },
 
-  // 删除已帮助的订单
-  deleteOrder(e) {
-    wx.showModal({  //showModal 弹窗
-      title: '确认要取消该订单吗？',
-      content: '如果要取消已帮助的订单，请一定要电话告知接单者！！！如果未告知接单者，擅自取消已帮助的订单，则违反平台规定，受到平台惩罚！！！',
-      success: (res) => {
-        const { confirm } = res; //confirm用户点击的选项
-        if (confirm) {
-          wx.showLoading({
-            title: '处理中',
-          })
-          const {
-            id
-          } = e.currentTarget.dataset;
-          wx.cloud.callFunction({
-            name: 'deleteOrder',
-            data: {
-              _id: id
-            },
-            success: () => {
-              wx.showToast({
-                title: '删除成功',
-              })
-              this.getMyOrder();
-              wx.hideLoading();
-            },
-            fail: () => {
-              wx.showToast({
-                icon: 'none',
-                title: '删除失败',
-              })
-              wx.hideLoading();
-            }
-          })
-        }
-      }
-    })
-  },
 
   //直接删除订单
   zhijiedeleteOrder(e) {
@@ -225,7 +187,7 @@ Page({
       title: '加载中',
     })
     db.collection('order').orderBy('createTime', 'desc').where({
-      state: '待帮助'
+      state: '待接单'
     }).get({
       success: (res) => {
         const {
@@ -252,38 +214,6 @@ Page({
     })
   },
 
-  // 获取我的订单信息
-  getMyOrder() {
-    wx.showLoading({
-      title: '加载中',
-    })
-    db.collection('order').orderBy('createTime', 'desc').where({
-      _openid: this.data.openid
-    }).get({
-      success: (res) => {
-        const {
-          data
-        } = res;
-        data.forEach(item => {
-          if (item.name === "快递代取" && item.info.expressCode) {
-            item.expressCode = item.info.expressCode;
-          }
-          if (item.name === "快递代取" && item.info.codeImg) {
-            item.codeImg = item.info.codeImg;
-          }
-          if (item.name === "快递代寄" && item.info.imgUrl) {
-            item.imgUrl = item.info.imgUrl;
-          }
-          item.info = this.formatInfo(item);
-          item.stateColor = this.formatState(item.state);
-        });
-        this.setData({
-          myOrder: data,
-        })
-        wx.hideLoading();
-      }
-    })
-  },
 
   // 点击接单
   orderReceive(e) {
@@ -331,20 +261,16 @@ Page({
         userInfo,
       })
 
-      //调用updateReceive云函数，接单成功，则订单状态为"已帮助"
+      //调用updateReceive云函数，接单成功，则订单状态为"待完成"
       wx.cloud.callFunction({ 
         name: 'updateReceive',
         data: {
           _id,
           receivePerson: this.data.openid,
-          state: "已帮助"
+          state: "待完成"
         },
         success: (res) => {
-          if (this.data.tabNow === 0) {
-            this.onLoad();
-          } else {
-            this.getRewardOrder();
-          }
+          getApp().globalData.orderStatus="待完成";
           wx.hideLoading();
         },
         fail: (err) => {
@@ -474,9 +400,9 @@ Page({
 
   //所有的状态类型
   formatState(state) {
-    if (state === '待帮助') {
+    if (state === '待接单') {
       return 'top_right';
-    } else if (state === '已帮助') {
+    } else if (state === '待完成') {
       return 'top_right_help';
     } else if (state === '已完成') {
       return 'top_right_finish';
@@ -507,7 +433,7 @@ Page({
     this.getPersonPower(); //查看当前用户的权限
     db.collection('order').orderBy('createTime', 'desc').where(
       {
-        state:"待帮助"
+        state:"待接单"
       }
     ).get({
       success: (res) => {
@@ -558,7 +484,7 @@ Page({
       }
     } = e.currentTarget.dataset;
     console.log(codeImg, state, receivePerson);
-    if (state !== '已帮助' || receivePerson !== this.data.openid) {
+    if (state !== '待完成帮助' || receivePerson !== this.data.openid) {
       wx.showToast({ //设置查看权限
         icon: 'none',
         title: '无权查看 !',
@@ -816,7 +742,7 @@ Page({
       })
     } else if (tabNow === 3) {
       db.collection('order').orderBy('createTime', 'desc').skip(rewardOrder.length).where({
-        state: '待帮助'
+        state: '待接单'
       }).get({
         success: (res) => {
           if (res.data.length) {

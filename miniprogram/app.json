@@ -47,7 +47,9 @@
     "navigationBarTextStyle": "black"
   },
   "usingComponents": {
-    "cu-custom": "/style/colorui/components/cu-custom"
+    "cu-custom": "style/colorui/components/cu-custom",
+    "van-tabbar":"style/@vant/weapp/lib/tabbar/index",
+    "van-tabbar-item":"style/@vant/weapp/lib/tabbar-item/index"
   },
   "tabBar": {
     "list": [
@@ -72,6 +74,5 @@
     ]
   },
   "sitemapLocation": "sitemap.json",
-  "style": "v2",
   "lazyCodeLoading": "requiredComponents"
 }
