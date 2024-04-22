@@ -209,7 +209,7 @@ Page({
         data
       },
       success:async (res)=>{
-        await this.handleObtainedOrRepublish(this.data.id,"sold")
+        await this.handleObtainedOrRepublish(this.data.id,"waitchecked")
         console.log(res)
         wx.navigateTo({
           url: './../secorder/secorder',

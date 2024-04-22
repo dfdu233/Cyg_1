@@ -26,7 +26,7 @@ Page({
       goodsData: [],
       page:1
     },
-    pending:{
+    waitchecked:{
       goodsData: [],
       page:1
     },
