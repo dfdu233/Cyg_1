@@ -28,10 +28,6 @@
   <view class="line">接单员取送：服务费 =商品售价×5%
 ；服务费最低为0.5元，最高为5元</view>
   <view class="line">服务费将在商品交易成功后，从卖家的账户中自动扣除</view>
-  <view class="bold">5、挂房租房</view>
-  <view class="line">校园畅逸服务平台为房东、中介、租客提供免费信息服务。</view>
-  <view class="bold">6、电费代充</view>
-  <view class="line">达到王者段位后可以享受免费电费代充服务</view>
 </view>
 
 <view class="paragraph" wx:if="{{tabNow===1}}">
@@ -44,11 +40,7 @@
   <view class="bold">4、闲置买卖</view>
   <view class="line">卖主上传一个商品获得1积分；
     用户下单成功一个商品获得1积分。若中途由第三方送货则接单员接单一次获得1积分</view>
-  <view class="bold">5、挂房租房</view>
-  <view class="line">房东上传1套房源信息，获得1积分；
-    租客下单获取1套房源信息获得1积分。</view>
-  <view class="bold">6、电费代充</view>
-  <view class="line">用户下单代充电费金额{{'<'}}50无法获取积分；50元{{'>='}}用户下单代充电费金额{{'<'}}100元获得1积分；用户下单代充电费金额{{'>='}}100元，获得2积分。</view>
+
   <view class="body">
     <view class="table-container">
       <view class="row">
@@ -112,9 +104,6 @@
 </view>
 
 <view class="paragraph" wx:if="{{tabNow===2}}">
-  <view class="body">
-    
-  </view>
   <view class="tips">以下为{{locationRange[0][locationValue]}}各服务的手续费用，为保证平台平稳可持续发展，
 征收手续费用用于平台的日常维护。</view>
   <view class="body">
@@ -126,13 +115,13 @@
       </view>
       <view class="row">
         <view class="column">快递代取</view>
-        <view class="column">15%</view>
-        <view class="column">85%</view>
+        <view class="column">10%</view>
+        <view class="column">90%</view>
       </view>
       <view class="row">
         <view class="column">跑腿服务</view>
-        <view class="column">15%</view>
-        <view class="column">85%</view>
+        <view class="column">10%</view>
+        <view class="column">90%</view>
       </view>
     </view>
   </view>

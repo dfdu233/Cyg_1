@@ -1,5 +1,4 @@
 //首页
-
 const db = wx.cloud.database();
 
 Page({
@@ -68,7 +67,7 @@ Page({
     ],
     curschoolName:"成都理工大学(成都）" ,
     title: "学校"
-	},
+  },
 	changeSchool(e){
     console.log(e.detail.selectId);
     console.log(e.detail.select);
@@ -189,4 +188,5 @@ Page({
 
   }
 })
+
 

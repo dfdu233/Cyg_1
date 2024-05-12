@@ -1,31 +1,39 @@
-
+<!--pages/sell/sell.wxml-->
 <cu-custom bgColor="bg-white" isBack="{{true}}">
-	<view slot="backText"> 市场 </view>
+	<view slot="backText"> 我要卖 </view>
 </cu-custom>
-<!--index.wxml-->
-<view class="skeleton">
-  <swiper class='x__swiper' indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-    <block wx:for="{{imgUrls}}" wx:key="{{index}}">
-      <swiper-item>
-        <image src="{{item}}" class="slide-image skeleton-rect" />
-      </swiper-item>
-    </block>
-  </swiper>
-  <view class="container">
-    <i-row i-class="x__grid_container" wx:for="{{grids}}" wx:key="{{index}}">
-      <view class="x__grid_item" wx:for="{{item}}" wx:for-item="subItem" wx:for-index="subIndex" wx:key="{{subIndex}}" data-label="{{subItem.label}}" bindtap="onPressCategoryItem">
-        <i-grid-icon>
-          <image class="skeleton-radius" src="{{subItem.icon}}" />
-        </i-grid-icon>
-        <i-grid-label>
-          <text class="skeleton-rect">{{subItem.label}}</text>
-        </i-grid-label>
+
+
+
+ <!--miniprogram/pages/publish/publish.wxml-->
+<i-panel title="" hide-border="true">
+  <i-input value="{{name}}" type="text" placeholder="请输入闲置物品名称" bind:change="nameHandle" />
+  <i-input value="{{description}}" type="textarea" placeholder="请简要描述一下物品的细节，新旧程度，型号尺寸" maxlength="200" bind:change="descriptionHandle" />
+</i-panel>
+<i-panel title="添加图片(最多六张)" hide-border="true">
+  <i-cell-group>
+    <i-cell>
+      <view class="weui-uploader__input-box" wx:if="{{selectedImages.length<6}}">
+        <view class="weui-uploader__input" bindtap="chooseImage"></view>
       </view>
-    </i-row>
-    <view class="goods__list_container">
-      <goods-item style="width:48%;margin:0 1% 2% 1%;" bind:onGoodsItemPress="onItemPress" wx:for="{{goodsData}}" wx:key="{{index}}" data="{{item}}" />
-    </view>
-  </view>
-</view>
-<i-load-more loading="{{ showLoadMore }}" />
-<skeleton wx:if="{{showSkeleton}}"></skeleton>
+      <view class="weui-uploader__file uploader__img_box" wx:for="{{selectedImages}}" wx:for-index="idx" wx:key="idx">
+        <image class="weui-uploader__img " src="{{item}}" bindtap='previewImage' data-currenturl="{{item}}" mode="aspectFit" />
+        <i-icon type="delete" size="28" color="#8c8c8c" class='close-btn' bindtap='deleteHandle' data-index='index' />
+      </view>
+    </i-cell>
+  </i-cell-group>
+</i-panel>
+<i-cell-group>
+  <i-cell title="是否全新">
+    <i-switch value="{{isNew}}" size="large" bind:change="onChangeSwitch" slot="footer">
+      <view slot="open">是</view>
+      <view slot="close">否</view>
+    </i-switch>
+  </i-cell>
+</i-cell-group>
+<i-cell-group>
+  <i-cell title="分类" is-link url="/pages/category/category" value="{{categoryValue|| '选择分类'}}"></i-cell>
+</i-cell-group>
+<i-button type="primary" bind:click="handleNextSubmit" type="error" shape="circle" size="small">下一步 上架闲品</i-button>
+
+

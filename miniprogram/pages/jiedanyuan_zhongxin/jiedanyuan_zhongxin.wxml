@@ -259,7 +259,7 @@
       <view class="money">
         金额 ￥{{ item.money }}
       </view>
-      <view class="accept" wx:if="{{ item.state === '待帮助' }}" bindtap="orderReceive" data-item="{{ item }}">
+      <view class="accept" wx:if="{{ item.state === '待接单' }}" bindtap="orderReceive" data-item="{{ item }}">
         接单
       </view>
     </view>

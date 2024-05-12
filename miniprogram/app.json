@@ -37,19 +37,16 @@
     "pages/secorder",
     "pages/secorder/secorder",
     "pages/usercenter/usercenter",
-    "pages/goodsList/goodsList"
+    "pages/goodsList/goodsList",
+    "custom-tab-bar/self"
   ],
+  
   "window": {
     "navigationStyle": "custom",
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTextStyle": "black"
-  },
-  "usingComponents": {
-    "cu-custom": "style/colorui/components/cu-custom",
-    "van-tabbar":"style/@vant/weapp/lib/tabbar/index",
-    "van-tabbar-item":"style/@vant/weapp/lib/tabbar-item/index"
   },
   "tabBar": {
     "list": [
@@ -72,6 +69,12 @@
         "selectedIconPath": "images/person_fill.png"
       }
     ]
+  },  
+      
+  "usingComponents": {
+    "cu-custom": "style/colorui/components/cu-custom",
+    "van-tabbar": "style/@vant/weapp/lib/tabbar/index",
+    "van-tabbar-item": "style/@vant/weapp/lib/tabbar-item/index"
   },
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents"

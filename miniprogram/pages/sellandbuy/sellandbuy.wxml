@@ -1,6 +1,6 @@
 <!--pages/sell/sell.wxml-->
 <cu-custom bgColor="bg-white" isBack="{{true}}">
-	<view slot="backText"> 闲置买卖 </view>
+	<view slot="backText"> 闲置买卖</view>
 </cu-custom>
 
 <!--我要买和我要卖-->

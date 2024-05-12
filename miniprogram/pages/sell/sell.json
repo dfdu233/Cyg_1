@@ -1,12 +1,17 @@
+
 {
-  "navigationBarTitleText": "发布闲品",
+  "navigationBarTitleText": "",
   "usingComponents": {
-    "i-button": "./../../iview/dist/button/index",
-    "i-input": "./../../iview/dist/input/index",
-    "i-panel": "./../../iview/dist/panel/index",
-    "i-switch": "./../../iview/dist/switch/index",
-    "i-cell": "./../../iview/dist/cell/index",
-    "i-cell-group": "./../../iview/dist/cell-group/index",
-    "i-icon": "./../../iview/dist/grid-icon/index"
+    "i-grid": "./../../iview/dist/grid/index",
+    "i-grid-item": "./../../iview/dist/grid-item/index",
+    "i-grid-icon": "./../../iview/dist/grid-icon/index",
+    "i-grid-label": "./../../iview/dist/grid-label/index",
+    "i-row": "./../../iview/dist/row/index",
+    "i-col": "./../../iview/dist/col/index",
+    "i-avatar": "./../../iview/dist/avatar/index",
+    "goods-item":"./../../component/goodsItem/goodsItem",
+    "skeleton": "./../../component/skeleton/skeleton",
+    "i-load-more": "./../../iview/dist/load-more/index"
   }
+
 }
