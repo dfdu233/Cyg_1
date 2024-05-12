@@ -65,7 +65,7 @@
 
 <!--我下单的待完成部分-->
 <view wx:if="{{ tabNow === 1}}" class="body">
-  <view class="order" wx:for="{{ ordering }}" wx:key="index">
+  <view class="order" wx:for="{{ myOrdering }}" wx:key="index">
     <view class="order_top">
       <view class="top_left">
         <image src="{{ item.userInfo.avatarUrl }}"></image>
@@ -100,9 +100,9 @@
           联系电话：{{item.phone}} 
         </block>
       </view>
-      <view class="address" bindtap="callPhone" data-phone="{{ phoneNow }}">
+      <view class="address" bindtap="callPhone" data-phone="{{ item.phonenow }}">
         <block>
-          接单员电话：{{phoneNow}}
+          接单员电话：{{item.phonenow}}
         </block>
       </view>
     </view>
@@ -112,7 +112,7 @@
         金额 ￥{{ item.money }}
       </view>
       <view class="accept" wx:if="{{ item.state === '待完成' }}" bindtap="toFinish" data-item="{{ item }}">
-        已完成
+        确认
       </view>
     </view>
   </view>
@@ -123,7 +123,7 @@
 
 <!--我下单的已完成部分-->
 <view wx:if="{{ tabNow ===2}}" class="body">
-  <view class="order" wx:for="{{ ordered }}" wx:key="index">
+  <view class="order" wx:for="{{ myOrdered }}" wx:key="index">
     <view class="order_top">
       <view class="top_left">
         <image src="{{ item.userInfo.avatarUrl }}"></image>

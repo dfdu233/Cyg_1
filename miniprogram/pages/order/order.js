@@ -190,7 +190,7 @@ Page({
         wx.showToast({
           title: '删除成功',
         })
-        this.myOrdered();
+       // this.myOrdered();
         wx.hideLoading();
       },
       fail: () => {
@@ -256,7 +256,7 @@ Page({
         state: '已完成'
       }
     });
-    this.myOrdered();
+   // this.myOrdered();
     wx.hideLoading();
   },
 
@@ -572,7 +572,7 @@ Page({
         }
       })
     } else if (tabNow === 1) {
-      db.collection('order').orderBy('createTime', 'desc').skip(myOrder.length).where({
+      db.collection('order').orderBy('createTime', 'desc').skip(myOrdering.length).where({
         _openid: openid
       }).get({
         success: (res) => {
@@ -592,10 +592,10 @@ Page({
               }
               item.info = this.formatInfo(item);
               item.stateColor = this.formatState(item.state);
-              myOrder.push(item);
+              myOrdering.push(item);
             });
             this.setData({
-              myOrder,
+              myOrdering,
             })
           } else {
             wx.showToast({

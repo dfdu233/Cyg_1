@@ -107,6 +107,9 @@ text-align: center;
   width: 550rpx;
   height: 90rpx;
 }  
+.Bt:not([size='mini']){ display: flex; align-items: center; justify-content: center; background-color: red; margin-top: 15rpx; padding: 0rpx; width:200rpx; height:70rpx; border-radius: 40rpx; color: white; }
+
+
 .arrow-container {   
   display: flex;  
   align-items:flex-end; /* 垂直居中箭头符号 */  

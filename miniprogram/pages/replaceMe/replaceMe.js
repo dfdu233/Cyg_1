@@ -134,7 +134,7 @@ Page({
         // 当前时间
         time: getTimeNow(),
         // 订单金额
-        money:Number(moneya*moneyb+addMoney),
+        money:this.data.finalMoney,
         // 订单状态
         state: '待接单',
         // 收件地址

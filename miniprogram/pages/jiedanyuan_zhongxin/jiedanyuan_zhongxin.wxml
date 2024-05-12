@@ -8,6 +8,7 @@
 <view class="container2">
   <text class="changan_1">余额：</text>
   <text class="changan_2">{{helpTotalMoeny}}元</text>
+  <button bind:tap="getcash" class="Bt">提现</button>
 </view>
 <view class="container3">
   <view class="box">
@@ -15,7 +16,7 @@
     <view class="text" style="font-size:30rpx; color:black">今日成单</view>
   </view>
   <view class="box">
-    <view class="text" style="font-size:35rpx; color:black">580单</view>
+    <view class="text" style="font-size:35rpx; color:black">{{monthCount}}</view>
     <view class="text" style="font-size:30rpx; color:black">本月成单</view>
   </view>
   <view class="box">
@@ -131,14 +132,12 @@
     </view>
 
     <view class="order_bottom">
-      <button type="warn" size="mini" style="margin-right: 10rpx;" bindtap="deleteOrder" data-id="{{ item._id }}" wx:if="{{ item.state === '已帮助' }}">删除</button>
-      <button type="warn" size="mini" style="margin-right: 10rpx;" bindtap="zhijiedeleteOrder" data-id="{{ item._id }}" wx:if="{{ item.state !== '已帮助' }}">删除</button>
-      <!--在“我的订单”页，仅显示“删除”“金额”“订单状态”三个信息-->
-      <!-- 
+      
+      
       <button wx:if="{{ item.name === '打印服务' && openid === item.receivePerson }}" size="mini" type="primary" bindtap="downloadFile" data-item="{{ item }}">下载文件</button>
       <button wx:if="{{ item.codeImg }}" size="mini" type="primary" bindtap="showCodeImg" data-item="{{ item }}">取件码</button>
       <button wx:if="{{ item.imgUrl }}" size="mini" type="primary" bindtap="showimgUrl" data-item="{{ item }}">快递代寄</button> 
-      -->
+      
       <view class="money">
         金额 ￥{{ item.money }}
       </view>
@@ -259,7 +258,7 @@
       <view class="money">
         金额 ￥{{ item.money }}
       </view>
-      <view class="accept" wx:if="{{ item.state === '待帮助' }}" bindtap="orderReceive" data-item="{{ item }}">
+      <view class="accept" wx:if="{{ item.state === '待接单' }}" bindtap="orderReceive" data-item="{{ item }}">
         接单
       </view>
     </view>

@@ -46,7 +46,7 @@ Page({
     expressCode: '',
     codeImg: '',
     remark: '',
-    addMoney: 0,
+    addMoney: 0.00,
     money: 3.3,
     phone: '',
     finalMoney:''
@@ -92,14 +92,16 @@ Page({
       })
       return;
     }
+    console.log('manei')
+    console.log(that.finalMoney+that.addMoney)
     db.collection('order').add({ //在云数据库中新增记录
-      data: {
-        // 模块的名字
+      data: {                
+        //模块的名字
         name: '快递代取',
         // 当前时间
         time: getTimeNow(),
         // 订单金额
-        money:Number(that.money+that.addMoney),
+        money:that.finalMoney,
         // 订单状态
         state: '待接单',
         // 收件地址
@@ -293,7 +295,8 @@ Page({
     const discount = app.globalData.discount;
     console.log(app.globalData.discount)
     const {
-      business
+      business,
+      
     } = options;
     const address = wx.getStorageSync('addressNow');
     const userInfo = wx.getStorageSync('userInfo');
@@ -334,7 +337,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      business:  app.globalData.businessType
+    })
   },
 
   /**

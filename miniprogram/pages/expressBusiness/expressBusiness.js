@@ -1,5 +1,5 @@
 // 首页-快递代寄-快递商家
-
+const app=getApp()
 Page({
   /**
    * 页面的初始数据
@@ -14,9 +14,11 @@ Page({
   selectBusiness(e) {
     const { index } = e.currentTarget.dataset;
     const { url } = this.data;
-    wx.redirectTo({
-      url: `../${url}/${url}?business=${this.data.businessList[index]}`,
-    })
+    console.log(getCurrentPages())
+    
+    app.globalData.businessType = this.data.businessList[index]
+  
+    wx.navigateBack();
   },
 
   selectTab(e) {
@@ -32,6 +34,7 @@ Page({
   onLoad: function (options) {
     console.log(options);
     const { url } = options;
+    
     this.setData({
       url
     })

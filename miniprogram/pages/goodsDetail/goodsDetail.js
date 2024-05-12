@@ -11,6 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    index2:0,
     showSkeleton: true,
     userData: {},
     id: "",
@@ -224,6 +225,11 @@ Page({
       complete:()=>{
         wx.hideLoading()
       }
+    })
+  },
+  choose(e){
+    this.setData({
+      index2:e.detail.value
     })
   },
   handleWechatPay(){

@@ -307,7 +307,27 @@ touserguide() {
         })
     },
 
-  
+    sendSubscribeMessage: function() {
+      wx.requestSubscribeMessage({
+        tmplIds: ['CPQXB8sEqpwK1BMIIr753xyFOE4gg3UT1AS1vg_N8HE'],
+        success(res) {
+          if (res['CPQXB8sEqpwK1BMIIr753xyFOE4gg3UT1AS1vg_N8HE'] === 'accept') {
+            // 用户同意订阅，可以向用户发送消息了
+            console.log(res)
+          } else {
+            // 用户拒绝订阅，给用户一个提示
+            wx.showToast({
+              title: '请开启订阅消息功能',
+              icon: 'none',
+              duration: 2000
+            })
+          }
+        },
+        fail(err) {
+          console.error(err)
+        }
+      })
+  },
 
     /**
      * 生命周期函数--监听页面加载
@@ -328,7 +348,8 @@ touserguide() {
         })
         let personReceiveState = '';
 				this.getJiedanyuanPower();
-				this.getAdminPower();
+        this.getAdminPower();
+        
         db.collection('orderReceive').where({
             _openid: wx.getStorageSync('openid')
         }).get({

@@ -27,6 +27,12 @@
       <i-tag i-class="font-base x__tag_base mr-1" name="标签一" color="yellow" wx:for="{{pageData.shippingMethods}}" wx:key="{{index}}">
         {{item.name}}
       </i-tag>
+      <picker bindchange="choose" value="{{index2}}" range="{{pageData.shippingMethods}}" range-key="name">
+        <view >
+
+当前选择：{{pageData.shippingMethods[index2].name}}
+</view>
+      </picker>
     </view>
     <view class="flex-start mt-2">
       <text class="skeleton-rect text-black text-bold">{{pageData.name||"名称"}}</text>

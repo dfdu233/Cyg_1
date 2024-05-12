@@ -34,17 +34,17 @@ Page({
       }
     ],
     shippingMethodsTags: [{
-        name: '自提',
+        name: '卖主送',
         checked: true,
         color: 'theme'
       },
       {
-        name: '跑腿',
+        name: '跑腿送',
         checked: false,
         color: 'theme'
       },
       {
-        name: '买主',
+        name: '买主取',
         checked: false,
         color: 'theme'
       },

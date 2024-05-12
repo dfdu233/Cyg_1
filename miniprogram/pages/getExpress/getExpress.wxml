@@ -37,7 +37,7 @@
   </view>
   <view class="address">
     <text>增加金额: </text>
-    <input type="text" value="{{ addMoney }}" placeholder="增加金额" bindinput="getAddMoney" />
+    <input class="weui-input" type="digit" value="{{ addMoney }}" placeholder="增加金额" bindinput="getAddMoney" />
   </view>
 
   <view class="address">

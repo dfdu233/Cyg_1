@@ -114,7 +114,7 @@ Page({
         // 当前时间
         time: getTimeNow(),
         // 订单金额
-        money: colorPrint ? ( copieNum * 1 * pageNum + 3 ) : ( copieNum * 0.5 * pageNum + 3 ),
+        money: this.data.finalMoney,
         // 订单状态
         state: '待接单',
         // 收件地址

@@ -1,5 +1,5 @@
 <!--首页-快递代寄-快递商家-->
-<cu-custom bgColor="bg-white">
+<cu-custom bgColor="bg-white" isBack="{{true}}">
 	<view slot="content">请选择快递点</view>
 </cu-custom>
 

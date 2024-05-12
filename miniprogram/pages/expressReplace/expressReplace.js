@@ -87,7 +87,7 @@ Page({
         // 当前时间
         time: getTimeNow(),
         // 订单金额
-				money: Number(that.money + that.addMoney),
+				money: that.finalMoney,
         // 订单状态
         state: '待接单',
         // 收件地址
@@ -171,7 +171,7 @@ Page({
 
   // 快递商家
   selectBusiness() {
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../expressBusiness/expressBusiness?url=expressReplace',
     })
   },
@@ -274,7 +274,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      business:  app.globalData.businessType
+    })
   },
 
   /**

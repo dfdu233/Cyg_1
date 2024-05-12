@@ -21,15 +21,34 @@ Page({
     helpTotalNum: 0,
     helpTotalMoeny: 0,
     dayCount:0,
-    now : new Date("2024/3/24").toLocaleDateString()
+    now : new Date().toLocaleDateString(),
+    monthCount:0,
+    cash:0
+  },
+  getCash(){
+    const that=this
+    db.collection('orderReceive').
+    where({
+      _openid:wx.getStorageSync('openid')
+    }).
+    get({
+      success: function(res) {
+       console.log(res.data[0].cash)
+        that.setData({
+          cash:res.data[0].cash
+        })
+        
+      }
+    })
   },
   getdayCount() {
     const _=db.command
     console.log(this.data.now)
+    const that=this
     db.collection('order').where({
       receivePerson: wx.getStorageSync('openid'),
       state: '已完成',
-      time: _.and(_.gte(new Date(this.data.now+"00:00:00")),_.lte(new Date(this.data.now+"23:59:59"))),
+      createTime: _.and(_.gte(new Date(that.data.now+" 00:00:00")),_.lte(new Date(that.data.now+" 23:59:59"))),
     }).count({
       success: (res) => {
 
@@ -41,6 +60,27 @@ Page({
     })
   },
 
+  getmonthCount() {
+    const _=db.command
+    console.log(this.data.now)
+    const that=this
+    const array=this.data.now.split('/')
+    const starttime=array[0]+'/'+array[1]+'/'+'1'
+    db.collection('order').where({
+      receivePerson: wx.getStorageSync('openid'),
+      state: '已完成',
+      createTime: _.and(_.gte(new Date(starttime+" 00:00:00")),_.lte(new Date(that.data.now+" 23:59:59"))),
+    }).count({
+      success: (res) => {
+
+        console.log(res);
+        this.setData({
+          monthCount: res.total
+        })
+      }
+    })
+  },
+  
 //订单页
 
 
@@ -123,33 +163,70 @@ Page({
     })
   },
 
+  getMyHelpOrder() {
+    wx.showLoading({
+      title: '加载中',
+    })
+    db.collection('order').orderBy('createTime', 'desc').where({
+      receivePerson: this.data.openid,
+      state:'已完成'
+    }).get({
+      success: (res) => {
+        const {
+          data
+        } = res;
+        data.forEach(item => {
+          if (item.name === "快递代取" && item.info.expressCode) {
+            item.expressCode = item.info.expressCode;
+          }
+          if (item.name === "快递代取" && item.info.codeImg) {
+            item.codeImg = item.info.codeImg;
+          }
+          if (item.name === "快递代寄" && item.info.imgUrl) {
+            item.imgUrl = item.info.imgUrl;
+          }
+          item.info = this.formatInfo(item);
+          item.stateColor = this.formatState(item.state);
+        });
+        this.setData({
+          helpOrder: data,
+        })
+        wx.hideLoading();
+      }
+    })
+  },
+/*
   // 获取我帮助的订单信息 
   getMyHelpOrder() {
     wx.showLoading({
       title: '加载中',
     })
     // 从数据库中获取订单信息
-    db.collection('orderReceive').where({
-      _openid: wx.getStorageSync('openid')
+    db.collection('order').orderBy('createTime', 'desc').where({
+      receivePerson: wx.getStorageSync('openid'),
+      state:'已完成'
     }).get({
       success: (res) => {
         const {
           data
         } = res;
+        console.log('res')
+        console.log(res)
         this.setData({
           helpTotalMoeny: data[0].allMoney,
           helpTotalNum: data[0].allCount
         })
         this.setData({
-          helpOrder: data[0].allOrder,
+          helpOrder: data,
         })
         wx.hideLoading();
       }
     })
   },
-
+*/
   // 我帮助的订单单数总和
   getHelpTotalNum() {
+    
     db.collection('order').where({
       receivePerson: wx.getStorageSync('openid'),
       state: '已完成'
@@ -163,23 +240,36 @@ Page({
     })
   },
 
+
+
   // 我帮助的订单金额总和
   getHelpTotalMoney() {
     const $ = db.command.aggregate;
+    const max_limit=20;
+    const total=db.collection('order').count();
+    const batchtimes=Math.ceil(total/max_limit);
+    console.log(total)
+    for(let i=0;i<5;i++){
+      
     db.collection('order').aggregate().match({
       receivePerson: wx.getStorageSync('openid'),
       state: '已完成',
-    }).group({
+    }).skip(i*max_limit)
+    .group({
       _id: null,
       totalNum: $.sum('$money'),
     }).end({
       success: (res) => {
         console.log(res);
         this.setData({
-          helpTotalMoeny: res.list[0].totalNum
+          helpTotalMoeny: this.data.helpTotalMoeny+res.list[0].totalNum
         })
       }
     })
+  }
+  this.setData({
+    helpTotalMoeny: this.data.helpTotalMoeny-this.data.cash
+  })
   },
   // 获取正在悬赏的订单信息
   getRewardOrder() {
@@ -187,7 +277,7 @@ Page({
       title: '加载中',
     })
     db.collection('order').orderBy('createTime', 'desc').where({
-      state: '待帮助'
+      state: '待接单'
     }).get({
       success: (res) => {
         const {
@@ -214,7 +304,23 @@ Page({
     })
   },
 
+  getcash(){
+    console.log("提现")
+    const _=db.command
+    db.collection('orderReceive').
+    where({
+      _openid:this.data.openid
+    }).
+    update({
+      data: {
+        cash: _.inc(this.data.helpTotalMoeny)
+      },
+      success: function(res) {
+        console.log(res.data)
+      }
+    })
 
+  },
   // 点击接单
   orderReceive(e) {
     const userInfo = wx.getStorageSync('userInfo');  //未登录不允许接单
@@ -267,9 +373,30 @@ Page({
         data: {
           _id,
           receivePerson: this.data.openid,
-          state: "待完成"
+          state: "待完成",
+          phonenow:wx.getStorageSync('phone')
         },
         success: (res) => {
+          wx.cloud.callFunction({
+            name: 'sendMessage',
+            data: {
+              OPENID: _id
+            },
+            success: () => {
+              wx.showToast({
+                title: '已取消',
+              })
+           
+              wx.hideLoading();
+            },
+            fail: () => {
+              wx.showToast({
+                icon: 'none',
+                title: '取消失败',
+              })
+              wx.hideLoading();
+            }
+          });
           getApp().globalData.orderStatus="待完成";
           wx.hideLoading();
         },
@@ -325,6 +452,39 @@ Page({
     });
     this.getMyOrder();
     wx.hideLoading();
+  },
+
+  getMyOrder() {
+    wx.showLoading({
+      title: '加载中',
+    })
+    db.collection('order').orderBy('createTime', 'desc').where({
+      receivePerson: this.data.openid,
+      state:'待完成'
+    }).get({
+      success: (res) => {
+        const {
+          data
+        } = res;
+        data.forEach(item => {
+          if (item.name === "快递代取" && item.info.expressCode) {
+            item.expressCode = item.info.expressCode;
+          }
+          if (item.name === "快递代取" && item.info.codeImg) {
+            item.codeImg = item.info.codeImg;
+          }
+          if (item.name === "快递代寄" && item.info.imgUrl) {
+            item.imgUrl = item.info.imgUrl;
+          }
+          item.info = this.formatInfo(item);
+          item.stateColor = this.formatState(item.state);
+        });
+        this.setData({
+          myOrder: data,
+        })
+        wx.hideLoading();
+      }
+    })
   },
 
   //所有订单的信息
@@ -431,6 +591,11 @@ Page({
       title: '加载中',
     })
     this.getPersonPower(); //查看当前用户的权限
+    this.getCash();
+    this.getdayCount();
+    this.getmonthCount();
+    this.getHelpTotalMoney();
+    this.getHelpTotalNum();  
     db.collection('order').orderBy('createTime', 'desc').where(
       {
         state:"待接单"
@@ -484,7 +649,7 @@ Page({
       }
     } = e.currentTarget.dataset;
     console.log(codeImg, state, receivePerson);
-    if (state !== '待完成帮助' || receivePerson !== this.data.openid) {
+    if (state !== '待完成' || receivePerson !== this.data.openid) {
       wx.showToast({ //设置查看权限
         icon: 'none',
         title: '无权查看 !',
@@ -633,7 +798,11 @@ Page({
     } = this.data;
 
     if (tabNow === 0) {
-      db.collection('order').orderBy('createTime', 'desc').skip(orderList.length).get({
+      db.collection('order').orderBy('createTime', 'desc').skip(orderList.length).
+      where({
+        state:'待接单'
+      }).
+      get({
         success: (res) => {
           if (res.data.length) {
             res.data.forEach(item => {
@@ -671,7 +840,8 @@ Page({
       })
     } else if (tabNow === 1) {
       db.collection('order').orderBy('createTime', 'desc').skip(myOrder.length).where({
-        _openid: openid
+        receivePerson: openid,
+        state:'待完成',
       }).get({
         success: (res) => {
           if (res.data.length) {
@@ -742,7 +912,7 @@ Page({
       })
     } else if (tabNow === 3) {
       db.collection('order').orderBy('createTime', 'desc').skip(rewardOrder.length).where({
-        state: '待帮助'
+        state: '待接单'
       }).get({
         success: (res) => {
           if (res.data.length) {

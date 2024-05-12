@@ -1,7 +1,8 @@
 // app.js
 App({
   globalData:{
-    orderStatus:"待完成"
+    orderStatus:"待完成",
+    business:''
   },
   watch: function (method) {
     var obj = this.globalData;
@@ -18,7 +19,29 @@ App({
       }
     })
   },
+  sendSubscribeMessage: function() {
+      wx.requestSubscribeMessage({
+        tmplIds: ['CPQXB8sEqpwK1BMIIr753xyFOE4gg3UT1AS1vg_N8HE'],
+        success(res) {
+          if (res['CPQXB8sEqpwK1BMIIr753xyFOE4gg3UT1AS1vg_N8HE'] === 'accept') {
+            // 用户同意订阅，可以向用户发送消息了
+            console.log(res)
+          } else {
+            // 用户拒绝订阅，给用户一个提示
+            wx.showToast({
+              title: '请开启订阅消息功能',
+              icon: 'none',
+              duration: 2000
+            })
+          }
+        },
+        fail(err) {
+          console.error(err)
+        }
+      })
+  },
   onLaunch: function () {
+    
     console.log(new Date().getDate())
     console.log(new Date().getMonth()+1)
     if (!wx.cloud) {
@@ -33,6 +56,10 @@ App({
         traceUser: true,
       });
     }
+
+
+
+    
     this.getDiscount= function (Jifen) {
       if (Jifen >= 1 && Jifen <= 5) {
         return '10';

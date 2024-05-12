@@ -26,6 +26,7 @@
       <goods-item style="width:48%;margin:0 1% 2% 1%;" bind:onGoodsItemPress="onItemPress" wx:for="{{goodsData}}" wx:key="{{index}}" data="{{item}}" />
     </view>
   </view>
+  <image class="view-add" src="./../../images/jiahao.png"></image>
 </view>
 <i-load-more loading="{{ showLoadMore }}" />
 <skeleton wx:if="{{showSkeleton}}"></skeleton>

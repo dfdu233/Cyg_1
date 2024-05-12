@@ -52,6 +52,17 @@ Page({
          userInfo,
      })
      wx.setStorageSync('userInfo', this.data.userInfo); //实时更新昵称
+
+     db.collection("users").where({
+      _openid:wx.getStorageSync('openid')
+    }).update({
+      data:{
+        nickName:wx.getStorageSync('userInfo').nickName
+      }
+    }).then(res=>{
+      console.log(res)
+    });
+
   },
 
   //换头像

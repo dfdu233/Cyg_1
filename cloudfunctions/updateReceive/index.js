@@ -9,13 +9,14 @@ const db = cloud.database();
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const { _id, receivePerson, state } = event;
+  const { _id, receivePerson, state,phonenow } = event;
   try {
     //使用 await 关键字等待数据库操作完成，并返回结果
     return await db.collection('order').doc(_id).update({
       data: {
         receivePerson,
-        state
+        state,
+        phonenow
       }
     }) 
   } catch (error) {

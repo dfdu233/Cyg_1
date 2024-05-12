@@ -3,6 +3,7 @@
   <view slot="content"> 校园畅逸服务 </view>
 </cu-custom>
 <!--修改个人信息-->
+<button bind:tap="sendSubscribeMessage">发送订阅提醒</button>
 <view class="info" bindtap="updateInfo">
   <image class="avatar" src="{{ hasUserInfo ? userInfo.avatarUrl : '../../images/touxiang.png' }}"></image>
   <block wx:if="{{ !hasUserInfo }}">
@@ -76,7 +77,7 @@
     <!--contact打开客服会话-->
     <view class="cellLeft">
       <image src="../../images/customService.png"></image>
-      <text>闲置买卖</text>
+      <text>我是买家</text>
     </view>
     <text class="cellRight">></text>
   </button>
@@ -84,7 +85,7 @@
     <!--contact打开客服会话-->
     <view class="cellLeft">
       <image src="../../images/customService.png"></image>
-      <text>我的主页</text>
+      <text>我是卖家</text>
     </view>
     <text class="cellRight">></text>
   </button>
