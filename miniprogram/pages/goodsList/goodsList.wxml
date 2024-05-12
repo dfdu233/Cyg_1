@@ -1,6 +1,6 @@
 <!--miniprogram/pages/goodsList/goodsList.wxml-->
 <cu-custom bgColor="bg-white" isBack="{{true}}">
-
+	<view slot="backText"> 闲置买卖-{{category}} </view>
 </cu-custom>
 <view class="goods__list_container">
   <goods-item style="width:48%;margin:0 1% 1% 1%;" bind:onGoodsItemPress="onItemPress" wx:for="{{goodsData}}" wx:key="{{index}}" data="{{item}}" />

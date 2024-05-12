@@ -27,6 +27,18 @@
   text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 }
 
+.submitBtn {
+  width: 30% !important;
+  color: #fff;
+  background-color: #f7d40f;
+  padding: 1rpx 0;
+  border-radius: 100rpx;
+  margin-top: 30rpx;
+  font-weight: 200;
+  margin-bottom: 10rpx;
+  bottom: 10rpx;
+}
+
 .background-picture{
   position: absolute;
   left: 0;

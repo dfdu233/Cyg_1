@@ -1,33 +1,14 @@
+<!--pages/rent/rent.wxml-->
 <cu-custom bgColor="bg-white" isBack="{{true}}">
 	<view slot="backText"> 电费代充 </view>
 </cu-custom>
-<!-- page.wxml -->
+
+<!--租房信息-->
 <view class="container">
-  <view class="section">
-    <text>电费类型选择：</text>
-    <radio-group bindchange="onTypeChange">
-      <label>
-        <radio value="照明" checked="{{type === '照明'}}" />
-        <text>照明</text>
-      </label>
-      <label>
-        <radio value="空调" checked="{{type === '空调'}}" />
-        <text>空调</text>
-      </label>
-    </radio-group>
-  </view>
-  
-  <view class="section">
-    <text>地点选择：</text>
-    <picker mode="multiSelector" bindchange="onLocationChange" value="{{locationValue}}" range="{{locationRange}}">
-      <text>{{locationText}}</text>
-    </picker>
-  </view>
-  
-  <view class="section">
-    <text>充值金额：</text>
-    <input type="number" bindinput="onAmountChange" value="{{amount}}" />
-  </view>
-  
-  <button class="rechargeBtn" bindtap="onRecharge">立即充值</button>
+  <image class="center-image" src="../../images/kaifazhong.png"></image>
+  <text class="center-text">正在开发中，敬请期待~</text>
 </view>
+
+
+
+

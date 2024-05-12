@@ -4,3 +4,234 @@ page {
 @import"/style/main.wxss";
 @import "style/weui.wxss";
 @import "style/colorui/main.wxss";
+
+.goods__list_container {
+  padding: 10rpx 0;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  font-size: 24rpx;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.cell-panel {
+  margin-top: 10rpx;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+}
+
+.x__button {
+  height: 60rpx !important;
+  line-height: 60rpx !important;
+  margin: 10rpx !important;
+}
+
+.x__button_close {
+  position: absolute;
+  top: 44rpx;
+  right: 10rpx;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 99;
+  background: rgba(0, 0, 0, 0.7);
+  transition: all 0.5s;
+}
+
+
+
+/* 全局布局 */
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-2 {
+  flex: 2;
+}
+
+.flex-3 {
+  flex: 3;
+}
+
+.flex-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-warp {
+  flex-wrap: wrap;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+/* 全局边距 */
+
+.p-2 {
+  padding: 20rpx;
+}
+
+.pt-2 {
+  padding-top: 20rpx;
+}
+
+.p-3 {
+  padding: 30rpx;
+}
+
+.p-4 {
+  padding: 40rpx;
+}
+
+.pv-3 {
+  padding: 30rpx 10rpx;
+}
+
+.pv-2 {
+  padding: 20rpx 10rpx;
+}
+
+.pb-100 {
+  padding-bottom: 100rpx;
+}
+
+.mt-1 {
+  margin-top: 10rpx;
+}
+
+.mr-1 {
+  margin-right: 10rpx;
+}
+
+.mr-2 {
+  margin-right: 20rpx;
+}
+
+.mt-2 {
+  margin-top: 20rpx;
+}
+
+.mt-4 {
+  margin-top: 40rpx;
+}
+
+.mt-6 {
+  margin-top: 60rpx;
+}
+
+.mh-1 {
+  margin: 0 10rpx;
+}
+
+.mh-2 {
+  margin: 0 20rpx;
+}
+
+/* 全局字体 */
+
+.font-small {
+  font-size: 24rpx;
+}
+
+.font-base {
+  font-size: 28rpx !important;
+}
+
+/* .x__tag_base {
+  height: 30px !important;
+  line-height: 30px !important;
+} */
+
+/* 全局边框 */
+
+.border-top-1 {
+  border-top: 1rpx solid #f5f5f5;
+}
+
+.border-bottom-1 {
+  border-bottom: 1rpx solid #f5f5f5;
+}
+/* 全局颜色 */
+
+.backgroundWhite {
+  background-color: #fff;
+}
+
+.backgroundMoneyRed {
+  background-color: #ff0036;
+  color: #fff;
+}
+
+.moneyRed {
+  color: #ff0036;
+}
+
+.primaryColor {
+  color: #2d8cf0;
+}
+
+.lightColor {
+  color: #80848f;
+}
+
+.round-5{
+  border-radius: 10rpx;
+}
+
+/* 解决skeleton没有渲染高度的问题 */
+
+.minHeight {
+  min-height: 30rpx;
+}
+

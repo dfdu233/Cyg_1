@@ -73,6 +73,7 @@ function queryGoods(data) {
         // .orderBy('date', 'desc')
         .get({
           success: res => {
+            console.log(data)
             let totalPage = Math.ceil(totalRes.total / data.pageSize)
             resolve({ ...res,
               total: totalRes.total,

@@ -2,27 +2,9 @@
 <cu-custom bgColor="bg-white" isBack="{{true}}">
 	<view slot="backText"> 交易详情 </view>
 </cu-custom>
-<i-cell-group>
-  <i-cell title="交易类型">
-    <view class='right__footer_between' slot="footer">
-      <i-tag 
-          i-class="my-i-tag"
-          wx:for="{{transactionTypeTags}}" 
-          wx:key="{{index}}"
-          bindchange="onChangeTransactionType" 
-          checkable="{{true}}" 
-          name="{{index}}" 
-          color="{{item.color}}" 
-          checked="{{item.tagIndex==transactionTypeTagsIndex}}" 
-          type="border"
-          style="margin-right:10rpx;">
-          {{item.name}}
-      </i-tag>
-    </view>
-  </i-cell>
-</i-cell-group>
+
 <i-panel title="">
-    <i-input right value="{{ money }}" type="number" title="兑换金额" placeholder="请输入兑换金额" bind:change="handleMoneyChange" />
+    <i-input right value="{{ money }}" type="number" title="售卖金额" placeholder="请输入售卖金额" bind:change="handleMoneyChange" />
 </i-panel>
 <i-panel title="" class="cell-panel">
   <i-cell-group>

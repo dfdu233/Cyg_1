@@ -1,13 +1,5 @@
 /*校区选择*/
-.body {
-  width: 85%;
-  margin: 20rpx auto;
-  box-shadow: 0 0 20rpx #a1a1a1;
-  border-radius: 25rpx;
-  padding: 25rpx;
-  justify-content: center;
-  align-items: center;
-}
+
 
 .popup {
   position: fixed;
@@ -28,24 +20,22 @@
 .container {
   margin: 40rpx;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap ;
 }
 
-.page {
-  position: relative;
-}
+
 
 /*大容器内九个小方块样式*/
 .container .body {
   width: 180rpx;
   height: 160rpx;
   background-color: #fff;
-  display: flex;
+  display: flex ;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
-  margin: 20rpx;
+  position: relative ;
+  margin: 20rpx !important;
   border-radius: 20rpx;
 }
 

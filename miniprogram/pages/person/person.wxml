@@ -76,7 +76,7 @@
   <button class="cell" bind:tap="toorder">
     <!--contact打开客服会话-->
     <view class="cellLeft">
-      <image src="../../images/customService.png"></image>
+      <image src="../../images/buyer.png"></image>
       <text>我是买家</text>
     </view>
     <text class="cellRight">></text>
@@ -84,7 +84,7 @@
   <button class="cell" bind:tap="tousercenter">
     <!--contact打开客服会话-->
     <view class="cellLeft">
-      <image src="../../images/customService.png"></image>
+      <image src="../../images/seller.png"></image>
       <text>我是卖家</text>
     </view>
     <text class="cellRight">></text>

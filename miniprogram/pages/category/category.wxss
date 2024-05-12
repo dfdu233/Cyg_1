@@ -1,5 +1,14 @@
 /* miniprogram/pages/category/category.wxss */
 
+.container { /*页面的大容器*/
+  background-color: #fff;
+  width: 85%;
+  margin: 30rpx auto;
+  border-radius: 30rpx;
+  box-shadow: 0 0 15rpx #a1a1a1;
+  padding: 40rpx 25rpx 25rpx 25rpx;
+}
+
 .category__container {
   width: "100%";
   display: flex;

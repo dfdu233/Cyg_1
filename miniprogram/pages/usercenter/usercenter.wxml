@@ -1,22 +1,8 @@
 <!--miniprogram/pages/userCenter/userCenter.wxml-->
 <cu-custom bgColor="bg-white" isBack="{{true}}">
-	<view slot="backText"> 我的主页 </view>
+	<view slot="backText"> 我是卖家 </view>
 </cu-custom> 
-<view class="UCenter-bg">
-  <image src='{{currentbackground}}' mode='scaleToFill' class="background-picture"></image>
-  <view class="cu-avatar xl round" style="background-image:url({{userInfo.avatarUrl}});"></view>
-  <view class="text-xl">{{userInfo.nickName}}</view>
-  <view class='flex-center'>
-    <i-rate 
-        disabled
-        value="{{rateValue}}" 
-        size="20">
-    </i-rate>
-    <text class='text-yellow text-bold'>{{rateOriginValue||"暂无评分"}}</text>
-  </view>
-  
-  <!-- <image src="https://image.weilanwl.com/gif/wave.gif" mode="scaleToFill" class="gif-wave"></image> -->
-</view>
+<button class="submitBtn" bindtap="submit">￥提现</button>
 <i-tabs current="{{ currentTab }}" color="#ffd84d" bindchange="handleChange">
     <i-tab key="published" title="在出售"></i-tab>
     <i-tab key="waitchecked" title="待确认"></i-tab>

@@ -4,16 +4,7 @@
 </cu-custom>
 
 <!--校区选择-->
-<view class="body">
-  <my_select 
-	title="校区选择▼"
-	nowId="{{curfId}}"
-	nameList="{{school}}" 
-	nowName="{{curschoolName}}" 
-	placeholder="请选择学校" 
-	bind:handleChange="changeSchool">
-  </my_select>
-</view>
+
 
 <!--大容器-->
 <view class="container">
@@ -26,10 +17,10 @@
     </view>
     <text class="text">{{ item.text }}</text>
   </view>
-</view>
-
-<!--小公告-->
+  <!--小公告-->
 <view class="notice" bindtap="handleClickNotice">
   <image src="../../images/notice.png"></image>
   <text>欢迎使用！请接单员添加客服的微信：zxy1475857674</text>
 </view>
+</view>
+

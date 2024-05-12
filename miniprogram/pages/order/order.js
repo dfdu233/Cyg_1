@@ -14,7 +14,8 @@ Page({
     myOrdered:[],
     helpOrder: [],
     openid: '',
-    phoneNow: ''
+    phoneNow: '',
+    unreadCount:0
   },
 
   selectTab(e) {
@@ -39,7 +40,7 @@ Page({
   // 根据当前的tab状态加载数据
   loadDataBasedOnTabs: function() {
     let { tabNow, tab_nextNow } = this.data;
-    // 示例: 根据tabNow和tab_nextNow的值调用不同的函数
+    console.log(tabNow);
     if (tabNow === 0) {
       this.onLoad();
     } else if (tabNow === 1) {
@@ -59,10 +60,18 @@ Page({
       state: "待完成"
     }).get({
       success: (res) => {
+        // 判断是否有新增的待完成订单
+        /*const newOrders = res.data.filter(order => !this.data.orders.some(existingOrder => existingOrder._id === order._id));
+        if (newOrders.length > 0) {
+          this.setData({
+            unreadCount: this.data.unreadCount + 1
+          });
+        }*/
         const {
           data
         } = res;
         console.log(data);
+      
         data.forEach(item => {
           if (item.name === "快递代取" && item.info.expressCode) {
             item.expressCode = item.info.expressCode;
@@ -329,7 +338,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.fetchDataForTab0Next1()
     db.collection('order').orderBy('createTime', 'desc').where({
       _openid: this.data.openid,
       state: "待接单"
@@ -366,12 +374,6 @@ Page({
         wx.hideLoading();
       }
     })
-    getApp().watch((value)=>{
-      if(value === "待完成"){
-        this.fetchDataForTab0Next1();
-      }
-    })
-    this.fetchDataForTab0Next1();
     wx.showLoading({
       title: '加载中',
     })
@@ -387,13 +389,6 @@ Page({
       }
     } = e.currentTarget.dataset;
     console.log(codeImg, state, receivePerson);
-    if (state !== '已帮助' || receivePerson !== this.data.openid) {
-      wx.showToast({ //设置查看权限
-        icon: 'none',
-        title: '无权查看 !',
-      })
-      return;
-    }
     //未登录不允许查看
     const userInfo = wx.getStorageSync('userInfo');
     if (!userInfo) {
@@ -418,13 +413,6 @@ Page({
       }
     } = e.currentTarget.dataset;
     console.log(imgUrl, state, receivePerson);
-    if (state !== '已完成' || receivePerson !== this.data.openid) {
-      wx.showToast({ //设置查看权限
-        icon: 'none',
-        title: '无权查看 !',
-      })
-      return;
-    }
     //未登录不允许查看
     const userInfo = wx.getStorageSync('userInfo');
     if (!userInfo) {
@@ -444,13 +432,6 @@ Page({
     //订单已完成，或者待帮助，或者不是接单员，都无权查看
     const { item: { printImg, codeImg, state, receivePerson } } = e.currentTarget.dataset;
     console.log(printImg, codeImg, state, receivePerson);
-    if (state !== '已帮助' || receivePerson !== this.data.openid) {
-      wx.showToast({
-        icon: 'none',
-        title: '无权查看 !',
-      })
-      return;
-    }
     //未登录不允许下载
     const userInfo = wx.getStorageSync('userInfo');
     if (!userInfo) {
@@ -527,15 +508,18 @@ Page({
       title: '加载中',
     })
     let {
-      orderList,
-      myOrder,
+      myOrderNotGet,
+      myOrdering,
+      myOrdered,
       tabNow,
-      tab_nextNow,
       openid
     } = this.data;
 
     if (tabNow === 0) {
-      db.collection('order').orderBy('createTime', 'desc').skip(orderList.length).get({
+      db.collection('order').orderBy('createTime', 'desc').skip(myOrderNotGet.length).where({
+        _openid: this.data.openid,
+        state:"待接单"
+      }).get({
         success: (res) => {
           if (res.data.length) {
             res.data.forEach(item => {
@@ -573,7 +557,8 @@ Page({
       })
     } else if (tabNow === 1) {
       db.collection('order').orderBy('createTime', 'desc').skip(myOrdering.length).where({
-        _openid: openid
+        _openid: this.data.openid,
+        state:"待完成"
       }).get({
         success: (res) => {
           if (res.data.length) {
@@ -607,44 +592,9 @@ Page({
         }
       })
     } else if (tabNow === 2) {
-      db.collection('order').orderBy('createTime', 'desc').skip(helpOrder.length).where({
-        receivePerson: this.data.openid,
+      db.collection('order').orderBy('createTime', 'desc').skip(myOrdered.length).where({
+        _openid: this.data.openid,
         state: '已完成'
-      }).get({
-        success: (res) => {
-          if (res.data.length) {
-            const {
-              data
-            } = res;
-            data.forEach(item => {
-              if (item.name === "快递代取" && item.info.expressCode) {
-                item.expressCode = item.info.expressCode;
-              }
-              if (item.name === "快递代取" && item.info.codeImg) {
-                item.codeImg = item.info.codeImg;
-              }
-              if (item.name === "快递代寄" && item.info.imgUrl) {
-                item.imgUrl = item.info.imgUrl;
-              }
-              item.info = this.formatInfo(item);
-              item.stateColor = this.formatState(item.state);
-              helpOrder.push(item);
-            });
-            this.setData({
-              helpOrder,
-            })
-          } else {
-            wx.showToast({
-              icon: 'none',
-              title: '无更多信息',
-            })
-          }
-          wx.hideLoading();
-        }
-      })
-    } else if (tabNow === 3) {
-      db.collection('order').orderBy('createTime', 'desc').skip(rewardOrder.length).where({
-        state: '待帮助'
       }).get({
         success: (res) => {
           if (res.data.length) {

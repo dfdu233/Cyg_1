@@ -1,166 +1,132 @@
-/**index.wxss**/
-
+/* pages/trade/trade.wxss */
 page {
-  background: #f6f6f6;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-swiper{
-  height: 400rpx;
+  background-color: #fff;
 }
 
-.x__swiper image {
-  height: 400rpx;
+.container { /*页面的大容器*/
+  background-color: #fff;
+  width: 85%;
+  margin: 30rpx auto;
+  border-radius: 30rpx;
+  box-shadow: 0 0 15rpx #a1a1a1;
+  padding: 40rpx 25rpx 25rpx 25rpx;
 }
-.x__grid_container {
-  display: flex;
-  justify-content: flex-start;
-  width: 100%;
-}
-.x__grid_item {
-  display: flex;
+.body {
+  width: 85%;
+  margin: 20rpx auto;
+  box-shadow: 0 0 20rpx #a1a1a1;
+  border-radius: 25rpx;
+  padding: 25rpx;
+  justify-content: center;
   align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  width: 25%;
-  position: relative;
-  padding: 20px 10px;
-  box-sizing: border-box;
 }
 
-.userinfo, .uploader, .tunnel {
-  margin-top: 40rpx;
-  height: 140rpx;
-  width: 100%;
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-left: none;
-  border-right: none;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  transition: all 300ms ease;
+/* 我要卖+我要买 */
+.container {  
+  display: flex;  
+  justify-content: space-between;  
+  align-items: center;  
+}  
+  
+.left-part {  
+  flex: 1;  
+  display: flex;  
+  justify-content: center;  
+  align-items: flex-end;  
+}  
+  
+.text {  
+	font-size: 16px; /* 设置字体大小为 16px */  
+  color: #FF6302;  
+}  
+  
+.right-part {  
+  flex: 1;  
+  display: flex;  
+  justify-content: center;  
+}  
+
+/* 种类 */
+.category-container {  
+	width: 100%; /* 可根据需要设置容器的宽度 */  
+	padding: 10rpx; 
+}  
+  
+.category-header {  
+  display: flex;  
+  justify-content: space-between;  
+  align-items: center;  
+  padding: 5rpx;  
+}  
+  
+.category-label {  
+	font-weight: bold;  
+	color: #000; /* 可根据需要设置字体颜色 */  
+}  
+
+.category-labe2 {  
+	font-weight: bold;  
+	color: rgb(0, 0, 0,0.4); /* 可根据需要设置字体颜色 */  
+}  
+  
+.select-labe2{  
+  color: rgb(0, 0, 0,0.4); /* 可根据需要设置字体颜色 */  
+}  
+  
+.category-buttons {  
+  display: flex;  
+  justify-content: space-around;  
+  margin-top: 5rpx;  
+}  
+
+.category-buttons {  
+  display: flex;  
+  justify-content: space-between;  
+}  
+
+
+
+.category-btn {  
+	font-size: 11px; /* 设置字体大小为 16px */ 
+  background-color: #D8D8D8; /* 书籍按钮的背景色 */  
+  color:rgba(0, 0, 0, 0.4); /* 书籍按钮的文字颜色 */  
+  width: 80rpx; /* 书籍按钮的宽度 */  
+  height: 80rpx; /* 书籍按钮的高度 */  
+	margin: 8rpx; /* 书籍按钮的间距 */  
+	border-radius: 12px 12px 12px 12px;
+}  
+
+	
+.category-buttons .category-btn { 
+	color:rgba(0, 0, 0, 0.4); 
+  /* 其他样式保持不变 */  
+}  
+  
+.selected {  
+  color: orange; /* 选中的按钮字体颜色为橙色 */  
 }
 
-.userinfo-avatar {
-  width: 100rpx;
-  height: 100rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-  background-size: cover;
-  background-color: white;
+/* 上传图片 */  
+/* 灰色边框 */  
+.container1 {  
+	height: 150rpx;
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  border: 2px solid gray; /* 灰色边框 */  
+  padding: 20px; /* 内边距 */  
+  margin-top: 10px; /* 离顶部的距离 */  
+  border-radius: 8px 8px 8px 8px; /* 圆角效果，四个方向的半径分别为左上、右上、右下、左下 */  
 }
 
-.userinfo-avatar:after {
-  border: none;
-}
 
-.userinfo-nickname {
-  font-size: 32rpx;
-  color: #007aff;
-  background-color: white;
-  background-size: cover;
-}
-
-.userinfo-nickname::after {
-  border: none;
-}
-
-.uploader, .tunnel {
-  height: auto;
-  padding: 0 0 0 40rpx;
-  flex-direction: column;
-  align-items: flex-start;
-  box-sizing: border-box;
-}
-
-.uploader-text, .tunnel-text {
-  width: 100%;
-  line-height: 52px;
-  font-size: 34rpx;
-  color: #007aff;
-}
-.view-add{
-  position: fixed;
-  bottom: 0;
-  left: 50rpx;
-  right: 50rpx;
-  height: 48px;
-  background: red;
-}
-.uploader-container {
-  width: 100%;
-  height: 400rpx;
-  padding: 20rpx 20rpx 20rpx 0;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  box-sizing: border-box;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.uploader-image {
-  width: 100%;
-  height: 360rpx;
-}
-
-.tunnel {
-  padding: 0 0 0 40rpx;
-}
-
-.tunnel-text {
-  position: relative;
-  color: #222;
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.tunnel-text:first-child {
-  border-top: none;
-}
-
-.tunnel-switch {
-  position: absolute;
-  right: 20rpx;
-  top: -2rpx;
-}
-
-.disable {
-  color: #888;
-}
-
-.service {
-  position: fixed;
-  right: 40rpx;
-  bottom: 40rpx;
-  width: 140rpx;
-  height: 140rpx;
-  border-radius: 50%;
-  background: linear-gradient(#007aff, #0063ce);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  transition: all 300ms ease;
-}
-
-.service-button {
-  position: absolute;
-  top: 40rpx;
-}
-
-.service:active {
-  box-shadow: none;
-}
-
-.request-text {
-  padding: 20rpx 0;
-  font-size: 24rpx;
-  line-height: 36rpx;
-  word-break: break-all;
+.container2 {  
+	height: 60rpx;
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  border: 2px solid gray; /* 灰色边框 */  
+  padding: 20px; /* 内边距 */  
+  margin-top: 10px; /* 离顶部的距离 */  
+  border-radius: 8px 8px 8px 8px; /* 圆角效果，四个方向的半径分别为左上、右上、右下、左下 */  
 }

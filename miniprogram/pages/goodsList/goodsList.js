@@ -13,6 +13,7 @@ Page({
     page: 1,
     pageSize: 10,
     goodsData: [],
+    category:'',
     showLoadMore: false
   },
 
@@ -25,6 +26,9 @@ Page({
         title: '加载中...',
       })
       let params = options.category
+      this.setData({
+        category:options.category
+      })
       await wx.setNavigationBarTitle({
         title: params
       })

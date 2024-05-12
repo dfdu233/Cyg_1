@@ -62,7 +62,6 @@
     ------- <text>已显示全部</text> -------
   </view>
 </view>
-
 <!--我下单的待完成部分-->
 <view wx:if="{{ tabNow === 1}}" class="body">
   <view class="order" wx:for="{{ myOrdering }}" wx:key="index">
@@ -112,7 +111,7 @@
         金额 ￥{{ item.money }}
       </view>
       <view class="accept" wx:if="{{ item.state === '待完成' }}" bindtap="toFinish" data-item="{{ item }}">
-        确认
+        完成
       </view>
     </view>
   </view>
