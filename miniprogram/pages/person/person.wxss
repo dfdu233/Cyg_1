@@ -1,0 +1,126 @@
+.info {
+  width: 80%;
+  background-color: #1067D1;
+  display: flex;
+  /*四角小圆弧*/
+  border-radius: 10rpx;
+  margin: 0 auto;
+  padding: 50rpx 40rpx;
+  align-items: center;
+}
+
+.info .avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  box-shadow: 0 0 8rpx 8rpx #ffffff; /*白色小阴影圆环*/
+  margin-left: 10rpx;
+}
+
+.info .name {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  margin-left: 55rpx;
+}
+
+/*取父容器.info .name下面的text标签的第2个标签（性别）*/
+.info .name text:nth-child(2) {
+  margin-top: 25rpx;
+}
+
+.info .into {
+  width: 50rpx;
+  height: 50rpx;
+  /*自适应靠左*/
+  margin-left: auto; 
+}
+
+/*公告*/
+.notice {
+  display: flex;
+  width: 79% !important;
+  background-color: #fff;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center; /*垂直居中*/
+  padding: 20rpx 40rpx;
+  margin-top: 6rpx; /*与上面的间距*/
+  font-weight: 400;
+  border-radius: 10rpx;
+}
+
+.notice image {
+  width: 95rpx;
+  height: 50rpx;
+}
+
+.notice text {
+  font-size: 29rpx;
+  /*多余内容隐藏*/
+  overflow: hidden;
+  /*隐藏的内容用……显示*/
+  text-overflow: ellipsis;
+  /*不换行*/
+  white-space: nowrap;
+  margin-left: 28rpx;
+  font-weight: bold;
+}
+
+/*单元条*/
+.cell {
+  display: flex;
+  width: 90% !important;
+  background-color: #fff;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center; /*垂直居中*/
+  padding: 20rpx 40rpx;
+  margin-top: 6rpx; /*与上面的间距*/
+  font-weight: 400;
+}
+
+.cell .cellLeft {
+  display: flex;
+  align-items: center;
+}
+
+.cell .cellLeft image {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+/*左间距*/
+.cell .cellLeft text {
+  margin-left: 26rpx;
+}
+
+/*尖角符颜色*/
+.cell .cellRight {
+  color: #c1c1c1;
+}
+
+/*小提示
+.customerService .tips {
+  background-color: #3b83db;
+  width: 80%;
+  padding: 20rpx 40rpx;
+  color: #fff;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 28rpx;
+  border-radius: 10rpx;
+}
+*/
+
+/*单元条之间间距*/
+.mt {
+  margin-top: 25rpx;
+}
+
+/*当前版本*/
+.version {
+  color: #a1a1a1;
+  width: 100%;
+  text-align: center;
+}

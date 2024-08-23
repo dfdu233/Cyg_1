@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "闲品详情",
+  "backgroundColor": "#ffffff",
+  "usingComponents": {
+    "i-avatar": "./../../iview/dist/avatar/index",
+    "i-panel": "./../../iview/dist/panel/index",
+    "i-tag": "./../../iview/dist/tag/index",
+    "i-input": "./../../iview/dist/input/index",
+    "i-button": "./../../iview/dist/button/index",
+    "i-icon": "./../../iview/dist/grid-icon/index",
+    "skeleton": "./../../component/skeleton/skeleton",
+    "pay-panel":"./../../component/payPanel/payPanel",
+    "i-message": "./../../iview/dist/message/index"
+  }
+}

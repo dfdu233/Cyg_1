@@ -1,0 +1,22 @@
+/* pages/trade/trade.wxss */
+page {
+  background-color: #fff;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* 设置容器高度为整个页面的高度 */
+}
+
+.center-image {
+  width: 200rpx; /* 设置图片宽度 */
+  height: 200rpx; /* 设置图片高度 */
+}
+
+.center-text {
+  margin-top: 20rpx; /* 设置文字与图片之间的间距 */
+  font-size: 32rpx; /* 设置文字大小 */
+  color: cornflowerblue;
+}

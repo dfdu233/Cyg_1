@@ -1,0 +1,27 @@
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="backText"> 闲置买卖 </view>
+</cu-custom>
+
+<!--index.wxml-->
+<view class="skeleton">
+
+  <view class="container">
+    <i-row i-class="x__grid_container" wx:for="{{grids}}" wx:key="{{index}}">
+      <view class="x__grid_item" wx:for="{{item}}" wx:for-item="subItem" wx:for-index="subIndex" wx:key="{{subIndex}}" data-label="{{subItem.label}}" bindtap="onPressCategoryItem">
+        <i-grid-icon>
+          <image class="skeleton-radius" src="{{subItem.icon}}" />
+        </i-grid-icon>
+        <i-grid-label>
+          <text class="skeleton-rect">{{subItem.label}}</text>
+        </i-grid-label>
+      </view>
+    </i-row>
+    <view class="goods__list_container">
+      <goods-item style="width:48%;margin:0 1% 2% 1%;" bind:onGoodsItemPress="onItemPress" wx:for="{{goodsData}}" wx:key="{{index}}" data="{{item}}" />
+    </view>
+  </view>
+  <button class="button" bindtap="goToBuyPage">我也要卖</button>
+</view>
+<i-load-more loading="{{ showLoadMore }}" />
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+

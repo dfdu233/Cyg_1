@@ -1,0 +1,65 @@
+<!--pages/sell/sell.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="backText"> 我要卖 </view>
+</cu-custom>
+
+ <!--miniprogram/pages/publish/publish.wxml-->
+ 
+
+<view class="container">
+  <i-input value="{{name}}" type="text" placeholder="请输入闲置物品名称" bind:change="nameHandle" />
+  <i-input value="{{description}}" type="text" placeholder="请简要描述物品的细节" bind:change="descriptionHandle" />
+<i-panel title="添加图片(最多六张)" hide-border="true">
+  <i-cell-group>
+    <i-cell>
+      <view class="weui-uploader__input-box" wx:if="{{selectedImages.length<6}}">
+        <view class="weui-uploader__input" bindtap="chooseImage"></view>
+      </view>
+      <view class="weui-uploader__file uploader__img_box" wx:for="{{selectedImages}}" wx:for-index="idx" wx:key="idx">
+        <image class="weui-uploader__img " src="{{item}}" bindtap='previewImage' data-currenturl="{{item}}" mode="aspectFit" />
+        <i-icon type="delete" size="28" color="#8c8c8c" class='close-btn' bindtap='deleteHandle' data-index='index' />
+      </view>
+    </i-cell>
+  </i-cell-group>
+</i-panel>
+  <i-cell-group>
+  <i-cell title="分类:" is-link url="/pages/category/category" value="{{categoryValue|| '选择分类'}}"></i-cell>
+</i-cell-group>
+<i-panel title="">
+    <i-input right value="{{ money }}" type="digit" title="售卖金额" placeholder="不得低于3.5元" bind:change="handleMoneyChange" />
+</i-panel>
+<i-panel title="" class="cell-panel">
+  <i-cell-group>
+    <i-cell title="支持发货方式(可多选)">
+      <view class='right__footer_between' slot="footer">
+        <i-tag 
+            i-class="my-i-tag"
+            wx:for="{{shippingMethodsTags}}" 
+            wx:key="{{index}}"
+            bindchange="onChangeShippingMethods" 
+            checkable="{{true}}" 
+            name="{{index}}" 
+            color="{{item.color}}" 
+            checked="{{item.checked}}" 
+            type="border"
+            style="margin-right:10rpx;">
+            {{item.name}}
+        </i-tag>
+      </view>
+    </i-cell>
+  </i-cell-group>
+</i-panel>
+<i-panel title="">
+  <i-cell-group>
+    <i-cell title="商品重量:" value="{{weight}}" bind:click="handleSelectWeight"></i-cell>
+  </i-cell-group>
+</i-panel>
+
+<i-action-sheet visible="{{ visibleActions }}" actions="{{ weightActions }}" show-cancel bind:cancel="handleCancelWeightActions" bind:click="handleClickItem">
+    <view slot="header" style="padding: 16rpx">
+        <text>3kg以上的物品建议选择同城交易哟</text>
+    </view>
+</i-action-sheet>
+<i-button class="footer__btn" type="primary" bind:click="handlePublish" disabled="{{!money||!address}}" type="error" shape="circle" size="small">确定上架</i-button>
+</view>
+

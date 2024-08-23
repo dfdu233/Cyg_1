@@ -1,0 +1,14 @@
+<!--pages/rent/rent.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="backText"> 租房信息 </view>
+</cu-custom>
+
+<!--租房信息-->
+<view class="container">
+  <image class="center-image" src="../../images/kaifazhong.png"></image>
+  <text class="center-text">正在开发中，敬请期待~</text>
+</view>
+
+
+
+

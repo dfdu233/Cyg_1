@@ -1,0 +1,26 @@
+<!--我的-关于我们-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="backText">返回</view>
+</cu-custom>
+
+<view class="logo">
+    <image src="../../images/banner7.jpg" mode="widthFix"></image>
+</view>
+
+<view class="desc">
+  “校园畅逸服务”小程序专注于为<text>\t</text>【中国大学校园的师生】<text>\t</text>提供最便捷的校园生活服务。我们的理念：互利共存。<text>\n\n</text>您可以成为一个发布者，发布的您需求；也可以做一个接单者，接收并完成任务获取收益——成为发布者或接单者各取所需。
+</view>
+
+<view class="text">联系我们</view>
+
+<view class="cell">
+    对本程序中的疏漏之处和错误，望不吝赐教
+</view>
+
+<view class="cell">
+    关注微信公众号：成都点圆面体科技有限公司
+</view>
+
+<view class="cell">
+    客服微信：zxy1475857674
+</view>

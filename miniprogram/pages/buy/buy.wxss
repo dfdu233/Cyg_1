@@ -1,0 +1,149 @@
+/* pages/trade/trade.wxss */
+page {
+  background-color: #fff;
+}
+
+.container { /*页面的大容器*/
+  background-color: #fff;
+  width: 85%;
+  margin: 30rpx auto;
+  border-radius: 30rpx;
+  box-shadow: 0 0 15rpx #a1a1a1;
+  padding: 40rpx 25rpx 25rpx 25rpx;
+}
+.body {
+  width: 85%;
+  margin: 20rpx auto;
+  box-shadow: 0 0 20rpx #a1a1a1;
+  border-radius: 25rpx;
+  padding: 25rpx;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 我要卖+我要买 */
+.container {  
+  display: flex;  
+  justify-content: space-between;  
+  align-items: center;  
+}  
+  
+.left-part {  
+  flex: 1;  
+  display: flex;  
+  justify-content: center;  
+  align-items: flex-end;  
+}  
+  
+.text {  
+	font-size: 16px; /* 设置字体大小为 16px */  
+  color: #FF6302;  
+}  
+  
+.right-part {  
+  flex: 1;  
+  display: flex;  
+  justify-content: center;  
+}  
+
+/* 种类 */
+.category-container {  
+	width: 100%; /* 可根据需要设置容器的宽度 */  
+	padding: 10rpx; 
+}  
+  
+.category-header {  
+  display: flex;  
+  justify-content: space-between;  
+  align-items: center;  
+  padding: 5rpx;  
+}  
+  
+.category-label {  
+	font-weight: bold;  
+	color: #000; /* 可根据需要设置字体颜色 */  
+}  
+
+.category-labe2 {  
+	font-weight: bold;  
+	color: rgb(0, 0, 0,0.4); /* 可根据需要设置字体颜色 */  
+}  
+  
+.select-labe2{  
+  color: rgb(0, 0, 0,0.4); /* 可根据需要设置字体颜色 */  
+}  
+  
+.category-buttons {  
+  display: flex;  
+  justify-content: space-around;  
+  margin-top: 5rpx;  
+}  
+
+.category-buttons {  
+  display: flex;  
+  justify-content: space-between;  
+}  
+
+
+
+.category-btn {  
+	font-size: 11px; /* 设置字体大小为 16px */ 
+  background-color: #D8D8D8; /* 书籍按钮的背景色 */  
+  color:rgba(0, 0, 0, 0.4); /* 书籍按钮的文字颜色 */  
+  width: 80rpx; /* 书籍按钮的宽度 */  
+  height: 80rpx; /* 书籍按钮的高度 */  
+	margin: 8rpx; /* 书籍按钮的间距 */  
+	border-radius: 12px 12px 12px 12px;
+}  
+
+	
+.category-buttons .category-btn { 
+	color:rgba(0, 0, 0, 0.4); 
+  /* 其他样式保持不变 */  
+}  
+  
+.selected {  
+  color: orange; /* 选中的按钮字体颜色为橙色 */  
+}
+
+/* 上传图片 */  
+/* 灰色边框 */  
+.container1 {  
+	height: 150rpx;
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  border: 2px solid gray; /* 灰色边框 */  
+  padding: 20px; /* 内边距 */  
+  margin-top: 10px; /* 离顶部的距离 */  
+  border-radius: 8px 8px 8px 8px; /* 圆角效果，四个方向的半径分别为左上、右上、右下、左下 */  
+}
+
+
+.container2 {  
+	height: 60rpx;
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+  border: 2px solid gray; /* 灰色边框 */  
+  padding: 20px; /* 内边距 */  
+  margin-top: 10px; /* 离顶部的距离 */  
+  border-radius: 8px 8px 8px 8px; /* 圆角效果，四个方向的半径分别为左上、右上、右下、左下 */  
+}
+/* miniprogram/pages/buy/buy.wxss */
+
+/* other */
+
+.right__footer_start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.right__footer_between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+

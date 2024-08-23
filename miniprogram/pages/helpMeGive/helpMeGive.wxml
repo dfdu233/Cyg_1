@@ -1,0 +1,52 @@
+<!--首页-帮我拿-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="backText"> 帮我送 </view>
+</cu-custom>
+
+<view class="body">
+	<view class="title">物品大小：</view>
+  <view class="type">
+    <!--selectType选择快递大小，并给出提示-->
+    <view class="{{ typeNow === index ? 'selectType' : ''}}" wx:for="{{ typeList }}" wx:key="index" data-id="{{ index }}" data-tip="{{ item.tips }}" bindtap="selectType">{{ item.name }}</view>
+  </view>
+
+	<view class="title">时间要求：</view>
+  <view class="time">
+    <!--selectType选择时间缓急，并给出提示-->
+    <view class="{{ timeNow === index ? 'selectType' : ''}}" wx:for="{{ timeList }}" wx:key="index" data-id="{{ index }}" data-tip="{{ item.tips }}" bindtap="selectTime">{{ item.name }}</view>
+  </view>
+	
+	<view class="help_content">
+    <text>帮助内容： </text>
+    <textarea placeholder="输入详细的送达地点及物品信息" value="{{ helpContent }}" cols="30" rows="10" bindinput="getHelpContent"></textarea>
+  </view>
+
+  <view class="item">
+    <text>取货地址: </text>
+    <text bindtap="selectAddress">{{ address ? address : '请选择地址 >' }}</text>
+  </view>
+
+  <view class="item">
+    <text>送达地点: </text>
+    <view class="getAddress">
+      <input type="text" value="{{ pickUpAddress }}" placeholder="输入取货地点" bindinput="getPickUpAddress" />
+      <image src="../../images/address.png"></image>
+    </view>
+  </view>
+
+  <view class="item">
+    <text>增加金额: </text>
+    <input type="text" value="{{ addMoney }}" placeholder="增加金额" bindinput="getMoney" />
+  </view>
+
+  <view class="tips">
+    <text>避免距离过长无人接单， 建议增加金额</text>
+    <text>需支付 :</text>
+    <text>{{finalMoney}}元</text>
+  </view>
+
+  <button class="submitBtn" bindtap="submit">立即发布</button>
+
+  <view class="notice" bindtap="toAgreement">用户条款&隐私策略</view>
+
+</view>

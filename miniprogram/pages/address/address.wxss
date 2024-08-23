@@ -1,0 +1,81 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /*水平居中*/
+  align-items: center; /*垂直居中*/
+}
+
+.body .noneImg {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+/*.body 下面.noneData和.showAll两者的样式*/
+.body .noneData, .showAll {
+  color: #717171;
+  margin-top: 30rpx;
+}
+
+.body .showAll text {
+  margin: 0 20rpx;
+}
+
+/*按钮的样式*/
+.body .addBtn {
+  width: 90%;
+  background-color: #1067D1;
+  color: #fff;
+  border-radius: 40rpx;
+  padding: 20rpx 0;
+  margin-top: 60rpx;
+  margin-bottom: 80rpx;
+  font-weight: 400;
+}
+
+.body .address {
+  width: 80%;
+  padding: 35rpx 25rpx;
+  background-color: #fff;
+  box-shadow: 0 0 20rpx #a1a1a1;
+  margin: 0 auto;
+  margin-top: 20rpx;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20rpx;
+}
+
+.body .address .address_bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30rpx;
+}
+
+.body .address .address_bottom .bottom_left {
+  display: flex;
+  align-items: center;
+  color: #1067D1;
+}
+
+.iconSize {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.body .address .address_bottom .bottom_right {
+  display: flex;
+}
+
+.body .address .address_bottom .bottom_right view {
+  display: flex;
+  align-items: center;
+  margin-left: 30rpx;
+}
+
+.body .address .address_bottom .bottom_right .delete {
+  color: #f00;
+}
+
+.ml {
+  margin-left: 15rpx;
+}

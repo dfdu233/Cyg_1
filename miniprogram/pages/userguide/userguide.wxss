@@ -1,0 +1,89 @@
+page {
+  background-color: #fff;
+}
+.body {
+  width: 85%;
+  margin: 20rpx auto;
+  box-shadow: 0 0 20rpx #a1a1a1;
+  border-radius: 25rpx;
+  padding: 25rpx;
+  justify-content: center;
+  align-items: center;
+}
+
+.scroll_view {
+  background-color: #fff;
+  white-space: nowrap; /*不能换行*/
+}
+
+.tab {
+  display: flex;
+  text-align: center;
+}
+
+.tab .tab_item {
+  height: 90rpx;
+  display: inline-block;
+  line-height: 90rpx;
+  margin: 0 10rpx;
+  padding: 0 20rpx;
+  flex: 1; /*平均分配Tab的长度*/
+}
+
+.select {
+  color: rgb(0, 0, 0);
+  border-bottom: 4rpx solid #FF6302;
+}
+.tab_next{
+  display: flex;
+  justify-content: space-around;
+}
+.selected {
+  color: rgb(0, 0, 0); /* 设置选中状态的文字颜色 */
+  border-bottom: 2px solid #FF6302; /* 添加下划线 */
+}
+
+.line {
+  margin-left: 64rpx; /* 左边距模拟空格 */
+  margin-right: 64rpx; /* 右边距模拟空格 */
+}
+
+.bold {
+  font-weight: bold; /* 将文字加粗 */
+  margin-left: 64rpx; /* 左边距模拟空格 */
+  margin-right: 64rpx; /* 右边距模拟空格 */
+}
+
+/* 设置表格元素及外边距 */
+.table-container {
+  background-color: #ffffff;
+}
+
+/* 设置每一行的样式 */
+.row {
+  display: flex;
+  align-items: center;
+  height: 64rpx;
+  border-bottom: 1rpx solid #f0f0f0; /* 设置横线颜色为浅灰色 */
+  white-space: nowrap; /*不能换行*/
+}
+
+/* 设置每一列的样式 */
+.column {
+  flex: 1;
+  height: 64rpx;
+  line-height: 64rpx;
+  text-align: center;
+  white-space: nowrap; /*不能换行*/
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+.no-spacing {
+  margin: 0;
+  padding: 0;
+}
+.tips{
+  color: #a1a1a1;
+  margin-left: 64rpx;
+  margin-right: 64rpx;
+}

@@ -1,0 +1,150 @@
+<!--miniprogram/pages/goodsDetail/goodsDetail.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="backText"> 商品详情 </view>
+</cu-custom>
+<view class="skeleton pb-100">
+  <swiper class='x__swiper skeleton-rect' indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{pageData.images}}" wx:key="{{index}}">
+      <swiper-item>
+        <image mode='aspectFit' src="{{item}}" class="slide-image " data-currentUrl="{{item}}" catchtap='previewImage' />
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="p-3" style="background:#fff">
+    <view class="flex-between">
+      <view class="moneyRed flex-start skeleton-rect">
+        <i-avatar src="./../../../images/egg.png" size="small"></i-avatar>
+        <text>{{pageData.money}}</text>
+        <text>元</text>
+      </view>
+      <!-- <view class="font-base flex-around lightColor skeleton-rect">
+        <text class="mr-2">收藏</text>
+        <text>{{pageData.collection}}</text>
+      </view> -->
+    </view>
+    <view class="flex-start mt-2 skeleton-rect">
+      <text class="font-small">支持发货方式：</text>
+      <i-tag i-class="font-base x__tag_base mr-1" name="标签一" color="yellow" wx:for="{{pageData.shippingMethods}}" wx:key="{{index}}">
+        {{item.name}}
+      </i-tag>
+      <picker bindchange="choose" value="{{index2}}" range="{{pageData.shippingMethods}}" range-key="name">
+        <view >
+
+当前选择：{{pageData.shippingMethods[index2].name}}
+</view>
+      </picker>
+    </view>
+    <view class="flex-start mt-2">
+      <text class="skeleton-rect text-black text-bold">{{pageData.name||"名称"}}</text>
+    </view>
+    <view class="flex-start mt-2 lightColor skeleton-rect">
+      <text class="font-base">{{pageData.description||"描述"}}</text>
+    </view>
+    <view class="flex-between mt-1 pt-2 flex-warp border-top-1" bindtap='handleEnterChat'>
+      <view class="font-base">
+        <i-avatar class="skeleton-radius" src="{{pageData.avatarUrl}}" size="default"></i-avatar>
+        <text class="mh-1 skeleton-rect">{{pageData.nickName||"用户名"}}</text>
+        <text class="lightColor skeleton-rect">{{formatModule.format.formatDateFunc(pageData.createTime)||"发布时间"}}</text>
+      </view>
+      <view class="font-base primaryColor">
+        <text class="skeleton-rect">{{pageData.address.build||"地址"}}-</text>
+        <text class="skeleton-rect">{{pageData.address.houseNumber||"地址"}}</text>
+      </view>
+    </view>
+  </view>
+  <i-panel title="留言{{pageData.comment.length>0?'('+pageData.comment.length+')':''}}" class="skeleton-rect">
+    <view class="font-base flex-column pv-3">
+      <view class="light" wx:if="{{pageData.comment.length===0}}">还没有人评论哟，快来抢沙发~</view>
+      <view class="flex-center mt-2">
+        
+        <view class="cu-form-group">
+          <i-avatar i-class="mh-2" src="{{userData.avatarUrl}}" size="default"></i-avatar>
+          <input 
+            value="{{commentValue}}"
+            type="text" 
+            class='x__input border-bottom-1'
+            mode="wrapped" 
+            confirm-type="send"
+            bindinput="handleCommentChange" 
+            bindblur="handleCommentBlur" 
+            bindconfirm="handleCommentSend"
+            focus="{{commentFocus}}" 
+            placeholder="问问更多细节"
+          ></input>
+          <button 
+            class="cu-btn bg-green x__button" 
+            disabled='{{!commentValue}}' 
+            bindtap='handleCommentSend'
+          >{{commentType==='comment'?"评论":"回复"}}</button>
+        </view>
+      </view>
+    </view>
+    <view class="cu-card dynamic no-card" wx:if="{{pageData.comment.length>0}}">
+      <view class="cu-item shadow" wx:for="{{pageData.comment}}" wx:key="{{item.timeStamp}}" wx:for-item="item">
+        <view class="cu-list menu-avatar comment border-top-1">
+          <view class="cu-item">
+            <view class="cu-avatar round" style="background-image:url({{item.userinfo.avatarUrl}});"></view>
+            <view class="content">
+              <view class="text-grey">{{item.userinfo.nickName}}</view>
+              <view class="text-gray text-content text-df">
+                {{item.commentValue}}
+              </view>
+              <view class="bg-gray padding-sm radius margin-top-sm text-sm" wx:if="{{item.reply.length}}">
+                <view class="flex" wx:for="{{item.reply}}" wx:for-item="subItem" wx:key="{{subItem.timeStamp}}">
+                  <view>{{subItem.userinfo.nickName}}：</view>
+                  <view class="flex-sub">{{subItem.commentValue}}</view>
+                </view>
+              </view>
+              <view class="margin-top-sm flex justify-between">
+                <view class="text-gray text-df">{{formatModule.format.formatDateFunc(item.timeStamp)}}</view>
+                <view>
+                  <i-icon type="message_fill" size='25' color='#c5c6c7' data-replyid="{{item.timeStamp}}" bindtap='handleReply'/>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+  </i-panel>
+</view>
+<view class="footer__btn flex-start backgroundWhite border-top-1">
+  <view class="flex-column flex-1">
+    <button wx:if='{{!isCollected}}' class="button-transparent backgroundWhite flex-column lightColor" bindtap='handleAddFavorites'>
+      <i-icon type="collection" size='24' />
+      <text>收藏</text>
+    </button>
+    <button wx:if='{{isCollected}}' class="button-transparent backgroundWhite flex-column lightColor" bindtap='cancelAddFavorites'>
+    <i-icon type="collection_fill" size='24' color="#ff0036"/>
+      <text>已收藏</text>
+    </button>
+  </view>
+  <view class="flex-column flex-1">
+    <button open-type='contact' class="button-transparent backgroundWhite flex-column lightColor">
+      <i-icon type="customerservice_fill" size='24' />
+      <text>客服</text>
+    </button>
+  </view>
+  <view class="flex-column flex-1">
+    <button open-type="share" class="button-transparent backgroundWhite flex-column lightColor">
+      <i-icon type="share" size='24' />
+      <text>分享</text>
+    </button>
+  </view>
+  <view class="flex-3">
+    <button class="flex-column button-transparent backgroundMoneyRed" wx:if='{{pageData.status==="published"}}' bindtap='handleWechatPay'>
+      <text style='line-height:100rpx'>立刻交易</text>
+    </button>
+    <button class="flex-column button-transparent" disabled wx:if='{{pageData.status==="pending"}}'>
+      <text style='line-height:100rpx'>已下架</text>
+    </button>
+    <button class="flex-column button-transparent" disabled wx:if='{{pageData.status==="sold"}}'>
+      <text style='line-height:100rpx'>已卖出</text>
+    </button>
+  </view>
+</view>
+<i-message id="message" />
+<pay-panel isShow="{{isPayPanelShow}}" money="{{pageData.money}}" password="{{password}}" bind:hidePanel="handlePayPanelHide" bind:handleChange="handlePayPanelChange"></pay-panel>
+<skeleton wx:if="{{showSkeleton}}"></skeleton>
+<wxs module="formatModule" src="./../../filter/format.wxs"></wxs>

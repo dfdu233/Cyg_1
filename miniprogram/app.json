@@ -1,0 +1,86 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/order/order",
+    "pages/person/person",
+    "pages/getExpress/getExpress",
+    "pages/address/address",
+    "pages/addAddress/addAddress",
+    "pages/selectBuild/selectBuild",
+    "pages/print/print",
+    "pages/run/run",
+    "pages/expressReplace/expressReplace",
+    "pages/expressBusiness/expressBusiness",
+    "pages/sellandbuy/sellandbuy",
+    "pages/rent/rent",
+    "pages/helpMeGive/helpMeGive",
+    "pages/replaceMe/replaceMe",
+    "pages/charge/charge",
+    "pages/updateInfo/updateInfo",
+    "pages/aboutAs/aboutAs",
+    "pages/applyOrder/applyOrder",
+    "pages/agreement/agreement",
+    "components/myButton/myButton",
+    "components/myModal/myModal",
+    "pages/receiveLoading/receiveLoading",
+    "pages/orderReceiver/orderReceiver",
+    "pages/points/points",
+    "pages/detail/detail",
+    "pages/userguide/userguide",
+    "pages/jiedanyuan_zhongxin/jiedanyuan_zhongxin",
+    "pages/category/category",
+    "pages/publish/publish",
+    "pages/buy/buy",
+    "pages/goodsDetail/goodsDetail",
+    "pages/sell/sell",
+    "pages/secorder",
+    "pages/secorder/secorder",
+    "pages/usercenter/usercenter",
+    "pages/goodsList/goodsList",
+    "custom-tab-bar/self"
+  ],
+  
+  "window": {
+    "navigationStyle": "custom",
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/index",
+        "iconPath": "images/index.png",
+        "selectedIconPath": "images/index_fill.png"
+      },
+      {
+        "text": "我是买家",
+        "pagePath": "pages/secorder/secorder",
+        "iconPath": "images/order.png",
+        "selectedIconPath": "images/buyer.png"
+      },
+      {
+        "text": "我是卖家",
+        "pagePath": "pages/usercenter/usercenter",
+        "iconPath": "images/order.png",
+        "selectedIconPath": "images/seller.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/person/person",
+        "iconPath": "images/person.png",
+        "selectedIconPath": "images/person_fill.png"
+      }
+    ]
+  },  
+      
+  "usingComponents": {
+    "cu-custom": "style/colorui/components/cu-custom",
+    "van-tabbar": "style/@vant/weapp/lib/tabbar/index",
+    "van-tabbar-item": "style/@vant/weapp/lib/tabbar-item/index"
+  },
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

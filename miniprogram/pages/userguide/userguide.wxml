@@ -1,0 +1,143 @@
+<!--用户指南-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="backText">返回</view>
+</cu-custom>
+
+<!--可滚动视图-->
+<scroll-view scroll-x class="scroll_view">
+  <!--scroll-x横向滚动-->
+  <view class="tab">
+    <view class="tab_item {{ tabNow === index ? 'select' : '' }}" wx:for="{{ tabList }}" data-index="{{ index }}" wx:key="index" bindtap="selectTab">
+      {{ item }}
+    </view>
+  </view>
+</scroll-view>
+
+<view class="paragraph" wx:if="{{tabNow===0}}">
+  <view class="bold">闲置买卖</view>
+  <view class="line">卖主送：服务费 =商品售价×5%
+；服务费最低为0.5元，最高为5元</view>
+  <view class="line">买主取：服务费 =商品售价×7%
+；服务费最低为0.7元，最高为7元</view>
+  <view class="line">跑腿取送：服务费 =商品售价×5%
+；服务费最低为0.5元，最高为5元</view>
+  <view class="line">服务费将在商品交易成功后，从卖家的账户中自动扣除</view>
+</view>
+
+<view class="paragraph" wx:if="{{tabNow===1}}">
+
+  <view class="bold">闲置买卖</view>
+  <view class="line">卖主上传一个商品获得1积分；
+    用户下单成功一个商品获得1积分。若中途由跑腿取送则接单员接单一次获得1积分</view>
+
+  <view class="body">
+    <view class="table-container">
+      <view class="row">
+        <view class="column">
+          <image src="../../images/one.png" mode="aspectFit" style="width:50rpx; height: 50rpx" />
+        </view>
+        <view class="column">青铜</view>
+        <view class="column"> 积 分 </view>
+        <view class="column">{{'≤'}} 5 </view>
+        <view class="column">原</view>
+        <view class="column">价</view>
+
+      </view>
+      <view class="row">
+        <view class="column">
+          <image src="../../images/two.png" mode="aspectFit" style="width:50rpx; height: 50rpx" />
+        </view>
+        <view class="column">白银 </view>
+        <view class="column">5 {{'<'}} 积 分 {{'≤'}} 10 </view>
+        <view class="column">享受9.9折权益</view>
+      </view>
+      <view class="row">
+        <view class="column">
+          <image src="../../images/three.png" mode="aspectFit" style="width:50rpx; height: 50rpx" />
+        </view>
+        <view class="column">黄金</view>
+        <view class="column">10{{'<'}} 积分 {{'≤'}} 20</view>
+        <view class="column">享受9.8折权益</view>
+      </view>
+      <view class="row">
+        <view class="column">
+          <image src="../../images/four.png" mode="aspectFit" style="width:50rpx; height: 50rpx" />
+        </view>
+        <view class="column">铂金</view>
+        <view class="column">20{{'<'}} 积分 {{'≤'}} 30</view>
+        <view class="column">享受9.7折权益</view>
+      </view>
+      <view class="row">
+        <view class="column">
+          <image src="../../images/five.png" mode="aspectFit" style="width:50rpx; height: 50rpx" />
+        </view>
+        <view class="column">钻石</view>
+        <view class="column">30{{'<'}} 积分 {{'≤'}} 40</view>
+        <view class="column">享受9.6折权益</view>
+      </view>
+      <view class="row">
+        <view class="column">
+          <image src="../../images/six.png" mode="aspectFit" style="width:50rpx; height: 50rpx" />
+        </view>
+        <view class="column">星耀</view>
+        <view class="column">40{{'<'}} 积分 {{'≤'}} 50</view>
+        <view class="column">享受9.5折权益</view>
+      </view>
+      <view class="row">
+        <view class="column">
+          <image src="../../images/seven.png" mode="aspectFit" style="width:50rpx; height: 50rpx" />
+        </view>
+        <view class="column">王者</view>
+        <view class="column">50 {{'>'}} 积分 {{'>'}}60</view>
+        <view class="column">享受9.0折权益</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="paragraph" wx:if="{{tabNow===2}}">
+  <view class="tips">若物流方式选择为跑腿取送，则需要从商品成单售价中抽取一部分接单员的佣金，具体收费规则如下</view>
+  <view class="body">
+    <view class="table-container">
+      <view class="row">
+        <view class="column"class="bold">时效</view>
+        <view class="column"class="bold">商品售价</view>
+        <view class="column"class="bold">物品大小</view>
+        <view class="column"class="bold">接单员佣金（元）</view>
+      </view>
+      <view class="row">
+        <view class="column">2</view>
+        <view class="column">小于等于15元</view>
+        <view class="column">小</view>
+        <view class="column">3</view>
+      </view>
+      <view class="row">
+        <view class="column">h</view>
+        <view class="column">15元~40元</view>
+        <view class="column">中</view>
+        <view class="column">5</view>
+      </view>
+      <view class="row">
+        <view class="column">以</view>
+        <view class="column">40元~100元</view>
+        <view class="column">大</view>
+        <view class="column">5</view>
+      </view>
+      <view class="row">
+        <view class="column">内</view>
+        <view class="column">商品售价>=100元</view>
+        <view class="column">超大</view>
+        <view class="column">9</view>
+      </view>
+    </view>
+  </view>
+  <view class="tips">物品大小根据商品售价自动判定</view>
+</view>
+
+
+    
+    
+    
+    
+    
+    

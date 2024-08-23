@@ -1,0 +1,44 @@
+<!--首页-快递代取-收件地址-添加地址-选择楼栋-->
+<cu-custom bgColor="bg-white">
+	<view slot="content">请选择楼栋</view>
+</cu-custom>
+
+<scroll-view scroll-x class="scroll_view">
+  <view class="tab">
+    <view class="tab_item {{ tabNow === index ? 'select' : '' }}" wx:for="{{ tabList }}" data-id="{{ index }}" wx:key="index" bindtap="selectTab">
+      {{ item }}
+    </view>
+  </view>
+</scroll-view>
+
+<view wx:if="{{ tabNow <= 0 }}" class="body">
+  <view class="item" wx:for="{{ 2 }}" wx:key="index" bindtap="selectBuild" data-index="{{ index }}">
+    {{ index + 1 }} 栋
+  </view>
+</view>
+
+<view wx:elif="{{ tabNow >0 && tabNow <=1  }}" class="body">
+  <view class="item" wx:for="{{ 7 }}" wx:key="index" bindtap="selectBuild" data-index="{{ index }}">
+    {{ index + 1 }} 栋
+  </view>
+</view>
+
+<view wx:elif="{{ tabNow >1 && tabNow <=2  }}" class="body">
+  <view class="item" wx:for="{{ 4 }}" wx:key="index" bindtap="selectBuild" data-index="{{ index }}">
+    {{ index + 1 }} 栋
+  </view>
+</view>
+
+<view wx:elif="{{ tabNow >2 && tabNow <=3  }}" class="body">
+  <view class="item" wx:for="{{ 9 }}" wx:key="index" bindtap="selectBuild" data-index="{{ index }}">
+    {{ index + 1 }} 栋
+  </view>
+</view>
+
+<view wx:else class="body">
+  <view class="item" wx:for="{{ 6 }}" wx:key="index" bindtap="selectBuild" data-index="{{ index }}">
+    {{ index + 1 }} 栋
+  </view>
+</view>
+
+<view class="showAll">已显示全部</view>
