@@ -1,7 +1,4 @@
 <!--miniprogram/pages/order/order.wxml-->
-<cu-custom bgColor="bg-white" isBack="{{true}}">
-	<view slot="backText"> 我是买家 </view>
-</cu-custom>
 <i-tabs current="{{ currentTab }}" color="#ffd84d" bindchange="handleChange">
     <i-tab key="unreceipt" title="待收货"></i-tab>
     <i-tab key="wait_rate" title="待评价"></i-tab>

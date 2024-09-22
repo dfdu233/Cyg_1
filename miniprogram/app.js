@@ -42,8 +42,6 @@ App({
   },
   onLaunch: function () {
     
-    console.log(new Date().getDate())
-    console.log(new Date().getMonth()+1)
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力');
     } else {
@@ -57,7 +55,26 @@ App({
       });
     }
 
-
+    wx.getSetting({
+      withSubscriptions: true,
+      success (res) {
+        console.log(res.authSetting)
+        // res.authSetting = {
+        //   "scope.userInfo": true,
+        //   "scope.userLocation": true
+        // }
+        console.log(res.subscriptionsSetting)
+        // res.subscriptionsSetting = {
+        //   mainSwitch: true, // 订阅消息总开关
+        //   itemSettings: {   // 每一项开关
+        //     SYS_MSG_TYPE_INTERACTIVE: 'accept', // 小游戏系统订阅消息
+        //     SYS_MSG_TYPE_RANK: 'accept'
+        //     zun-LzcQyW-edafCVvzPkK4de2Rllr1fFpw2A_x0oXE: 'reject', // 普通一次性订阅消息
+        //     ke_OZC_66gZxALLcsuI7ilCJSP2OJ2vWo2ooUPpkWrw: 'ban',
+        //   }
+        // }
+      }
+    })
 
     
     this.getDiscount= function (Jifen) {
@@ -98,6 +115,7 @@ App({
       }
     })
 
+
 		wx.getSystemInfo({
 			success: e => {
 				this.globalData.StatusBar = e.statusBarHeight;
@@ -114,7 +132,9 @@ App({
     console.log("0 after output")
     const res = await new Promise((resolve, reject) => {
       wx.getSetting({
+        withSubscriptions: true,
         success(res) {
+          console.log(res.authSetting)
           resolve(res)
         },
         fail(err) {

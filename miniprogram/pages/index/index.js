@@ -139,9 +139,19 @@ Page({
    */
   goToBuyPage: function() {  
     // 跳转到指定页面  
-    wx.navigateTo({  
-      url: '/pages/buy/buy', // 跳转到的页面路径  
-    });  
+    const userInfo=wx.getStorageSync('userInfo')
+    if(userInfo){
+      wx.navigateTo({  
+        url: '/pages/buy/buy', // 跳转到的页面路径  
+      });  
+    }
+    else {
+      wx.showToast({
+        icon: 'none',
+        title: '请前往个人中心登录 !',
+      })
+    }
+    
   },  
   onReachBottom: async function() {
     try {

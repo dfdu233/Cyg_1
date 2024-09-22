@@ -23,6 +23,7 @@ Page({
       app.globalData = {
         ...res
       }
+      console.log(res)
     })
   },
 

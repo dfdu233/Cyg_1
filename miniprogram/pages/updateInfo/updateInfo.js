@@ -25,7 +25,7 @@ Page({
   // 默认地址
   updateAddress() {
     wx.setStorageSync('urlNow', 'updateInfo')
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../address/address',
     })
   },

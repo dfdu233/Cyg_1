@@ -18,6 +18,7 @@ function queryUser(openid) {
   })
 }
 
+
 function queryFilterGoods(data) {
   console.log(data)
   const db = wx.cloud.database()

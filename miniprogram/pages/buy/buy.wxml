@@ -60,6 +60,11 @@
         <text>3kg以上的物品建议选择同城交易哟</text>
     </view>
 </i-action-sheet>
+<i-panel title="">
+  <i-cell-group>
+    <i-cell  bind:click="chooseAddress" value="{{address.build+address.houseNumber||'选择地址'}}"></i-cell>
+  </i-cell-group>
+</i-panel>
 <i-button class="footer__btn" type="primary" bind:click="handlePublish" disabled="{{!money||!address}}" type="error" shape="circle" size="small">确定上架</i-button>
 </view>
 

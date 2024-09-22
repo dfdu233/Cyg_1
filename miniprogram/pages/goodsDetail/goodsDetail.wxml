@@ -23,14 +23,13 @@
       </view> -->
     </view>
     <view class="flex-start mt-2 skeleton-rect">
-      <text class="font-small">支持发货方式：</text>
+      <text class="font-small">支持物流方式：</text>
       <i-tag i-class="font-base x__tag_base mr-1" name="标签一" color="yellow" wx:for="{{pageData.shippingMethods}}" wx:key="{{index}}">
         {{item.name}}
       </i-tag>
       <picker bindchange="choose" value="{{index2}}" range="{{pageData.shippingMethods}}" range-key="name">
         <view >
-
-当前选择：{{pageData.shippingMethods[index2].name}}
+请选择物流方式：{{pageData.shippingMethods[index2].name}}
 </view>
       </picker>
     </view>
@@ -47,10 +46,9 @@
         <text class="lightColor skeleton-rect">{{formatModule.format.formatDateFunc(pageData.createTime)||"发布时间"}}</text>
       </view>
       <view class="font-base primaryColor">
-        <text class="skeleton-rect">{{pageData.address.build||"地址"}}-</text>
-        <text class="skeleton-rect">{{pageData.address.houseNumber||"地址"}}</text>
+      
       </view>
-    </view>
+    </view>addres
   </view>
   <i-panel title="留言{{pageData.comment.length>0?'('+pageData.comment.length+')':''}}" class="skeleton-rect">
     <view class="font-base flex-column pv-3">

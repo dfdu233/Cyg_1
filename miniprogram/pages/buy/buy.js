@@ -1,5 +1,6 @@
 // miniprogram/pages/publish/publish.js
 const CloudFunc = require("./../../cloudDatabase/operateDatas.js")
+const CloudFuncGet = require("./../../cloudDatabase/getDatas.js")
 import regeneratorRuntime from "./../../util/regenerator-runtime/runtime.js"
 const app = getApp()
 Page({
@@ -20,7 +21,7 @@ Page({
         name: '3kg以上'
       }
     ],
-    money: "",
+    money: 0,
     weight: "1kg以下",
     transactionTypeTagsIndex: 0,
     transactionTypeTags: [{
@@ -65,7 +66,7 @@ Page({
    */
   onLoad: function(options) {
     console.log(options)
-    var addr=wx.getStorageSync('address')[0]
+    var addr=wx.getStorageSync('addressNow')
     this.setData({
       id: options.id || " ",
       address: addr
@@ -77,6 +78,14 @@ Page({
       app.globalData = {
         ...res
       }
+      console.log(res)
+      CloudFuncGet.queryUser(res.openid).then((res)=>{
+        app.globalData.userInfo.avatarUrl=res.data[0].avatarUrl;
+        app.globalData.userInfo.nickName=res.data[0].nickName;
+        console.log(res)
+      })
+      
+
     })
   },
 
@@ -98,6 +107,7 @@ Page({
   },
   handleMoneyChange(event) {
     console.log(event)
+    
     this.setData({
       money: event.detail.detail.value
     })
@@ -136,34 +146,125 @@ Page({
   },
   async handlePublish() {
     //上架商品
-    let where = {
-      id: this.data.id
+    let that = this
+    if (!app.globalData.userInfo) {
+      wx.navigateTo({
+        url: './../login/login',
+      })
+      return false
     }
+    if (!this.data.name) {
+      wx.showToast({
+        icon: "none",
+        title: '请输入物品名称',
+      })
+      return false
+    }
+    if (!this.data.description) {
+      wx.showToast({
+        icon: "none",
+        title: '请输入物品描述',
+      })
+      return false
+    }
+    if (!this.data.categoryValue) {
+      wx.showToast({
+        icon: "none",
+        title: '请选择分类',
+      })
+      return false
+    }
+    if (!this.data.selectedImages.length > 0) {
+      wx.showToast({
+        icon: "none",
+        title: '请添加图片',
+      })
+      return false
+    }
+    if(this.data.money<0.01){
+      wx.showToast({
+        icon: "none",
+        title: '金额不小于3.5',
+      })
+      return false
+    }
+    
+    const decimalPattern = /^\d+(\.\d{1,2})?$/;
+    if(!decimalPattern.test(this.data.money)){
+      wx.showToast({
+        icon: "none",
+        title: '金额最多两位小数',
+      })
+      return false
+    }
+    
+    const data = {
+      name: this.data.name,
+      description: this.data.description,
+      categoryType: this.data.categoryType,
+      categoryValue: this.data.categoryValue,
+      isNew: this.data.isNew,
+      images: this.data.selectedImages,
+      collection: 0,
+      status: "pending",
+      createTime: new Date().getTime(),
+      ...app.globalData.userInfo
+      
+    }
+    data.nickName=wx.getStorageSync('userInfo').nickName
+    data.avatarUrl=wx.getStorageSync('userInfo').avatarUrl
+    data.address=wx.getStorageSync('addressNow')
+    CloudFunc.addGoods(data).then((res) => {
+      wx.showToast({
+        title: '新增记录成功',
+      })
+      console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+      
+    let where = {
+      id: res._id
+    }
+    that.setData({
+      id:res._id
+    })
     let data = {
-      id: options.id || " ",
-      address: addr,
-      weight: this.data.weight,
-      address: this.data.address,
-      money: this.data.money,
-      transactionType: this.data.transactionTypeTags[this.data.transactionTypeTagsIndex].name,
-      shippingMethods: this.data.shippingMethodsTags.filter(item => item.checked),
+      id: res._id || " ",
+   
+      weight: that.data.weight,
+      address: that.data.address,
+      money: that.data.money,
+      transactionType: that.data.transactionTypeTags[this.data.transactionTypeTagsIndex].name,
+      shippingMethods: that.data.shippingMethodsTags.filter(item => item.checked),
       buyeraddress:'',
     }
-    await CloudFunc.updateGoods(where, data).then((res)=>{
+    CloudFunc.updateGoods(where, data).then((res)=>{
       console.log(res)
       wx.showToast({
         title: '发布成功',
       })
       wx.navigateTo({
-        url: `./../../pages/goodsDetail/goodsDetail?id=${this.data.id}`
+        url: `./../../pages/goodsDetail/goodsDetail?id=${that.data.id}`
       })
     }).catch((err)=>{
       wx.showToast({
         title: `error${err}`,
       })
     })  
+    }).catch((err) => {
+      wx.showToast({
+        icon: 'none',
+        title: '新增记录失败'
+      })
+      console.error('[数据库] [新增记录] 失败：', err)
+    })
+  
   },
 
+  chooseAddress(){
+    wx.setStorageSync('urlNow', 'buy');
+    wx.navigateTo({
+      url: '../address/address',
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -322,6 +423,7 @@ Page({
       })
       return false
     }
+
     const data = {
       name: this.data.name,
       description: this.data.description,
