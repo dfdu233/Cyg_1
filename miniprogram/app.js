@@ -115,7 +115,6 @@ App({
       }
     })
 
-
 		wx.getSystemInfo({
 			success: e => {
 				this.globalData.StatusBar = e.statusBarHeight;

@@ -66,7 +66,7 @@ Page({
     duration: 1000,
     goodsData: [],
     requestResult: '',
-    pageSize: 4,
+    pageSize: 2,
     page: 1,
     total: 0,
     totalPage: 0,
@@ -139,19 +139,9 @@ Page({
    */
   goToBuyPage: function() {  
     // 跳转到指定页面  
-    const userInfo=wx.getStorageSync('userInfo')
-    if(userInfo){
-      wx.navigateTo({  
-        url: '/pages/buy/buy', // 跳转到的页面路径  
-      });  
-    }
-    else {
-      wx.showToast({
-        icon: 'none',
-        title: '请前往个人中心登录 !',
-      })
-    }
-    
+    wx.navigateTo({  
+      url: '/pages/buy/buy', // 跳转到的页面路径  
+    });  
   },  
   onReachBottom: async function() {
     try {

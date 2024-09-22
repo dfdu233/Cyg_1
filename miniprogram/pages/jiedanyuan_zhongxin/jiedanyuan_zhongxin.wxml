@@ -10,7 +10,6 @@
   <text class="changan_2">{{helpTotalMoeny}}元</text>
   <button bind:tap="getcash" class="Bt">提现</button>
 </view>
-
 <view class="container3">
   <view class="box">
     <view class="text" style="font-size:35rpx; color:black">{{dayCount}}单</view>

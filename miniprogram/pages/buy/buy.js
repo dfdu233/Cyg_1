@@ -423,7 +423,6 @@ Page({
       })
       return false
     }
-
     const data = {
       name: this.data.name,
       description: this.data.description,

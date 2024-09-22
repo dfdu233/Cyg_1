@@ -1,0 +1,99 @@
+<!--pages/sell/sell.wxml-->
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+	<view slot="backText"> 闲置买卖</view>
+</cu-custom>
+
+<!--我要买和我要卖-->
+
+<view class="body">
+	<scroll-view scroll-x class="scroll_view">
+		<!--scroll-x横向滚动-->
+		<view class="tab">
+			<view class="tab_item {{ tabNow === index ? 'select' : '' }}" wx:for="{{ tabList }}" data-index="{{ index }}" wx:key="index" bindtap="selectTab">
+				{{ item }}
+			</view>
+		</view>
+	</scroll-view>
+
+	<!--我要卖的渲染的判断-->
+<view  wx:if="{{ tabNow === 0}}">
+
+<!--种类-->
+<view class="category-container">  
+ <view class="category-header">  
+	 <view class="category-label">种类</view>  
+	 <view class="category-labe2">请选择一项</view>  
+ </view>  
+ <view class="container0">  
+	 <view class="category-buttons">  
+		 <button  
+			 wx:for="{{bookCategories}}"  
+			 wx:key="index"  
+			 wx:for-index="bookIndex"  
+			 wx:for-item="bookCategory"  
+			 class="{{selectedBookIndex === bookIndex ? 'selected' : ''}}"  
+			 bindtap="selectBookCategory"  
+			 data-index="{{bookIndex}}"  
+			 data-content="{{bookCategory}}"  
+	 >  
+			 {{bookCategory}}  
+	 </button>  
+	 </view>  
+</view>
+</view>
+<!--上传图片-->
+
+<view class="container1"> 
+<view class="container2"> 
+<text style="top: 10rpx; left: 10rpx;">图片0/3</text>  
+<image src="/images/jiahao.png" style="width: 160rpx; height: 160rpx; top: 2rpx; left: 1rpx;"></image>
+</view>
+<text class="changan">上传图片，长按可删除</text> 
+</view>
+
+ <!--商品描述-->
+<text class="category-label">商品描述</text>
+<view class="container3">  
+ <input class="wenzi" type="text" bindinput="changeText" value="{{text}}" placeholder="请输入文字" style="width: 100%; white-space: normal; overflow: auto;"/>  
+</view>
+
+<view class="container4">
+<!--售卖价格-->
+<view class="container5">
+<text class="category-label">售卖价格</text>
+<view class="container6">  
+ <text class="danwei">￥</text>
+ <input class="jiage" type="text" bindinput="changejiage" value="{{jiage}}" placeholder="" />  
+</view>
+</view>
+<!--配送方式-->
+<view class="container7">
+<text class="category-label">配送方式</text>
+<view class="container8">  
+ <button  
+			 wx:for="{{options}}"  
+			 wx:key="index"  
+			 wx:for-index="index"  
+			 wx:for-item="option"  
+			 class="{{selectedIndex === index ? 'selected' : ''}}"  
+			 bindtap="selectOption"  
+			 data-index="{{index}}"  
+			 data-content="{{option}}"  
+	 >  
+			 {{option}}  
+	 </button>  
+</view>
+</view>
+</view>
+<button class="submitBtn" bindtap="submit">立即发布</button>
+</view>
+
+<!--我要买的渲染的判断-->
+<view wx:if="{{ tabNow === 1}}">
+
+
+</view>
+
+
+</view>
+

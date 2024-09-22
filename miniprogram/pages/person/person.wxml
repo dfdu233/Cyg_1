@@ -46,7 +46,7 @@
   <text class="cellRight">></text>
 </button>
 
-<button class="cell" bindtap="jiedanyuan_zhongxin" >
+<button class="cell" bindtap="jiedanyuan_zhongxin" wx:if="{{ orderReceive }}">
   <!--只有当前用户是接单员时，才会显示这个按钮-->
   <view class="cellLeft">
     <image src="../../images/jiedanyuanzhongxin.png"></image>
