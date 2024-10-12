@@ -74,6 +74,20 @@ Page({
   },
 
   onLoad: async function() {
+
+    const openid = wx.getStorageSync('openid');
+    if (!openid) {
+      wx.cloud.callFunction({
+        name: 'UserOpenId',
+        success: (res) => {
+          const {
+            openid
+          } = res.result;
+          wx.setStorageSync('openid', openid);
+        }
+      })
+    };
+    
     try {
       console.log("index load")
       wx.showLoading({

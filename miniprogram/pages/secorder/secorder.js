@@ -1,6 +1,7 @@
 // miniprogram/pages/order/order.js
 import regeneratorRuntime from "./../../util/regenerator-runtime/runtime.js"
 const app=getApp()
+const db = wx.cloud.database();
 Page({
 
   /**
@@ -134,7 +135,7 @@ Page({
           this.setData({
             [setParam]: res.result.data
           })
-
+          
         },
         complete: () => {
           this.setData({
@@ -190,6 +191,14 @@ Page({
         type:"receipt"
       },
       success: res => {
+        db.collection('order')
+        .where({
+          _openid:wx.getStorageSync('openid')
+          
+        })
+          .update({
+            state:'已完成'
+        })
         this.fetchOrderData()
       },
       fail:(e)=>{

@@ -1,9 +1,12 @@
 // miniprogram/pages/goodsDetail/goodsDetail.js
 import regeneratorRuntime from "./../../util/regenerator-runtime/runtime.js"
+
+import {  getTimeNow } from '../../utils/index';
 const CloudFuncGet = require("./../../cloudDatabase/getDatas.js")
 const CloudFunc = require("./../../cloudDatabase/operateDatas.js")
 const { $Message } = require('../../iview/dist/base/index');
 const app = getApp()
+const db = wx.cloud.database();
 
 Page({
 
@@ -27,7 +30,8 @@ Page({
     commentFocus:false,
     password:[],
     isPayPanelShow:false,
-    create_time:"260909090"+Date.parse(new Date())
+    create_time:Date.parse(new Date()),
+    B_address:''
   },
 
   /**
@@ -271,6 +275,26 @@ Page({
         let content = '';
         if (methodName === '跑腿送') {
           content = '选择了跑推送';
+          db.collection('order').add({
+            data:{
+            name:'闲置交易',
+            time:getTimeNow(),
+            money:this.data.pageData.money,
+            state:'待接单',
+            address:this.data.B_address,
+            info:{
+              
+                helpContent:this.data.pageData.description,
+                pickUpAddress:this.data.pageData.address.build+this.data.pageData.address.houseNumber
+              
+            },
+            userInfo:wx.getStorageSync('userInfo'),
+            // 手机号
+            phone:wx.getStorageSync('addressNow').phone,
+            createTime: db.serverDate(),
+            outTradeNo:"2608230605"+Date.parse(new Date())
+          }
+          })
 
         } else if (methodName === '买主取') {
           content = `选择了买主取${address} `;
@@ -340,7 +364,7 @@ Page({
       name:"pay",
       data:{
         price:_.data.pageData.money,
-        outTradeNo:_.data.create_time
+        outTradeNo:"260909090"+_.data.create_time
       },
 
       success:res =>{
@@ -372,6 +396,7 @@ Page({
       type: 'warning'
     });
   },
+
   handlePayPanelChange(event){
     console.log(event.detail.inputValue)
     this.setData({
@@ -400,6 +425,12 @@ Page({
     }
   },
 
+  chooseAddress(){
+    wx.setStorageSync('urlNow', 'goodsdetail');
+    wx.navigateTo({
+      url: '../address/address',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -411,7 +442,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.setData({
+      B_address: wx.getStorageSync('addressNow').build+wx.getStorageSync('addressNow').houseNumber
+    })
   },
 
   /**

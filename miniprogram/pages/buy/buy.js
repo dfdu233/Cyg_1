@@ -100,6 +100,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    
+    this.setData({
+      address: wx.getStorageSync('addressNow')
+    })
+
     this.setData({
       categoryType: app.globalData.categorySelectedType||"",
       categoryValue: app.globalData.categorySelectedValue||""
@@ -259,11 +264,12 @@ Page({
   
   },
 
-  chooseAddress(){
+ chooseAddress(){
     wx.setStorageSync('urlNow', 'buy');
-    wx.navigateTo({
+     wx.navigateTo({
       url: '../address/address',
     })
+    
   },
   /**
    * 生命周期函数--监听页面隐藏

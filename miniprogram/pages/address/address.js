@@ -21,7 +21,7 @@ Page({
     const pages = getCurrentPages();
     const length = pages.length;
     wx.navigateBack({
-      delta: length - 1 // 返回到第一个页面
+      delta: 1 // 返回到第一个页面
     })
   },
 
