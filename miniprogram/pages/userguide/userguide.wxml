@@ -98,38 +98,7 @@
 <view class="paragraph" wx:if="{{tabNow===2}}">
   <view class="tips">若物流方式选择为跑腿取送，则需要从商品成单售价中抽取一部分接单员的佣金，具体收费规则如下</view>
   <view class="body">
-    <view class="table-container">
-      <view class="row">
-        <view class="column"class="bold">时效</view>
-        <view class="column"class="bold">商品售价</view>
-        <view class="column"class="bold">物品大小</view>
-        <view class="column"class="bold">接单员佣金（元）</view>
-      </view>
-      <view class="row">
-        <view class="column">2</view>
-        <view class="column">小于等于15元</view>
-        <view class="column">小</view>
-        <view class="column">3</view>
-      </view>
-      <view class="row">
-        <view class="column">h</view>
-        <view class="column">15元~40元</view>
-        <view class="column">中</view>
-        <view class="column">5</view>
-      </view>
-      <view class="row">
-        <view class="column">以</view>
-        <view class="column">40元~100元</view>
-        <view class="column">大</view>
-        <view class="column">5</view>
-      </view>
-      <view class="row">
-        <view class="column">内</view>
-        <view class="column">商品售价>=100元</view>
-        <view class="column">超大</view>
-        <view class="column">9</view>
-      </view>
-    </view>
+    <image src="../../images/yongjin.png" style="width:600rpx; height: 350rpx"/>
   </view>
   <view class="tips">物品大小根据商品售价自动判定</view>
 </view>

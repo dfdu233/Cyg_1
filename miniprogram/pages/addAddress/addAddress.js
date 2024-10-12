@@ -88,7 +88,12 @@ Page({
         url: '../address/address',
       })
   },
-
+  onBack() {
+    // 点击左上角返回键时跳转到 ../buy/buy
+    wx.navigateTo({
+      url: '../buy/buy',
+    });  
+  },
   //是否设为默认地址
   handleChangeSwitch(e) {
       this.setData({
@@ -179,9 +184,10 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+ 
+  onUnload() {
 
-  },
+},
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作

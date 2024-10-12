@@ -44,15 +44,17 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad:async function (options) {
+  onLoad:async function() {
+    console.log('jxhjsdsdsds')
     try{
-      const { userId } = options
+
       wx.showLoading({
         title: '加载中',
       })
       let randomIndex = Math.floor(Math.random() * this.data.backgroundLibary.length)
       let owner=await app.getUserInfoData()
-      if (owner.openid===userId){
+      console.log(owner.userid)
+      if (true){
         await this.setData({
           isLoginUser: true,
           currentbackground:this.data.backgroundLibary[randomIndex]
@@ -60,7 +62,7 @@ Page({
       }
       
       await this.setData({
-        userId: userId || ""
+        userId: owner.openid || ""
       })
       console.log(this.data.userId)
       wx.cloud.callFunction({

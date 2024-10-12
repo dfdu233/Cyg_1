@@ -23,6 +23,10 @@ Component({
       type: [Boolean, String],
       default: false
     },
+    isBackk:{
+      type: [Boolean, String],
+      default: false
+    },
     bgImage: {
       type: String,
       default: ''
@@ -44,6 +48,11 @@ Component({
       wx.navigateBack({
         delta: 1
       });
+    },
+    handleBack() {
+      if (this.data.isBack) {
+          this.triggerEvent('back'); // 触发自定义事件
+      }
     },
     toHome(){
       wx.reLaunch({

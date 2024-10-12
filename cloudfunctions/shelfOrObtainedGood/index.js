@@ -8,10 +8,10 @@ exports.main = async (event, context) => {
   try {
     console.log(event)
     let { id, type } = event
-    if (type=== "obtained") {
+    if (type=== "waitchecked") {
       await db.collection("xianyu_goods").doc(id).update({
         data: {
-          status: "pending"
+          status: "waitchecked"
         }
       })
     } else if (type === "sold"){

@@ -66,3 +66,15 @@
   mix-blend-mode: screen;  
   height: 100rpx;   
 }
+.Bt:not([size='mini']){display: flex; align-items: center;left: 30%; justify-content:center; background-color: rgb(8, 143, 233); margin-top: 0rpx; padding: 0rpx; width:175rpx; height:80rpx;bottom: 15px; border-radius: 30rpx; color: white; }
+
+.changan_1 {
+  font-size: 40rpx;
+  color: rgb(0, 0, 0);
+  margin-left: 5%;
+  margin-top: 50rpx;
+  }
+.changan_2 {
+  font-size: 40rpx;
+  color: rgb(0, 0, 0);
+}

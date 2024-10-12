@@ -14,13 +14,16 @@ Page({
         name: '1kg以下',
       },
       {
-        name: '2kg-3kg'
+        name: '1kg-5kg'
       },
       {
-        name: '3kg以上'
+        name: '5kg-10kg'
+      },
+      {
+        name: '10kg以上'
       }
     ],
-    money: "",
+    money: '',
     weight: "1kg以下",
     transactionTypeTagsIndex: 0,
     transactionTypeTags: [{
@@ -98,8 +101,10 @@ Page({
   },
   handleMoneyChange(event) {
     console.log(event)
+    
     this.setData({
-      money: event.detail.detail.value
+      money: event.detail.detail.value,
+      warningMessage: '' // 清空警告信息
     })
   },
   onChangeTransactionType(event) {
@@ -109,11 +114,22 @@ Page({
     })
   },
   onChangeShippingMethods(event) {
-    const detail = event.detail;
-    console.log(event.detail)
+    const index = event.detail.name; // 获取选择的发货方式索引
+    const shippingMethod = this.data.shippingMethodsTags[index];
+
+    // 检查金额是否小于10元
+    if (shippingMethod.name === '跑腿送' && this.data.money < 10) {
+      this.setData({
+        warningMessage: '当前金额少于10元不能选择跑腿送',
+        ['shippingMethodsTags[' + index + '].checked']: false // 取消选中
+      });
+      return; // 终止函数，避免执行后续逻辑
+    }
+
+    // 更新对应发货方式的 checked 状态
     this.setData({
-      ['shippingMethodsTags[' + event.detail.name + '].checked']: detail.checked
-    })
+      ['shippingMethodsTags[' + index + '].checked']: event.detail.checked
+    });
   },
   handleSelectWeight() {
     this.setData({
@@ -136,32 +152,113 @@ Page({
   },
   async handlePublish() {
     //上架商品
-    let where = {
-      id: this.data.id
+    let that = this
+    if (!app.globalData.userInfo) {
+      wx.navigateTo({
+        url: './../login/login',
+      })
+      return false
     }
+    if (!this.data.name) {
+      wx.showToast({
+        icon: "none",
+        title: '请输入物品名称',
+      })
+      return false
+    }
+    if (!this.data.description) {
+      wx.showToast({
+        icon: "none",
+        title: '请输入物品描述',
+      })
+      return false
+    }
+    if (!this.data.categoryValue) {
+      wx.showToast({
+        icon: "none",
+        title: '请选择分类',
+      })
+      return false
+    }
+    if (!this.data.selectedImages.length > 0) {
+      wx.showToast({
+        icon: "none",
+        title: '请添加图片',
+      })
+      return false
+    }
+    if(this.data.money<0.01){
+      wx.showToast({
+        icon: "none",
+        title: '金额不小于3.5',
+      })
+      return false
+    }
+    
+    const decimalPattern = /^\d+(\.\d{1,2})?$/;
+    if(!decimalPattern.test(this.data.money)){
+      wx.showToast({
+        icon: "none",
+        title: '金额最多两位小数',
+      })
+      return false
+    }
+    
+    const data = {
+      name: this.data.name,
+      description: this.data.description,
+      categoryType: this.data.categoryType,
+      categoryValue: this.data.categoryValue,
+      isNew: this.data.isNew,
+      images: this.data.selectedImages,
+      collection: 0,
+      status: "pending",
+      createTime: new Date().getTime(),
+      ...app.globalData.userInfo
+    }
+    CloudFunc.addGoods(data).then((res) => {
+      wx.showToast({
+        title: '新增记录成功',
+      })
+      console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+      
+    let where = {
+      id: res._id
+    }
+    that.setData({
+      id:res._id
+    })
     let data = {
-      id: options.id || " ",
-      address: addr,
-      weight: this.data.weight,
-      address: this.data.address,
-      money: this.data.money,
-      transactionType: this.data.transactionTypeTags[this.data.transactionTypeTagsIndex].name,
-      shippingMethods: this.data.shippingMethodsTags.filter(item => item.checked),
+      id: res._id || " ",
+      address: 'address',
+      weight: that.data.weight,
+      address: that.data.address,
+      money: that.data.money,
+      transactionType: that.data.transactionTypeTags[this.data.transactionTypeTagsIndex].name,
+      shippingMethods: that.data.shippingMethodsTags.filter(item => item.checked),
       buyeraddress:'',
     }
-    await CloudFunc.updateGoods(where, data).then((res)=>{
+    CloudFunc.updateGoods(where, data).then((res)=>{
       console.log(res)
       wx.showToast({
         title: '发布成功',
       })
       wx.navigateTo({
-        url: `./../../pages/goodsDetail/goodsDetail?id=${this.data.id}`
+        url: `./../../pages/goodsDetail/goodsDetail?id=${that.data.id}`
       })
     }).catch((err)=>{
       wx.showToast({
         title: `error${err}`,
       })
     })  
+    }).catch((err) => {
+      wx.showToast({
+        icon: 'none',
+        title: '新增记录失败'
+      })
+      console.error('[数据库] [新增记录] 失败：', err)
+    })
+  
   },
 
   /**
@@ -174,8 +271,10 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
-
+  onUnload: function () {
+    wx.redirectTo({
+      url: '../index/index'
+    })
   },
 
   /**
@@ -218,7 +317,7 @@ Page({
     // 选择图片
     let count = this.data.selectedImages.length
     wx.chooseImage({
-      count: 6 - count,
+      count: 3 - count,
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: (res) => {
@@ -231,6 +330,7 @@ Page({
       complete: function() {}
     })
   },
+  
   uploadImageHandle(files) {
     wx.showLoading({
       title: '图片上传中',
@@ -322,6 +422,7 @@ Page({
       })
       return false
     }
+
     const data = {
       name: this.data.name,
       description: this.data.description,

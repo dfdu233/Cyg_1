@@ -197,9 +197,10 @@ Page({
         totalmoney: this.data.pageData.money,
         name: this.data.pageData.name,
         image:this.data.pageData.images[0],
-        methods: this.data.pageData.shippingMethods
+        methods: this.data.pageData.shippingMethods[this.data.index2],
+        description:this.data.pageData.description
       },
-      addressInfo:'101',
+      addressInfo:this.data.pageData.address.addressDetail,
       create_time:this.data.create_time,
       status:"unreceipt",
       rate:0
@@ -210,11 +211,90 @@ Page({
         data
       },
       success:async (res)=>{
-        await this.handleObtainedOrRepublish(this.data.id,"waitchecked")
-        console.log(res)
-        wx.navigateTo({
-          url: './../secorder/secorder',
-        })
+        // const index2=this.data.index2
+        // let content =''
+        // await this.handleObtainedOrRepublish(this.data.id,"sold")
+        // console.log(this.data.pageData.shippingMethods[index2].name)
+        // if(this.data.pageData.shippingMethods[index2].name=='跑腿送'){
+        //   contents='选择了跑推送'
+        //   wx.showModal({
+        //     title: '提示',
+        //     content: '选择了跑推送',
+        //     success: function (res) {
+        //       if (res.confirm) {//这里是点击了确定以后
+        //         console.log('用户点击确定')
+        //       } else {//这里是点击了取消以后
+        //         console.log('用户点击取消')
+        //       }
+        //     }
+        //   })
+        // }
+        // if(this.data.pageData.shippingMethods[index2].name=='买主取'){
+        //   contents='选择了买主取'
+        //   wx.showModal({
+        //     title: '提示',
+        //     content: '选择了买主取',
+        //     success: function (res) {
+        //       if (res.confirm) {//这里是点击了确定以后
+        //         console.log('用户点击确定')
+        //       } else {//这里是点击了取消以后
+        //         console.log('用户点击取消')
+        //       }
+        //     }
+        //   })
+        // }
+        // if(this.data.pageData.shippingMethods[index2].name=='卖主送'){
+        //   wx.showModal({
+        //     title: '提示',
+        //     content: '选择了卖主送',
+        //     success: function (res) {
+        //       if (res.confirm) {//这里是点击了确定以后
+        //         console.log('用户点击确定')
+        //       } else {//这里是点击了取消以后
+        //         console.log('用户点击取消')
+        //       }
+        //     }
+        //   })
+        // }
+        // wx.switchTab({
+        //   url: './../secorder/secorder',
+        // })
+        const index2 = this.data.index2;
+        await this.handleObtainedOrRepublish(this.data.id, "sold");
+        console.log(this.data.pageData.shippingMethods[index2].name);
+      
+        const methodName = this.data.pageData.shippingMethods[index2].name;
+      
+        let content = '';
+        if (methodName === '跑腿送') {
+          content = '选择了跑推送';
+        } else if (methodName === '买主取') {
+          content = '选择了买主取';
+        } else if (methodName === '卖主送') {
+          content = '选择了卖主送';
+        }
+      
+        if (content) {
+          wx.showModal({
+            title: '提示',
+            content: content,
+            success: function (res) {
+              if (res.confirm) { // 这里是点击了确定以后
+                console.log('用户点击确定');
+                wx.switchTab({
+                  url: './../secorder/secorder',
+                });
+              } else { // 这里是点击了取消以后
+                console.log('用户点击取消');
+              }
+            }
+          });
+        } else {
+          // 如果没有匹配的配送方式，直接跳转
+          wx.switchTab({
+            url: './../secorder/secorder',
+          });
+        }
       },
       fail:(e)=>{
         console.log(e)
@@ -250,7 +330,7 @@ Page({
         wx.requestPayment({
           ...payment,
           success(res){
-            this.createOrder()
+            _.createOrder()
           },
           fail(err){
             console.log("支付失败",err);

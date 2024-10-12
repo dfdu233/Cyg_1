@@ -33,10 +33,10 @@
   <view class="image-container">  
     <image src="../../images/ball.png" style="width: 50rpx; height: 50rpx; top: 2rpx; left: 1rpx;"></image>   
   </view>  
-  <view class="text-container3">  
+  <view class="text-container3"bindtap="goToRent">  
     <text class="text-line">积分规则</text>  
   </view>  
-  <view class="arrow-container" bindtap="goToRent">  
+  <view class="arrow-container" >  
     <text class="arrow">></text>    
   </view>  
 </view>

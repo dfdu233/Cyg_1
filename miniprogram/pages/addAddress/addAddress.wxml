@@ -1,6 +1,6 @@
 <!--首页-快递代取-收件地址-添加地址-->
-<cu-custom bgColor="bg-white" isBack="{{true}}">
-	<view slot="backText">返回</view>
+<cu-custom bgColor="bg-white" isBack="{{true}}" bind:back="onBack">
+    <view slot="backkText">返回</view>
 </cu-custom>
 
 <view class="body">

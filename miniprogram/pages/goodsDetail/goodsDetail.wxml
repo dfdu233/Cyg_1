@@ -24,14 +24,13 @@
     </view>
     <view class="flex-start mt-2 skeleton-rect">
       <text class="font-small">支持发货方式：</text>
-      <i-tag i-class="font-base x__tag_base mr-1" name="标签一" color="yellow" wx:for="{{pageData.shippingMethods}}" wx:key="{{index}}">
+      <i-tag i-class="font-base x__tag_base mr-1" name="标签一" wx:for="{{pageData.shippingMethods}}" wx:key="{{index}}">
         {{item.name}}
       </i-tag>
       <picker bindchange="choose" value="{{index2}}" range="{{pageData.shippingMethods}}" range-key="name">
-        <view >
-
-当前选择：{{pageData.shippingMethods[index2].name}}
-</view>
+        <view style="border: 5px solid orange; padding: 5px; border-radius: 10px;">
+          请点击选择：{{pageData.shippingMethods[index2].name}}
+        </view>
       </picker>
     </view>
     <view class="flex-start mt-2">
@@ -52,62 +51,6 @@
       </view>
     </view>
   </view>
-  <i-panel title="留言{{pageData.comment.length>0?'('+pageData.comment.length+')':''}}" class="skeleton-rect">
-    <view class="font-base flex-column pv-3">
-      <view class="light" wx:if="{{pageData.comment.length===0}}">还没有人评论哟，快来抢沙发~</view>
-      <view class="flex-center mt-2">
-        
-        <view class="cu-form-group">
-          <i-avatar i-class="mh-2" src="{{userData.avatarUrl}}" size="default"></i-avatar>
-          <input 
-            value="{{commentValue}}"
-            type="text" 
-            class='x__input border-bottom-1'
-            mode="wrapped" 
-            confirm-type="send"
-            bindinput="handleCommentChange" 
-            bindblur="handleCommentBlur" 
-            bindconfirm="handleCommentSend"
-            focus="{{commentFocus}}" 
-            placeholder="问问更多细节"
-          ></input>
-          <button 
-            class="cu-btn bg-green x__button" 
-            disabled='{{!commentValue}}' 
-            bindtap='handleCommentSend'
-          >{{commentType==='comment'?"评论":"回复"}}</button>
-        </view>
-      </view>
-    </view>
-    <view class="cu-card dynamic no-card" wx:if="{{pageData.comment.length>0}}">
-      <view class="cu-item shadow" wx:for="{{pageData.comment}}" wx:key="{{item.timeStamp}}" wx:for-item="item">
-        <view class="cu-list menu-avatar comment border-top-1">
-          <view class="cu-item">
-            <view class="cu-avatar round" style="background-image:url({{item.userinfo.avatarUrl}});"></view>
-            <view class="content">
-              <view class="text-grey">{{item.userinfo.nickName}}</view>
-              <view class="text-gray text-content text-df">
-                {{item.commentValue}}
-              </view>
-              <view class="bg-gray padding-sm radius margin-top-sm text-sm" wx:if="{{item.reply.length}}">
-                <view class="flex" wx:for="{{item.reply}}" wx:for-item="subItem" wx:key="{{subItem.timeStamp}}">
-                  <view>{{subItem.userinfo.nickName}}：</view>
-                  <view class="flex-sub">{{subItem.commentValue}}</view>
-                </view>
-              </view>
-              <view class="margin-top-sm flex justify-between">
-                <view class="text-gray text-df">{{formatModule.format.formatDateFunc(item.timeStamp)}}</view>
-                <view>
-                  <i-icon type="message_fill" size='25' color='#c5c6c7' data-replyid="{{item.timeStamp}}" bindtap='handleReply'/>
-                </view>
-              </view>
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
-    
-  </i-panel>
 </view>
 <view class="footer__btn flex-start backgroundWhite border-top-1">
   <view class="flex-column flex-1">
@@ -120,18 +63,7 @@
       <text>已收藏</text>
     </button>
   </view>
-  <view class="flex-column flex-1">
-    <button open-type='contact' class="button-transparent backgroundWhite flex-column lightColor">
-      <i-icon type="customerservice_fill" size='24' />
-      <text>客服</text>
-    </button>
-  </view>
-  <view class="flex-column flex-1">
-    <button open-type="share" class="button-transparent backgroundWhite flex-column lightColor">
-      <i-icon type="share" size='24' />
-      <text>分享</text>
-    </button>
-  </view>
+
   <view class="flex-3">
     <button class="flex-column button-transparent backgroundMoneyRed" wx:if='{{pageData.status==="published"}}' bindtap='handleWechatPay'>
       <text style='line-height:100rpx'>立刻交易</text>
