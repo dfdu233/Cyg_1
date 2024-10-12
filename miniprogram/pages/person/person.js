@@ -163,10 +163,11 @@ Page({
     },
 
    //我的地址
-	 toaddAddress() {
+	 toaddAddress(){
 		wx.navigateTo({
-				url: '../addAddress/addAddress',
-		})
+  
+				url:'../address/address',
+    })
 },
 
    //我的积分

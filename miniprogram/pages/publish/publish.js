@@ -23,6 +23,10 @@ Page({
       app.globalData = {
         ...res
       }
+<<<<<<< HEAD
+      console.log(res)
+=======
+>>>>>>> ecd518a831cc6f499949b86b46dd88f9fb909187
     })
   },
 
@@ -219,7 +223,11 @@ Page({
       })
       console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
       wx.navigateTo({
+<<<<<<< HEAD
         url: `./../buy/buy?id=${encodeURIComponent(res._id)}`,
+=======
+        url: `./../publishDetail/publishDetail?id=${encodeURIComponent(res._id)}`,
+>>>>>>> ecd518a831cc6f499949b86b46dd88f9fb909187
       })
     }).catch(() => {
       wx.showToast({

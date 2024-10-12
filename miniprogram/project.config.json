@@ -24,6 +24,10 @@
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
+<<<<<<< HEAD
   },
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate/"
+=======
+  }
+>>>>>>> d1248dbce143ea0d5d92dda4a41df98c1a3ca955
 }

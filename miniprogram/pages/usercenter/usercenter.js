@@ -53,13 +53,12 @@ Page({
       })
       let randomIndex = Math.floor(Math.random() * this.data.backgroundLibary.length)
       let owner=await app.getUserInfoData()
-      console.log(owner.userid)
-      if (true){
+
         await this.setData({
           isLoginUser: true,
           currentbackground:this.data.backgroundLibary[randomIndex]
         })
-      }
+      
       
       await this.setData({
         userId: owner.openid || ""

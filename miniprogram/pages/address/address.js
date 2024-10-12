@@ -17,8 +17,11 @@ Page({
     const url = wx.getStorageSync('urlNow')
     const address = this.data.address[index];
     wx.setStorageSync('addressNow', address);
-    wx.redirectTo({
-      url: `../${url}/${url}`,
+
+    const pages = getCurrentPages();
+    const length = pages.length;
+    wx.navigateBack({
+      delta: length - 1 // 返回到第一个页面
     })
   },
 

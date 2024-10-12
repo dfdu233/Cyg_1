@@ -1,5 +1,6 @@
 // miniprogram/pages/publish/publish.js
 const CloudFunc = require("./../../cloudDatabase/operateDatas.js")
+const CloudFuncGet = require("./../../cloudDatabase/getDatas.js")
 import regeneratorRuntime from "./../../util/regenerator-runtime/runtime.js"
 const app = getApp()
 Page({
@@ -23,7 +24,7 @@ Page({
         name: '10kg以上'
       }
     ],
-    money: '',
+    money: 0,
     weight: "1kg以下",
     transactionTypeTagsIndex: 0,
     transactionTypeTags: [{
@@ -68,7 +69,7 @@ Page({
    */
   onLoad: function(options) {
     console.log(options)
-    var addr=wx.getStorageSync('address')[0]
+    var addr=wx.getStorageSync('addressNow')
     this.setData({
       id: options.id || " ",
       address: addr
@@ -80,6 +81,14 @@ Page({
       app.globalData = {
         ...res
       }
+      console.log(res)
+      CloudFuncGet.queryUser(res.openid).then((res)=>{
+        app.globalData.userInfo.avatarUrl=res.data[0].avatarUrl;
+        app.globalData.userInfo.nickName=res.data[0].nickName;
+        console.log(res)
+      })
+      
+
     })
   },
 
@@ -215,7 +224,11 @@ Page({
       status: "pending",
       createTime: new Date().getTime(),
       ...app.globalData.userInfo
+      
     }
+    data.nickName=wx.getStorageSync('userInfo').nickName
+    data.avatarUrl=wx.getStorageSync('userInfo').avatarUrl
+    data.address=wx.getStorageSync('addressNow')
     CloudFunc.addGoods(data).then((res) => {
       wx.showToast({
         title: '新增记录成功',
@@ -230,7 +243,7 @@ Page({
     })
     let data = {
       id: res._id || " ",
-      address: 'address',
+   
       weight: that.data.weight,
       address: that.data.address,
       money: that.data.money,
@@ -261,6 +274,12 @@ Page({
   
   },
 
+  chooseAddress(){
+    wx.setStorageSync('urlNow', 'buy');
+    wx.navigateTo({
+      url: '../address/address',
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

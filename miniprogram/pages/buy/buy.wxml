@@ -63,7 +63,7 @@
 </i-action-sheet>
 <i-panel title="">
   <i-cell-group>
-    <i-cell  is-link url="/pages/address/address" value="{{address.build+address.houseNumber||'选择地址'}}"></i-cell>
+    <i-cell  bind:click="chooseAddress" value="{{address.build+address.houseNumber||'选择地址'}}"></i-cell>
   </i-cell-group>
 </i-panel>
 <i-button class="footer__btn" type="primary" bind:click="handlePublish" disabled="{{!money||!address}}" type="error" shape="circle" size="small">确定上架</i-button>

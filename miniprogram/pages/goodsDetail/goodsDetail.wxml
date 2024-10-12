@@ -46,10 +46,9 @@
         <text class="lightColor skeleton-rect">{{formatModule.format.formatDateFunc(pageData.createTime)||"发布时间"}}</text>
       </view>
       <view class="font-base primaryColor">
-        <text class="skeleton-rect">{{pageData.address.build||"地址"}}-</text>
-        <text class="skeleton-rect">{{pageData.address.houseNumber||"地址"}}</text>
+      
       </view>
-    </view>
+    </view>addres
   </view>
 </view>
 <view class="footer__btn flex-start backgroundWhite border-top-1">

@@ -1,6 +1,4 @@
-<!--miniprogram/pages/order/order.wxml我是买家-->
-<cu-custom bgColor="bg-white" >
-</cu-custom>
+<!--miniprogram/pages/order/order.wxml-->
 <i-tabs current="{{ currentTab }}" color="#ffd84d" bindchange="handleChange">
     <i-tab key="unreceipt" title="待收货"></i-tab>
     <i-tab key="completed" title="已完成"></i-tab>

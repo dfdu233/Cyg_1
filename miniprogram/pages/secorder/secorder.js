@@ -135,8 +135,6 @@ Page({
           openId: this.data.userId
         },
         success: res => {
-          console.log('我来了')
-          console.log(res.result.data)
           let setParam = `${this.data.currentTab}.goodsData`
           this.setData({
             [setParam]: res.result.data

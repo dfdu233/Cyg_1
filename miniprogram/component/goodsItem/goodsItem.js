@@ -30,9 +30,19 @@ Component({
       const id = event.currentTarget.dataset.id;
       console.log(id)
       this.triggerEvent("onGoodsItemPress", { id })
-      wx.navigateTo({
-        url: `./../../pages/goodsDetail/goodsDetail?id=${encodeURIComponent(id)}`
-      })
+      const userInfo=wx.getStorageSync('userInfo')
+      if(userInfo){
+        wx.navigateTo({
+          url: `./../../pages/goodsDetail/goodsDetail?id=${encodeURIComponent(id)}`
+        })
+      }
+      else {
+        wx.showToast({
+          icon: 'none',
+          title: '请前往个人中心登录 !',
+        })
+      }
+      
     },
     handleContinuePublish(event){
       const id = event.currentTarget.dataset.id;

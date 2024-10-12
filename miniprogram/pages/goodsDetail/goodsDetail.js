@@ -34,6 +34,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: async function(options) {
+    const userInfo=wx.getStorageSync('userInfo')
+      
     await this.setData({
       id: options.id
     })
@@ -197,8 +199,9 @@ Page({
         totalmoney: this.data.pageData.money,
         name: this.data.pageData.name,
         image:this.data.pageData.images[0],
-        methods: this.data.pageData.shippingMethods[this.data.index2],
+        methods: this.data.pageData.shippingMethods,
         description:this.data.pageData.description
+
       },
       addressInfo:this.data.pageData.address.addressDetail,
       create_time:this.data.create_time,
@@ -264,14 +267,32 @@ Page({
         console.log(this.data.pageData.shippingMethods[index2].name);
       
         const methodName = this.data.pageData.shippingMethods[index2].name;
-      
+        const address = this.data.pageData.address.build + this.data.pageData.address.houseNumber;
         let content = '';
         if (methodName === '跑腿送') {
           content = '选择了跑推送';
+
         } else if (methodName === '买主取') {
-          content = '选择了买主取';
+          content = `选择了买主取${address} `;
         } else if (methodName === '卖主送') {
           content = '选择了卖主送';
+          wx.cloud.callFunction({
+            name:"sendMessage2",
+            data:{
+              OPENID:this.data.pageData._openid,
+              address:wx.getStorageSync('addressNow').build+wx.getStorageSync('addressNow').houseNumber,
+              time:new Date().toISOString().substring(0, 10),
+              person:wx.getStorageSync('userInfo').nickName
+            },
+      
+            success:res =>{
+              console.log("通知成功",res)
+             
+            },
+            fail(err){
+              console.log("通知失败",err)
+            }
+          })
         }
       
         if (content) {
