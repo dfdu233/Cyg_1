@@ -1,12 +1,14 @@
 <!--miniprogram/pages/userCenter/userCenter.wxml-->
-<cu-custom bgColor="bg-white" isBack="{{true}}">
-	<view slot="backText"> 我是卖家 </view>
+<cu-custom bgColor="bg-white" >
+
 </cu-custom> 
-<button class="submitBtn" bindtap="submit">￥提现</button>
+<text class="changan_1">余额：</text>
+<text class="changan_2">元</text>
+<button class="Bt" bindtap="submit">￥提现</button>
 <i-tabs current="{{ currentTab }}" color="#ffd84d" bindchange="handleChange">
     <i-tab key="published" title="在出售"></i-tab>
     <i-tab key="waitchecked" title="待确认"></i-tab>
-    <i-tab key="sold" title="已售出" wx:if="{{isLoginUser}}"></i-tab>
+    <i-tab key="sold" title="已售出" ></i-tab>
 </i-tabs>
 
 <view class="goods__list_container">

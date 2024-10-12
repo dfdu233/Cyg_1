@@ -1,5 +1,8 @@
 // miniprogram/pages/order/order.js
 import regeneratorRuntime from "./../../util/regenerator-runtime/runtime.js"
+const CloudFuncGet = require("./../../cloudDatabase/getDatas.js")
+const CloudFunc = require("./../../cloudDatabase/operateDatas.js")
+const { $Message } = require('../../iview/dist/base/index');
 const app=getApp()
 const db = wx.cloud.database();
 Page({
@@ -8,13 +11,14 @@ Page({
    * 页面的初始数据
    */
   data: {
+    imgUrls: [
+      'https://sr.aihuishou.com/sos/image/636782499370538790522990215.jpg?x-oss-process=image/quality,q_80&size=694x240',
+      'https://sr.aihuishou.com/sos/image/6368092437329051601479400495.png?x-oss-process=image/quality,q_80&size=694x240'
+    ],
+    goodsData: [],
     userId:"",
     currentTab:"unreceipt",
     unreceipt: {
-      goodsData: [],
-      page: 1
-    },
-    wait_rate: {
       goodsData: [],
       page: 1
     },
@@ -194,7 +198,7 @@ Page({
         db.collection('order')
         .where({
           _openid:wx.getStorageSync('openid')
-          
+
         })
           .update({
             state:'已完成'

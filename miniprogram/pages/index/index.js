@@ -66,7 +66,7 @@ Page({
     duration: 1000,
     goodsData: [],
     requestResult: '',
-    pageSize: 4,
+    pageSize: 6,
     page: 1,
     total: 0,
     totalPage: 0,

@@ -146,4 +146,22 @@ page {
   align-items: center;
 }
 
+.weui-uploader__file-delete {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.weui-uploader__file-delete image {
+  width: 6px;
+  height: 6px;
+}
+
 

@@ -6,7 +6,7 @@ Page({
    */
   data: {
     tabList:["服务规则","积分制度","接单佣金"],
-    tabNow:0,
+    tabNow:1,
   },
   selectTab(e) {
     const userInfo = wx.getStorageSync('userInfo');  //未登录不允许查看

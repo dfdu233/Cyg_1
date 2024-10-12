@@ -15,10 +15,13 @@ Page({
         name: '1kg以下',
       },
       {
-        name: '2kg-3kg'
+        name: '1kg-5kg'
       },
       {
-        name: '3kg以上'
+        name: '5kg-10kg'
+      },
+      {
+        name: '10kg以上'
       }
     ],
     money: 0,
@@ -114,7 +117,8 @@ Page({
     console.log(event)
     
     this.setData({
-      money: event.detail.detail.value
+      money: event.detail.detail.value,
+      warningMessage: '' // 清空警告信息
     })
   },
   onChangeTransactionType(event) {
@@ -124,11 +128,22 @@ Page({
     })
   },
   onChangeShippingMethods(event) {
-    const detail = event.detail;
-    console.log(event.detail)
+    const index = event.detail.name; // 获取选择的发货方式索引
+    const shippingMethod = this.data.shippingMethodsTags[index];
+
+    // 检查金额是否小于10元
+    if (shippingMethod.name === '跑腿送' && this.data.money < 10) {
+      this.setData({
+        warningMessage: '当前金额少于10元不能选择跑腿送',
+        ['shippingMethodsTags[' + index + '].checked']: false // 取消选中
+      });
+      return; // 终止函数，避免执行后续逻辑
+    }
+
+    // 更新对应发货方式的 checked 状态
     this.setData({
-      ['shippingMethodsTags[' + event.detail.name + '].checked']: detail.checked
-    })
+      ['shippingMethodsTags[' + index + '].checked']: event.detail.checked
+    });
   },
   handleSelectWeight() {
     this.setData({
@@ -281,8 +296,10 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
-
+  onUnload: function () {
+    wx.redirectTo({
+      url: '../index/index'
+    })
   },
 
   /**
@@ -325,7 +342,7 @@ Page({
     // 选择图片
     let count = this.data.selectedImages.length
     wx.chooseImage({
-      count: 6 - count,
+      count: 3 - count,
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: (res) => {
@@ -338,6 +355,7 @@ Page({
       complete: function() {}
     })
   },
+  
   uploadImageHandle(files) {
     wx.showLoading({
       title: '图片上传中',
@@ -429,6 +447,7 @@ Page({
       })
       return false
     }
+
     const data = {
       name: this.data.name,
       description: this.data.description,
